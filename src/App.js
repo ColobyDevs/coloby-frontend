@@ -4,6 +4,7 @@ import LandingPage from './landingPage';
 import Login from './authentication/login';
 import Signup from './authentication/signup';
 
+
 function App() {
   return (
     <div className="App">
@@ -11,6 +12,8 @@ function App() {
     <Route path='/' element = { <LandingPage/>}/>
     <Route path='/login' element = { <Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
+
+
     
 
       </Routes>

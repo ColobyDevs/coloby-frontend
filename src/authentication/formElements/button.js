@@ -2,7 +2,7 @@ import React from "react";
 
 const Button = (props)=>{
     return(
-        <button className="bg-yellow-500 w-1/2 rounded-md" type={props.type} disabled={props.disabled}>{props.name}</button>
+        <button className={`${props.formIsValid && 'bg-blue-500' || 'bg-blue-100'} text-white w-1/2 rounded-md mx-auto`} type={props.type} disabled={props.disabled}>{props.name}</button>
     )
 }
 

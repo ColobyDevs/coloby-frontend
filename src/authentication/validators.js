@@ -26,12 +26,13 @@ export const validate = (value, validators) => {
   let isValid = true;
   let errorType = ''
   for (const validator of validators) {
+   
     if (validator.type === VALIDATOR_TYPE_REQUIRE) {
      
       isValid = isValid && value.trim().length > 0;
     }
     if (validator.type === VALIDATOR_TYPE_MINLENGTH) {
-      console.log(validator.val, value.trim().length)
+      
       isValid = isValid && value.trim().length >= validator.val;
     }
     if (validator.type === VALIDATOR_TYPE_MAXLENGTH) {
