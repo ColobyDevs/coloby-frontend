@@ -1,13 +1,17 @@
 import React from "react";
+import useMobileMenu from "../hooks/useMobileMenu"; // Import the hook
 import "./navbar.css";
 import "animate.css";
 
 const Navbar = () => {
+  // Call the useMobileMenu hook here
+  useMobileMenu();
+
   return (
     <section className="navigation">
       <div className="nav-container">
         <div className="brand">
-          <a href="#">
+          <a href="">
             Coloby
             {/* <img src="images/school-logo.png" alt="" /> */}
           </a>
