@@ -46,8 +46,8 @@
   font-weight: 300;
 }
 .start__project {
-  animation: bounce; /* referring directly to the animation's @keyframe declaration */
-  animation-duration: 2s; /* don't forget to set a duration! */
+  animation: bounce;
+  animation-duration: 2s;
 }
 
 /* MEDIA QUERIES */
@@ -89,6 +89,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  .main__text {
+    text-align: center;
+    padding: 5px;
+  }
+  .sub__text {
+    text-align: center;
+    padding: 5px;
   }
   .start__project {
     margin: auto;

@@ -29,6 +29,5 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   background: var(--color-bg);
-  border: 3px solid gold;
   height: inherit;
 }

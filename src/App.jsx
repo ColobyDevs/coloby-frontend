@@ -6,7 +6,6 @@ import Works from "./components/works/Works";
 import Banner from "./components/banner/Banner";
 import Testimonials from "./components/testimonials/Testimonials";
 import Footer from "./components/footer/Footer";
-import End from "./components/end/End";
 
 const App = () => {
   return (
@@ -18,7 +17,6 @@ const App = () => {
       <Banner />
       <Testimonials />
       <Footer />
-      <End />
     </>
   );
 };

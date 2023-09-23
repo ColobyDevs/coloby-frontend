@@ -5,13 +5,21 @@ import WorkImage2 from "../../assets/works2.png";
 import WorkImage3 from "../../assets/works3.png";
 import WorkImage4 from "../../assets/works4.png";
 import Me from "../../assets/demzy.jpg";
-// import { AiOutlineTrophy } from "react-icons/ai";
-// import { BsXDiamondFill } from "react-icons/bs";
+import { useInView } from "react-intersection-observer";
 
 const Works = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
-    <div>
-      <section className="works__container">
+    <div ref={ref}>
+      <section
+        className={`works__container animate__animated ${
+          inView ? "animate__fadeInLeft" : ""
+        }`}
+      >
         <div>
           <h3>How it all works</h3>
           <div className="works__container-content">
@@ -53,19 +61,6 @@ const Works = () => {
           </div>
         </div>
       </section>
-
-      {/* <section className="attracts__container">
-        <div className="attracts__container-left"></div>
-        <div className="attracts__container-right">
-          <h3>Coloby Lorem, ipsum dolor.</h3>
-          <p>
-            Coloby Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum
-            inventore fuga officia totam dolorum. Iste commodi eos, explicabo
-            excepturi rem, beatae laudantium blanditiis nihil obcaecati laborum
-            doloribus nobis!
-          </p>
-        </div>
-      </section> */}
     </div>
   );
 };

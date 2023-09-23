@@ -1,6 +1,7 @@
 .testimonials__container {
   width: 100%;
   margin-bottom: 5rem;
+  padding: 5px;
 }
 .testimonials__container h3 {
   color: var(--color-variant);
@@ -65,18 +66,18 @@
   text-decoration: underline;
   cursor: pointer;
 }
-/* 
-@media screen and (max-width: 1100px) {
-  .testimonials__container {
-    background: red;
-    width: 90%;
-    margin: 0 auto;
-  }
-}
 
 @media screen and (max-width: 900px) {
   .testimonials__container {
-    background: red;
     margin: 0 auto;
   }
-} */
+  .testimonials:nth-child(3) {
+    background: gold;
+    display: none;
+  }
+}
+@media screen and (max-width: 620px) {
+  .testimonials:nth-child(2) {
+    display: none;
+  }
+}
