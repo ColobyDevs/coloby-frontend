@@ -1,0 +1,10 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .card{
+      @apply bg-white h-full w-56 rounded-lg grid grid-rows-5
+    }
+  }
