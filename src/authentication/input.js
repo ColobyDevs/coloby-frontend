@@ -23,8 +23,7 @@ const Input = (props)=>{
 
     const [state, dispatch] = useReducer(reducer, initialState)
     
-  
-    
+    console.log(props.validator, state.isValid)
     
     const changeHandler=(e)=>{
             dispatch({type: 'Change', val: e.target.value, validators: props.validator})

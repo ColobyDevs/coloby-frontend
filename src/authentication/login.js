@@ -24,7 +24,7 @@ return (
     <React.Fragment>
       <div className="my-auto absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 grid-rows-3 space-y-3">
             <h3 className="text-blue-500 font-medium">Login</h3>
-    <form className="bg-gray-100 w-96 mx-auto h-40 h-56 grid grid-flow-row py-3 text-xs" >
+    <form className="bg-gray-100 w-96 mx-auto h-56 grid grid-flow-row py-3 text-xs" >
     <Input type='email' id='email' name='Email' validator = {[VALIDATOR_EMAIL()]} onInput={inputHandler} errMsg = 'Invalid Email'/>
     <Input type='password' id='password' name = 'Password'  validator = {[VALIDATOR_MINLENGTH(6)]} onInput={inputHandler} errMsg = 'Invalid Password(should be at least 6 characters)'/>
     <Button type='submit' disabled={!formState.isValid} name='Login' formIsValid = {formState.isValid}/>

@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "./context/context";
+import { Link } from "react-router-dom";
 import { MdDashboard, MdOpenWith } from "react-icons/md";
-import { RiDiscussLine, RiArrowDownSLine } from "react-icons/ri";
+import { RiDiscussLine, RiArrowDownSLine, RiOrganizationChart } from "react-icons/ri";
 import { IoIosSettings, IoIosHelpCircle, IoIosLogOut, IoIosNotificationsOutline, IoIosStats } from "react-icons/io"
 
 
 
 const Sidebar = () => {
+    const {setCreateChModal, createChModal} = useContext(Context)
+    const createChHandler = ()=>{
+        setCreateChModal(true)
+    }
+    
     const [show, setShow] = useState(false)
 
     const showHandler = () => {
@@ -28,20 +35,24 @@ const Sidebar = () => {
             <section className={`flex flex-col space-y-5  h-64 justify-center w-full items-center mx-auto mt-4 `}>
                 <article className="flex flex-row w-1/2 mx-auto space-x-4 h-4 items-center">
                     <MdDashboard className="" />
+                    <Link to='/dashboard'>
                     <h2>Dashboard</h2>
+                    </Link>
                 </article>
 
                 <article className="flex flex-col space-y-5 w-1/2 mx-auto h-5/6">
                     <div className="flex flex-col row-span-1">
                         <div className="flex flex-row space-x-4 items-center">
-                            <MdOpenWith />
+                            <RiOrganizationChart />
+                            <Link to='channels'>
                             <h2>Channels</h2>
+                            </Link>
                             <RiArrowDownSLine className="ml-4 cursor-pointer" onClick={showHandler} />
                         </div>
                         <div className={`grid grid-rows-3  items-center ml-8 transition-all delay-400 ease-in-out ${show ? 'h-16' : 'h-0'}`}>
                             <h1 className={`${show ? 'visible' : 'hidden'} text-xs`}>#newJam</h1>
                             <h1 className={`${show ? 'visible' : 'hidden'} text-xs`}>#ncoloby</h1>
-                            <h1 className={`${show ? 'visible' : 'hidden'} text-sm`}>New channel +</h1>
+                            <h1 className={`${show ? 'visible' : 'hidden'} text-sm cursor-pointer`} onClick={createChHandler}>New channel +</h1>
                         </div>
                     </div>
                     <div className={`flex flex-row  items-center space-x-3`}>

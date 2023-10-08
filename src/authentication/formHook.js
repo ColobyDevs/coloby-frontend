@@ -8,7 +8,8 @@ const reducer = (state, action) => {
         let formIsValid = true;
         for (const inputId in state.inputs) {
             if (inputId === action.inputId) {
-            formIsValid = formIsValid && action.isValid;
+              formIsValid = formIsValid && action.isValid;
+              console.log(formIsValid);
           } else {
             formIsValid = formIsValid && state.inputs[inputId].isValid;
           }
@@ -33,10 +34,10 @@ const [state, dispatch] = useReducer(reducer, {
     inputs: initialInputs,
     validity: initialFormValidity
 })
-console.log(state.inputs)
-const inputHandler = useCallback((value, id, isValid)=>{
-    dispatch({type: 'INPUT_CHANGE', value:value, inputId: id, isValid:isValid})
 
+const inputHandler = useCallback((value, id, isValid)=>{
+  console.log(value, isValid);
+    dispatch({type: 'INPUT_CHANGE', value:value, inputId: id, isValid:isValid})
 }, [dispatch])
 
     return [state, inputHandler]
