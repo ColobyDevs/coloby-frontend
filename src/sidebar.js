@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Context } from "./context/context";
+import ColobyLogo from './assets/ColobyLogo.png'
 import { Link } from "react-router-dom";
-import { MdDashboard, MdOpenWith } from "react-icons/md";
+import { MdDashboard } from "react-icons/md";
 import { RiDiscussLine, RiArrowDownSLine, RiOrganizationChart } from "react-icons/ri";
 import { IoIosSettings, IoIosHelpCircle, IoIosLogOut, IoIosNotificationsOutline, IoIosStats } from "react-icons/io"
 
@@ -21,12 +22,13 @@ const Sidebar = () => {
 
     return (<>
 
-        <main className="fixed h-screen hidden items-center space-y-10 py-4 lg:flex lg:flex-col border w-72 border-l">
-            <div>
-                COLOBY
+        <main className="fixed h-screen hidden space-y-10 py-4 lg:flex lg:flex-col border w-72 border-l">
+            <div  className="ml-16">
+                <img src={ColobyLogo} className="w-20 h-10"/>
+                
             </div>
 
-            <div className="flex flex-row items-center text-xl font-bold">
+            <div className="flex flex-row items-center text-xl ml-16 font-bold">
                 <h1>
                     Swift Limited
                 </h1> <span className="text-xl">+</span>
@@ -61,7 +63,9 @@ const Sidebar = () => {
                     </div>
                     <div className="flex flex-row items-center space-x-4 ">
                         <IoIosStats />
-                        <h2>Analytics</h2>
+                        <Link to='/taskboard'>
+                        <h2>Taskboard</h2>
+                        </Link>
                     </div>
                     <div className="flex flex-row items-center space-x-4 ">
                         <RiDiscussLine />
