@@ -4,7 +4,7 @@ import WorkImage1 from "../../assets/works1.png";
 import WorkImage2 from "../../assets/works2.png";
 import WorkImage3 from "../../assets/works3.png";
 import WorkImage4 from "../../assets/works4.png";
-import Me from "../../assets/demzy.jpg";
+// import Me from "../../assets/demzy.jpg";
 import { useInView } from "react-intersection-observer";
 
 const Works = () => {
