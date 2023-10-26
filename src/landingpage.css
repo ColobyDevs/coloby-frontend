@@ -8,7 +8,6 @@
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
-  /* border: 1px solid red; */
 }
 
 :root {
@@ -20,10 +19,6 @@
 }
 html {
   scroll-behavior: smooth;
-}
-
-::-webkit-scrollbar {
-  /* display: none; */
 }
 
 body {
