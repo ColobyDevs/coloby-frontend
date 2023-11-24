@@ -1,5 +1,7 @@
 import './App.css';
-import {Routes, Route} from 'react-router-dom'
+import React, {useContext} from 'react';
+import { Context } from './context/context';
+import {Routes, Route, useParams} from 'react-router-dom'
 import LandingPage from './landingPage';
 import Login from './authentication/login';
 import Signup from './authentication/signup';
@@ -8,19 +10,24 @@ import Channels from './channels/channels';
 import Sidebar from './sidebar';
 import Chat from './channels/chats';
 import TaskBoard from './taskboard/taskboard';
+import Profile from './profile/profile';
+
 
 
 function App() {
+  const {token, userId} = useContext(Context)
+  
   return (
     <>
-    <Sidebar/>
+    {token && <Sidebar/>}
       <Routes>
-    <Route path='/dashboard' element = {<Dashboard/>}/>
+    <Route path='/dashboard/:userId' element = {<Dashboard/>}/>
+    <Route path='/profile' element = {<Profile/>}/>
     <Route path='/channels' element = {<Channels/>}/>
     <Route path='/chat' element = {<Chat/>}/>
-    <Route path='/taskboard' element = {<TaskBoard/>}/>
     <Route path='/login' element = { <Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
+    <Route path='/taskboard' element = {<Profile/>}/>
     <Route path='/' element = { <LandingPage/>}/>
       </Routes>
   
