@@ -1,5 +1,6 @@
 import React, {useRef, useState, useEffect, useContext} from "react";
 import { Context } from "../context/context";
+import { Navigate } from "react-router-dom";
 import { MdSearch, MdExplore } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import ChannelCards from "./channel-cards";
@@ -9,9 +10,17 @@ import avatar from '../img/avatar.jpg'
 import mock from '../img/mock.png'
 import {RiAddLine, RiBallPenLine, RiArrowLeftSLine, RiArrowRightSLine, RiHistoryLine, RiStarLine, RiSearchLine, RiFilter3Line, RiFile2Line} from "react-icons/ri";
 import {HiMiniUser} from 'react-icons/hi2'
-const Dashboard = ()=>{
-    const {setCreateChModal, createChModal} = useContext(Context)
+import { useHttp } from "../hooks/httpHook";
 
+const Dashboard = ()=>{
+    const {setCreateChModal, createChModal, token} = useContext(Context)
+
+   
+
+ 
+
+
+ 
     const [navState, setNavState] = useState(true)
 
     const [carousel, setCarousel] = useState()
@@ -52,7 +61,6 @@ const Dashboard = ()=>{
     
     
 }
-console.log(rightValue, leftValue)
 const createChHandler = ()=>{
     setCreateChModal(true)
 }
@@ -70,6 +78,10 @@ useEffect(()=>{
    
 
  }, [leftValue])
+
+
+if(token){
+    
 return(<>
 <CreateChannel/>
     <section className="h-screen ml-72">
@@ -235,6 +247,9 @@ return(<>
     </section>
 </>
 )
+}else{
+    return <Navigate to='/login'/>
+}
 }
 
 export default Dashboard

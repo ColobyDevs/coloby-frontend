@@ -9,6 +9,7 @@ import mock from '../img/mock.png'
 import './channels.css';
 import Chat from "./chats";
 import ChatTimeline from "./chat-timeline";
+import DataList from "./dataList";
 
 const Channels = ()=>{
 

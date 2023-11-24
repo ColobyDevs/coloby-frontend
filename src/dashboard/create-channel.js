@@ -2,12 +2,36 @@ import React, {useState, useContext} from "react";
 import { Context } from "../context/context";
 import {HiMiniXMark} from 'react-icons/hi2'
 import './create-channel.css'
+import { useHttp } from "../hooks/httpHook";
 
 const CreateChannel = ()=>{
-    const {setCreateChModal, createChModal} = useContext(Context)
+
+    const {setCreateChModal, createChModal, token} = useContext(Context)
     const [toggle, setToggle] = useState(false)
     const channelType = toggle ? 'Public' : 'Private'
     const channelInfo = toggle ? 'Anyone in your workspace can view and join this channel' : 'Only those you allow can see and join this channel'
+
+
+
+    const header = {
+        'Content-Type': 'application/json',
+         Authorization: 'Bearer ' + token
+      }
+    const api = 'https://coloby.onrender.com/api/v1/room/'
+    const httpBody = {
+        action: 'create',
+        room_name: 'colobyTest',
+        is_private: false
+    }
+    const body = {
+        method: 'POST',
+        headers: header,
+        body: JSON.stringify(httpBody)
+    }
+    const type = 'createRoom'
+    const [httpHandler] = useHttp(body, api, type)
+
+
 
     const toggleHandler = ()=>{
         setToggle(!toggle)
@@ -15,10 +39,16 @@ const CreateChannel = ()=>{
     const createChHandler = ()=>{
         setCreateChModal(false)
     }
+
+    function createChannel(e){
+        e.preventDefault()
+        console.log('dodo');
+    }
+
     if(createChModal) {
 
     return(
-        <main className="fixed top-0 bottom-0 right-0 left-0 flex z-20 items-center justify-center modal">
+        <form onSubmit={httpHandler} className="fixed top-0 bottom-0 right-0 left-0 flex z-20 items-center justify-center modal">
                 <section className="bg-white w-1/2 h-5/6 rounded-md grid grid-rows-6 ">
                 <article className="flex flex-row justify-between px-10 grow border border-b items-center">
                 <div className="">
@@ -71,7 +101,7 @@ const CreateChannel = ()=>{
                             <button>Cancel</button>
                         </div>
                         <div className="colour text-xs text-white  w-24 h-8 grid justify-center rounded-md">
-                            <button>Create channel</button>
+                            <button type="submit">Create channel</button>
                         </div>
                     </article>
                  
@@ -80,7 +110,7 @@ const CreateChannel = ()=>{
                     </article>
                    
                 </section>
-        </main>
+        </form>
     )
 } else {
     return null

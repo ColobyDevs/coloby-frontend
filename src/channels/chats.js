@@ -1,15 +1,19 @@
-import React, {useReducer, useState, useRef} from "react";
-import { data } from "./data";
-import { useEffect } from "react";
+import React, {useReducer, useState, useRef, useContext, useEffect} from "react";
+import { Context } from "../context/context";
+import { useLocation } from "react-router-dom";
+import { chatData } from "./chatData";
+import ChatDataList from "./dataList";
 import {CiFaceSmile } from 'react-icons/ci'
 import {ImAttachment} from 'react-icons/im'
 import {AiTwotoneCamera, AiOutlineSend} from 'react-icons/ai'
 import avatar from '../img/avatar.jpg'
+import { useHttp } from "../hooks/httpHook";
 
 
 const Chat = ()=>{
-    const [lop, setLop] = useState(false)
-
+    const {token, msgTrigger, roomMsgs, setRoomMsgs} = useContext(Context)
+    const location = useLocation()
+    
     const reducer = (state, action)=>{
         if(action.type === 'firstP'){
             return {...state, value: action.value, type: action.type }
@@ -18,28 +22,54 @@ const Chat = ()=>{
         }else if(action.type === 'clear'){
             return initialState
         }
-                }
+    }
     
-        const initialState = {
-            value: '',
+    const initialState = {
+        value: '',
             type: '',
             isValid: false
         }
-      
+        
         const [state, dispatch]  = useReducer(reducer, initialState)
    
         const messageHandler = (e)=>{
-        e.preventDefault();
+            e.preventDefault();
         dispatch({value: e.target.value, payload: 'right', type: 'secondP'})
-        }
+    }
 
 const carousel = useRef()
 const chatBox = useRef()
 
-        const btnIsValid = state.value !== ''
-    const sendMessage =  (e) => {
-        e.preventDefault();
-            data.push({
+const btnIsValid = state.value !== ''
+const api = 'https://coloby.onrender.com/api/v1/chat/send/colobytest_mhz0/'
+
+
+
+
+const message = {
+    message: state.value
+}
+
+const httpBody = {
+    method: 'POST',
+    body: JSON.stringify(message),
+    headers:{
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + token
+    }
+}
+const [httpHandler] = useHttp(httpBody, api, 'sendMessage')
+
+
+const sendMessage =  (e) => {
+   
+
+    e.preventDefault();
+
+ 
+        
+
+            chatData.push({
                 type: state.type,
                 message: state.value
             });
@@ -47,16 +77,54 @@ const chatBox = useRef()
             dispatch({type: 'clear'})
             
             
+            
+            
+        };
+        
 
-       
-    };
+        useEffect(()=>{
+            
+            if(location.pathname === '/channels'){
 
-
+                
+                const getMsgs = async ()=>{
+        
+                try{
+                    const response = await fetch(`https://coloby.onrender.com/api/v1/chat/get/colobytest_mhz0/`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + token
+                        }
+                    })
+                    const responseData = await response.json()
+                    console.log(responseData);
+                    setRoomMsgs(responseData.messages)
+                    dispatch({type: 'clear'})
+                    if(!response.ok){
+                        throw new Error(responseData.message)
+                    }
+                }catch(err){
+                    console.log(err)
+                }
+            }
+            getMsgs()
+        }
+        
+        
+        
+        
+    }, [msgTrigger, location.pathname])
+    
+    
     useEffect(()=>{
-        const carr = document.querySelector('.section-chat');
-        carr.scrollTop += carr.scrollHeight;
-    }, [state.value])
-
+            if(location.pathname === '/channels'){
+            const carr = document.querySelector('.section-chat');
+            carr.scrollTop += carr.scrollHeight;
+        }
+        }, [state.value])
+    
+        
   
 return(
     <>
@@ -70,11 +138,9 @@ return(
         </div>
        </article>
     <div className=" mt-4 px-2  flex flex-col space-y-3 max-w-xs overflow-hidden  field-text">
-        {data.map((obj)=>{
-            return <p ref={chatBox} className={`bg-gray-400 field-text chatbox rounded-2xl py-3 px-2 max-w-max w-24 text-white h-auto ${obj.type === 'firstP' ? 'ml-auto  colour  rounded-tr-none ': 'rounded-tl-none'}`}>{obj.message}</p>
-        })}
+       <ChatDataList/>
     </div>
-    <div className="bg-gray-600 sticky bottom-0 pb-2 mt-4 w-full px-2 flex flex-row items-center justify-between gap-x-2">
+    <div className="bg-gray-600 sticky top-0  bottom-0 pb-2 mt-2 left-0   w-full px-2 flex flex-row items-center justify-between gap-x-2">
         <div className="px-2 flex flex-row h-6 bg-gray-400 rounded-2xl w-11/12 items-center text-white justify-between">
             <div className="flex flex-row">
 
@@ -87,8 +153,8 @@ return(
         </div>
         </div>
         <div className="colour rounded-full w-5 h-5 flex items-center justify-center ">
-        <button disabled={!btnIsValid} className="">
-            <AiOutlineSend onClick={sendMessage} className="text-white text-xs "/>
+        <button className="">
+            <AiOutlineSend onClick={httpHandler} className="text-white text-xs "/>
             </button>
         </div>
     </div>

@@ -9,7 +9,7 @@ import { IoIosSettings, IoIosHelpCircle, IoIosLogOut, IoIosNotificationsOutline,
 
 
 const Sidebar = () => {
-    const {setCreateChModal, createChModal} = useContext(Context)
+    const {setCreateChModal, logout, userId} = useContext(Context)
     const createChHandler = ()=>{
         setCreateChModal(true)
     }
@@ -37,7 +37,7 @@ const Sidebar = () => {
             <section className={`flex flex-col space-y-5  h-64 justify-center w-full items-center mx-auto mt-4 `}>
                 <article className="flex flex-row w-1/2 mx-auto space-x-4 h-4 items-center">
                     <MdDashboard className="" />
-                    <Link to='/dashboard'>
+                    <Link to={`/dashboard/${userId}`}>
                     <h2>Dashboard</h2>
                     </Link>
                 </article>
@@ -81,7 +81,7 @@ const Sidebar = () => {
                             <h2>Help</h2>
                         </div>
                         <div className="flex flex-col  w-full  align-center text-center space-y-2">
-                            <div className="flex flex-row items-center space-x-4">
+                            <div className="flex flex-row items-center space-x-4 cursor-pointer" onClick={logout}>
                                 <IoIosLogOut className="" />
                                 <h2>Logout</h2>
                             </div>
