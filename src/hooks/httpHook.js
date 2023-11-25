@@ -1,6 +1,7 @@
 import {useContext} from 'react'
 import { Context } from '../context/context'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 export const useHttp=(httpBody, api, type)=>{
     const navigate = useNavigate()
@@ -19,13 +20,13 @@ export const useHttp=(httpBody, api, type)=>{
             if(type === 'login'){
                 login(access_token,  user_id);
             }else if(type === 'sendMessage'){
-        
                setMsgTrigger(!msgTrigger)
             } else if(type === 'register'){
                 setIsLoading(false)
                 return navigate('/login')
             } else if(type === 'createRoom'){
                 setCreateChModal(false)
+                toast.success('Room Succesfully Created!')
             }
             if (!response.ok) {
                 throw new Error(responseData.message)

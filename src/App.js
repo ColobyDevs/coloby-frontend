@@ -12,7 +12,7 @@ import Chat from './channels/chats';
 // import TaskBoard from './taskboard/taskboard';
 import Profile from './profile/profile';
 import Spinner from './spinner';
-
+import Toast from './shared/toast';
 
 function App() {
   const {token} = useContext(Context)
@@ -21,6 +21,7 @@ function App() {
     <>
     {token && <Sidebar/>}
     <Spinner/>
+    <Toast/>
       <Routes>
     <Route path='/dashboard/:userId' element = {<Dashboard/>}/>
     <Route path='/profile' element = {<Profile/>}/>
