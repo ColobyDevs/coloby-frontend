@@ -6,12 +6,13 @@ import { useHttp } from "../hooks/httpHook";
 
 
 const CreateChannel = ()=>{
-    const [channelName, setChannelName] = useState('')
 
+
+    const [channelName, setChannelName] = useState('')
 
     const {setCreateChModal, createChModal, token} = useContext(Context)
     const [toggle, setToggle] = useState(false)
-    const channelType = toggle ? false: true
+    const channelType = toggle ? 'public' : 'private'
     const channelInfo = toggle ? 'Anyone in your workspace can view and join this channel' : 'Only those you allow can see and join this channel'
 
 const channelNameHandler = (e)=>{
@@ -25,12 +26,12 @@ const channelNameHandler = (e)=>{
          Authorization: 'Bearer ' + token
       }
     const api = 'https://coloby.onrender.com/api/v1/room/'
-
     const httpBody = {
         action: 'create',
         room_name: channelName,
-        is_private: channelType
+        is_private: channelType === 'public' ? false: true
     }
+  
     const body = {
         method: 'POST',
         headers: header,
@@ -53,6 +54,7 @@ const channelNameHandler = (e)=>{
         console.log('dodo');
     }
 
+    console.log(toggle);
     if(createChModal) {
 
     return(
@@ -70,7 +72,7 @@ const channelNameHandler = (e)=>{
                     <div className=" px-10">
                 <label className="switch">
                 <input type="checkbox"  placeholder="" />
-                <span className={`slider round ${toggle ? 'text-end' : 'text-start'} pt-1.5 text-white  text-xs px-3`} onClick={toggleHandler}>{channelType}</span>
+                <span className={`slider round ${toggle ? 'text-end' : 'text-start'}  pt-1.5 text-white  text-xs px-3`} onClick={toggleHandler}>{channelType}</span>
                 </label>
                     </div>
                     <p className="text-xs mr-3">{channelInfo}</p>

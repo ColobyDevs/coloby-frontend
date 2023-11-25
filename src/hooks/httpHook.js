@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 export const useHttp=(httpBody, api, type)=>{
     const navigate = useNavigate()
 
-    const {login, setIsLoading, msgTrigger, setMsgTrigger} = useContext(Context)
+    const {login, setIsLoading, msgTrigger, setMsgTrigger, setCreateChModal} = useContext(Context)
     const httpFunction = async(httpBody, api, type)=>{
         
         try{
@@ -24,6 +24,8 @@ export const useHttp=(httpBody, api, type)=>{
             } else if(type === 'register'){
                 setIsLoading(false)
                 return navigate('/login')
+            } else if(type === 'createRoom'){
+                setCreateChModal(false)
             }
             if (!response.ok) {
                 throw new Error(responseData.message)
