@@ -4,13 +4,20 @@ import {HiMiniXMark} from 'react-icons/hi2'
 import './create-channel.css'
 import { useHttp } from "../hooks/httpHook";
 
+
 const CreateChannel = ()=>{
+    const [channelName, setChannelName] = useState('')
+
 
     const {setCreateChModal, createChModal, token} = useContext(Context)
     const [toggle, setToggle] = useState(false)
     const channelType = toggle ? 'Public' : 'Private'
     const channelInfo = toggle ? 'Anyone in your workspace can view and join this channel' : 'Only those you allow can see and join this channel'
 
+const channelNameHandler = (e)=>{
+    setChannelName(e.target.value)
+    console.log(channelName);
+}
 
 
     const header = {
@@ -18,10 +25,11 @@ const CreateChannel = ()=>{
          Authorization: 'Bearer ' + token
       }
     const api = 'https://coloby.onrender.com/api/v1/room/'
+
     const httpBody = {
         action: 'create',
-        room_name: 'colobyTest',
-        is_private: false
+        room_name: channelName,
+        is_private: channelType
     }
     const body = {
         method: 'POST',
@@ -61,7 +69,7 @@ const CreateChannel = ()=>{
                 <article className="flex flex-row items-center span-col-1">
                     <div className=" px-10">
                 <label className="switch">
-                <input type="checkbox"  placeholder=""/>
+                <input type="checkbox"  placeholder="" />
                 <span className={`slider round ${toggle ? 'text-end' : 'text-start'} pt-1.5 text-white  text-xs px-3`} onClick={toggleHandler}>{channelType}</span>
                 </label>
                     </div>
@@ -73,7 +81,7 @@ const CreateChannel = ()=>{
                     <div>
                         <label className="label text-xs">Name</label>
                         <div className="flex flex-col">
-                        <input className="input text-xs" placeholder="# e.g Leads"/>
+                        <input className="input text-xs" placeholder="# e.g Leads" value={channelName} onChange={channelNameHandler}/>
                         <span className="field-text text-gray-400"> Name must be lowercase</span>
                         </div>
                     </div>
