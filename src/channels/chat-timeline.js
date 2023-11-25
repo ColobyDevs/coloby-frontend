@@ -23,7 +23,7 @@ return(
 
     <div className="flex flex-row px-4 mt-2">
     <div className="relative flex flex-row">
-        <img src={avatar}  className="w-8 h-8 rounded-full"/>
+        <img src={avatar} alt="profile" className="w-8 h-8 rounded-full"/>
         <span className="absolute rounded-full w-1.5 h-1.5 ml-6 mt-6 bg-green-300 text-sm"></span>
         </div>
         <div className="ml-2 text-white flex flex-col">
@@ -37,7 +37,7 @@ return(
     </div>
     <div className="flex flex-row px-4 mt-2">
         <div className="relative flex flex-row">
-        <img src={avatar}  className="w-8 h-8 rounded-full"/>
+        <img src={avatar}  alt="profile" className="w-8 h-8 rounded-full"/>
         <span className="absolute rounded-full w-1.5 h-1.5 ml-6 mt-6 bg-green-300 text-sm"></span>
         </div>
         <div className="ml-2 text-white flex flex-col">
@@ -51,7 +51,7 @@ return(
     </div>
     <div className="flex flex-row px-4 mt-2">
     <div className="relative flex flex-row">
-        <img src={avatar}  className="w-8 h-8 rounded-full"/>
+        <img src={avatar}  alt="profile" className="w-8 h-8 rounded-full"/>
         <span className="absolute rounded-full w-1.5 h-1.5 ml-6 mt-6 bg-green-300 text-sm"></span>
         </div>
         <div className="ml-2 text-white flex flex-col">
@@ -65,7 +65,7 @@ return(
     </div>
     <div className="flex flex-row px-4 mt-2">
     <div className="relative flex flex-row">
-        <img src={avatar}  className="w-8 h-8 rounded-full"/>
+        <img src={avatar}  alt="profile" className="w-8 h-8 rounded-full"/>
         <span className="absolute rounded-full w-1.5 h-1.5 ml-6 mt-6 bg-green-300 text-sm"></span>
         </div>
         <div className="ml-2 text-white flex flex-col">

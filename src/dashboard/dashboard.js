@@ -10,10 +10,10 @@ import avatar from '../img/avatar.jpg'
 import mock from '../img/mock.png'
 import {RiAddLine, RiBallPenLine, RiArrowLeftSLine, RiArrowRightSLine, RiHistoryLine, RiStarLine, RiSearchLine, RiFilter3Line, RiFile2Line} from "react-icons/ri";
 import {HiMiniUser} from 'react-icons/hi2'
-import { useHttp } from "../hooks/httpHook";
+
 
 const Dashboard = ()=>{
-    const {setCreateChModal, createChModal, token} = useContext(Context)
+    const {setCreateChModal,  token} = useContext(Context)
 
    
 
@@ -24,8 +24,8 @@ const Dashboard = ()=>{
     const [navState, setNavState] = useState(true)
 
     const [carousel, setCarousel] = useState()
-    const [leftValue, setLeftValue ] = useState(0)
-    const [rightValue, setRightValue ] = useState(0)
+    const leftValue = 0
+ 
 
     const carouselRef = useRef()
     const cardRef = useRef()
@@ -40,9 +40,9 @@ const Dashboard = ()=>{
     
     
     setTimeout(()=> setNavState(()=>{
-            if(carousel.scrollLeft == 0) {
+            if(carousel.scrollLeft === 0) {
             return true   
-        } else if(carousel.scrollLeft == scrollWidth){
+        } else if(carousel.scrollLeft === scrollWidth){
             return
         }
     }), 60) 
@@ -100,7 +100,7 @@ return(<>
             
             <div className="h-10 w-10 grid items-center justify-center border rounded-md">
 
-                <img className=" w-6 h-6" src={avatar}/>
+                <img className=" w-6 h-6" alt="user" src={avatar}/>
             </div>
             </div>
         </article>
@@ -130,7 +130,7 @@ return(<>
                         <MdExplore/> <p className="text-xs">Explore this channel story</p>
                     </div>
                     <div className="row-span-3 border-b mx-auto  w-full">
-                        <img src={mock} className="h-24 mx-auto border"/>
+                        <img src={mock} alt="channel" className="h-24 mx-auto border"/>
                         </div>
                         <div className="border">
                         <p className="text-xs px-4">

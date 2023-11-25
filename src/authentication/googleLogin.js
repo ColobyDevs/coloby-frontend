@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import { jwtDecode } from 'jwt-decode'
-import { useLocation } from 'react-router-dom'
-
-
 
 
 function GoogleLoginAuth({type}) {

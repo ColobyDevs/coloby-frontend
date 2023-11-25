@@ -1,13 +1,15 @@
-import React, {useContext} from 'react'
-import { useNavigate } from 'react-router-dom'
+import {useContext} from 'react'
 import { Context } from '../context/context'
-
+import { useNavigate } from 'react-router-dom'
 
 export const useHttp=(httpBody, api, type)=>{
-    const {login, setRoomMsgs, msgTrigger, setMsgTrigger} = useContext(Context)
+    const navigate = useNavigate()
+
+    const {login, setIsLoading, msgTrigger, setMsgTrigger} = useContext(Context)
     const httpFunction = async(httpBody, api, type)=>{
         
         try{
+           type !== 'sendMessage' && setIsLoading(true)
           const response = await fetch(`${api}`,
                 httpBody
             )
@@ -17,15 +19,19 @@ export const useHttp=(httpBody, api, type)=>{
             if(type === 'login'){
                 login(access_token,  user_id);
             }else if(type === 'sendMessage'){
-                console.log('ko');
+        
                setMsgTrigger(!msgTrigger)
+            } else if(type === 'register'){
+                setIsLoading(false)
+                return navigate('/login')
             }
             if (!response.ok) {
                 throw new Error(responseData.message)
             }
+            setIsLoading(false)
 
         }catch(err){
-
+            setIsLoading(false)
             console.log(err);
         }
         

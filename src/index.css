@@ -13,3 +13,6 @@
 .carousel::-webkit-scrollbar{
   display: none;
 }
+.spinner{
+  background: rgba(0, 0, 0, 0.5)
+}

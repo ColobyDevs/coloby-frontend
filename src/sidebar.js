@@ -24,7 +24,7 @@ const Sidebar = () => {
 
         <main className="fixed h-screen hidden space-y-10 py-4 lg:flex lg:flex-col border w-72 border-l">
             <div  className="ml-16">
-                <img src={ColobyLogo} className="w-20 h-10"/>
+                <img src={ColobyLogo} alt='coloby' className="w-20 h-10"/>
                 
             </div>
 

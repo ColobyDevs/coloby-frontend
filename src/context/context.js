@@ -10,10 +10,11 @@ const [username, setUsername] = useState('')
 const [token, setToken] = useState(null)
 const [userId, setUserId] = useState('')
 const [tokenExpDate, setTokenExpDate] = useState('')
-const [spinner, setSpinner] = useState(false)
+const [isLoading, setIsLoading] = useState(false)
 const [roomMsgs, setRoomMsgs] = useState([])
 const [msgTrigger, setMsgTrigger ] = useState(false)
-
+const [showChatDate, setShowChatDate] = useState(false)
+const [chatDate, setChatDate] = useState('')
 
 
 
@@ -52,8 +53,8 @@ useEffect(()=>{
 
 
 // auto-logout after token expires
-let timeoutId;
 useEffect(()=>{
+    let timeoutId;
     if(tokenExpDate){
       const minutesLeft = tokenExpDate - new Date().getTime()
       timeoutId = setTimeout(logout, minutesLeft)
@@ -79,12 +80,16 @@ const coloby = 'coloby'
                 userId,
                 login,
                 logout,
-                spinner,
-                setSpinner,
+                isLoading,
+                setIsLoading,
                 roomMsgs,
                 setRoomMsgs,
                 msgTrigger,
-                setMsgTrigger
+                setMsgTrigger,
+                showChatDate,
+                setShowChatDate,
+                chatDate,
+                setChatDate
 
         }}>
             {props.children}

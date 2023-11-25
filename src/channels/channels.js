@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { MdSearch } from "react-icons/md";
 import avatar from '../img/avatar.jpg';
@@ -9,7 +9,7 @@ import mock from '../img/mock.png'
 import './channels.css';
 import Chat from "./chats";
 import ChatTimeline from "./chat-timeline";
-import DataList from "./dataList";
+
 
 const Channels = ()=>{
 
@@ -110,8 +110,8 @@ const Channels = ()=>{
         </section>
         
         <div className="flex flex-col ml-auto justify-center pr-3">
-            <ChatTimeline/>
             <Chat/>
+            <ChatTimeline/>
         </div>
         </section>
         </article>

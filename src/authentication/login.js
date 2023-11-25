@@ -1,20 +1,15 @@
-import React, {useEffect, useState} from "react";
-import { useLocation } from "react-router-dom";
-
+import React from "react";
 import Input from "./input";
 import Button from "./formElements/button";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "./validators";
 import { useForm } from "./formHook";
 import { Link } from "react-router-dom";
 import { useHttp } from "../hooks/httpHook";
-import {CgSpinner} from 'react-icons/cg'
 import GoogleLoginAuth from "./googleLogin";
 
 
 const Login = ()=>{
-const [currLocation, setCurrLocation] = useState()
-
-  const location = useLocation()
+    
 const [formState, inputHandler] = useForm( {
     email:{
       value: '',
