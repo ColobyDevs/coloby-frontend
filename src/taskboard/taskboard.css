@@ -1,0 +1,10 @@
+.title-bg{
+   background-color: #EBEBEB;
+}
+.inactive{
+    color: #7E7B7B;
+}
+.active{
+    border-bottom-width: 2;
+    border-bottom:1px solid #052CFD ;
+}

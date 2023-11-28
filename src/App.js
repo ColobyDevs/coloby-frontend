@@ -13,6 +13,8 @@ import Chat from './channels/chats';
 import Profile from './profile/profile';
 import Spinner from './spinner';
 import Toast from './shared/toast';
+import TaskBoard from './taskboard/taskboard';
+import Overview from './taskboard/overview';
 
 function App() {
   const {token} = useContext(Context)
@@ -29,7 +31,7 @@ function App() {
     <Route path='/chat' element = {<Chat/>}/>
     <Route path='/login' element = { <Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
-    <Route path='/taskboard' element = {<Profile/>}/>
+    <Route path='/taskboard/:section' element = {<TaskBoard/>}/>
     <Route path='/' element = { <LandingPage/>}/>
 
       </Routes>

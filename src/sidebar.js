@@ -63,7 +63,7 @@ const Sidebar = () => {
                     </div>
                     <div className="flex flex-row items-center space-x-4 ">
                         <IoIosStats />
-                        <Link to='/taskboard'>
+                        <Link to='/taskboard/overview'>
                         <h2>Taskboard</h2>
                         </Link>
                     </div>

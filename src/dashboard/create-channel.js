@@ -49,12 +49,9 @@ const channelNameHandler = (e)=>{
         setCreateChModal(false)
     }
 
-    function createChannel(e){
-        e.preventDefault()
-        console.log('dodo');
-    }
+    
 
-    console.log(toggle);
+   
     if(createChModal) {
 
     return(
@@ -108,7 +105,7 @@ const channelNameHandler = (e)=>{
                     </article>
                     <article className="flex flex-row justify-end px-10 space-x-3 items-center">
                         <div className="text-xs text-gray-300  w-24 h-8 grid justify-center rounded-md border">
-                            <button>Cancel</button>
+                            <button onClick={createChHandler}>Cancel</button>
                         </div>
                         <div className="colour text-xs text-white  w-24 h-8 grid justify-center rounded-md">
                             <button type="submit">Create channel</button>

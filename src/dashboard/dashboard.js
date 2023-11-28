@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect, useContext} from "react";
 import { Context } from "../context/context";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { MdSearch, MdExplore } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import ChannelCards from "./channel-cards";
@@ -13,9 +13,23 @@ import {HiMiniUser} from 'react-icons/hi2'
 
 
 const Dashboard = ()=>{
-    const {setCreateChModal,  token} = useContext(Context)
+    const navigate = useNavigate();
+    const location = useLocation()
+    const {setCreateChModal,setIsLoading, setRoomMsgs, msgTrigger,  token} = useContext(Context)
 
-   
+
+useEffect(()=>{
+    console.log(1);
+            
+}, [ ])
+
+// useEffect(()=>{
+//     getMsgs('first')
+//     // socket = io()
+// }, [])
+
+
+
 
  
 
@@ -140,11 +154,11 @@ return(<>
                         </div>
                     </div>
                 <ChannelCards/>
+                {/* <ChannelCards/>
                 <ChannelCards/>
                 <ChannelCards/>
                 <ChannelCards/>
-                <ChannelCards/>
-                <ChannelCards/>
+                <ChannelCards/> */}
                 </article>
 
                 <article className="px-4 flex flex-row justify-between mt-4">
@@ -248,7 +262,7 @@ return(<>
 </>
 )
 }else{
-    return <Navigate to='/login'/>
+    return navigate('/login')
 }
 }
 

@@ -34,6 +34,8 @@ const login = useCallback((token, userId, tokenDuration)=>{
 
 })
 
+
+
 const logout = useCallback(()=>{
     setToken(null)
     setTokenExpDate(null)
@@ -43,6 +45,7 @@ const logout = useCallback(()=>{
 
 // persist login after refresh
 useEffect(()=>{
+    console.log('test');
     const storedData = JSON.parse(localStorage.getItem('userData'))
     if(storedData && storedData.accessToken  && storedData.userId && storedData.tokenExpDate > new Date().getTime()){
        
@@ -64,6 +67,42 @@ useEffect(()=>{
   }, [tokenExpDate, logout])
 
 
+
+  const getMsgs = async (first)=>{
+
+            setIsLoading(true)
+            console.log(token);
+        
+    
+                try{
+                    const response = await fetch(`https://coloby.onrender.com/api/v1/chat/get/colobytest_mhz0/`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('userData')).accessToken
+                        }
+                    })
+                    const responseData = await response.json()
+                    console.log(responseData);
+            if(responseData.detail === 'Given token not valid for any token type'){
+                throw new Error(responseData.message)
+            }
+              setRoomMsgs(responseData.messages)
+            // dispatch({type: 'clear'})
+            setIsLoading(false)
+            if(!response.ok){
+                throw new Error(responseData.message)
+            }
+        }catch(err){
+            setIsLoading(false)
+            console.log(err)
+        } 
+    
+    }
+    useEffect(()=>{
+        console.log(1);
+                getMsgs()
+    }, [ msgTrigger])
 
 
 const coloby = 'coloby'
