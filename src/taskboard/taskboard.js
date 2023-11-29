@@ -101,7 +101,7 @@ function TaskBoard(){
                 <span className={`${state.requests.isActive ? 'active':'inactive'} font-medium transition-all delay-100 duration-100`}>Requests</span>
                 </Link>
                 <Link to='/taskboard/analysis' onClick={()=>taskBoardTabHandler('ANALYSIS')}>
-                <span className={`${state.analysis.isActive ? 'active':'inactive'} font-mediumtransition-all delay-100 duration-100`}>Analysis</span>
+                <span className={`${state.analysis.isActive ? 'active':'inactive'} font-medium transition-all delay-100 duration-100`}>Analysis</span>
                 </Link>
               
             </nav>
