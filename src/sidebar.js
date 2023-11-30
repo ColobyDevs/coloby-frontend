@@ -9,7 +9,7 @@ import { IoIosSettings, IoIosHelpCircle, IoIosLogOut, IoIosNotificationsOutline,
 
 
 const Sidebar = () => {
-    const {setCreateChModal, logout, userId} = useContext(Context)
+    const {setCreateChModal, logout, userId, state, dispatch} = useContext(Context)
     const createChHandler = ()=>{
         setCreateChModal(true)
     }
@@ -18,6 +18,10 @@ const Sidebar = () => {
 
     const showHandler = () => {
         setShow(!show)
+    }
+    function taskBoardTabHandler(){
+        console.log('yo');
+        dispatch({type: 'OVERVIEW'})
     }
 
     return (<>
@@ -63,7 +67,7 @@ const Sidebar = () => {
                     </div>
                     <div className="flex flex-row items-center space-x-4 ">
                         <IoIosStats />
-                        <Link to='/taskboard/overview'>
+                        <Link to='/taskboard/overview' onClick={taskBoardTabHandler}>
                         <h2>Taskboard</h2>
                         </Link>
                     </div>
@@ -80,7 +84,7 @@ const Sidebar = () => {
                             <IoIosHelpCircle />
                             <h2>Help</h2>
                         </div>
-                        <div className="flex flex-col  w-full  align-center text-center space-y-2">
+                        <div className="flex flex-col w-full align-center text-center space-y-2">
                             <div className="flex flex-row items-center space-x-4 cursor-pointer" onClick={logout}>
                                 <IoIosLogOut className="" />
                                 <h2>Logout</h2>

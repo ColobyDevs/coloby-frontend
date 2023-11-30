@@ -1,4 +1,5 @@
-import React, {useReducer} from 'react'
+import React, {useReducer, useContext} from 'react'
+import { Context } from '../context/context'
 import { MdSearch } from 'react-icons/md'
 import { IoIosNotificationsOutline } from 'react-icons/io'
 import avatar from '../img/avatar.jpg'
@@ -11,39 +12,8 @@ import Analysis from './analysis'
 import './taskboard.css'
 function TaskBoard(){
 
-    const initialState = {
-        overview:{
-            isActive: true
-        },
-        assigned:{
-            isActive: false
-        },
-        requests:{
-            isActive: false
-        },
-        analysis:{
-            isActive: false
-        },
-    }
-
-    const reducerFunc = (state, action)=>{
-            switch(action.type){
-                case 'OVERVIEW':{
-                    return {...state, overview:{isActive:true }, assigned: {isActive: false}, requests: {isActive: false}, analysis: {isActive: false} }
-                }
-                case 'ASSIGNED':{
-                    return {...state, overview:{isActive:false }, assigned: {isActive: true}, requests: {isActive: false}, analysis: {isActive: false} }
-                }
-                case 'REQUESTS': {
-                    return {...state, overview:{isActive:false }, assigned: {isActive: false}, requests: {isActive: true}, analysis: {isActive: false} }
-                }
-                case 'ANALYSIS': {
-                    return {...state, overview:{isActive:false }, assigned: {isActive: false}, requests: {isActive: false}, analysis: {isActive: true} }
-                }
-            }
-    }
-
-    const [state, dispatch] = useReducer(reducerFunc, initialState)
+    const {state, dispatch} = useContext(Context);
+  
 
     function taskBoardTabHandler(tab){
          dispatch({type: tab})
@@ -52,10 +22,10 @@ function TaskBoard(){
 
     return(<React.Fragment>
         <main className='h-screen ml-72'>
-        <section className="flex flex-row items-center  h-16 border w-full px-4">
-        <div className="w-full flex flex-row h-1/2 items-center">
-            <MdSearch className="text-lg border-r-0 border h-full rounded-l-md"/>
-            <input placeholder={`Search...`} className="px-2 h-full w-1/2  border border-l-0 rounded-r-md focus:outline-none"/>
+        <section className="flex flex-row items-center justify-between  h-16 border w-full px-4">
+        <div className="w-1/2 flex flex-row h-1/2 items-center border px-2 rounded-md">
+            <MdSearch className="text-lg border-r-0  h-full rounded-l-md"/>
+            <input placeholder={`Search...`} className="px-2 h-full w-10/12  rounded-r-md focus:outline-none"/>
             </div>
 
             <div  className="grid grid-cols-2 space-x-2">

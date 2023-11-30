@@ -1,4 +1,4 @@
-import React, {createContext, useState, useCallback, useEffect} from "react";
+import React, {createContext, useState, useCallback, useEffect, useReducer} from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -105,6 +105,47 @@ useEffect(()=>{
     }, [ msgTrigger])
 
 
+
+    // taskboard subsection navigation
+    const initialState = {
+        overview:{
+            isActive: true
+        },
+        assigned:{
+            isActive: false
+        },
+        requests:{
+            isActive: false
+        },
+        analysis:{
+            isActive: false
+        },
+    }
+
+    const reducerFunc = (state, action)=>{
+            switch(action.type){
+                case 'OVERVIEW':{
+                    return {...state, overview:{isActive:true }, assigned: {isActive: false}, requests: {isActive: false}, analysis: {isActive: false} }
+                }
+                case 'ASSIGNED':{
+                    return {...state, overview:{isActive:false }, assigned: {isActive: true}, requests: {isActive: false}, analysis: {isActive: false} }
+                }
+                case 'REQUESTS': {
+                    return {...state, overview:{isActive:false }, assigned: {isActive: false}, requests: {isActive: true}, analysis: {isActive: false} }
+                }
+                case 'ANALYSIS': {
+                    return {...state, overview:{isActive:false }, assigned: {isActive: false}, requests: {isActive: false}, analysis: {isActive: true} }
+                }
+            }
+    }
+
+    const [state, dispatch] = useReducer(reducerFunc, initialState)
+
+   
+
+
+
+
 const coloby = 'coloby'
 
     return(
@@ -128,7 +169,9 @@ const coloby = 'coloby'
                 showChatDate,
                 setShowChatDate,
                 chatDate,
-                setChatDate
+                setChatDate,
+                state,
+                dispatch
 
         }}>
             {props.children}

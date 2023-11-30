@@ -99,10 +99,10 @@ if(token){
 return(<>
 <CreateChannel/>
     <section className="h-screen ml-72">
-        <article className="flex flex-row items-center  h-16 border w-full px-4">
-        <div className="w-full flex flex-row h-1/2 items-center">
-            <MdSearch className="text-lg border-r-0 border h-full rounded-l-md"/>
-            <input placeholder={`Search...`} className="px-2 h-full w-1/2  border border-l-0 rounded-r-md focus:outline-none"/>
+    <section className="flex flex-row items-center justify-between  h-16 border w-full px-4">
+        <div className="w-1/2 flex flex-row h-1/2 items-center border px-2 rounded-md">
+            <MdSearch className="text-lg border-r-0  h-full rounded-l-md"/>
+            <input placeholder={`Search...`} className="px-2 h-full w-10/12  rounded-r-md focus:outline-none"/>
             </div>
 
             <div  className="grid grid-cols-2 space-x-2">
@@ -117,7 +117,7 @@ return(<>
                 <img className=" w-6 h-6" alt="user" src={avatar}/>
             </div>
             </div>
-        </article>
+        </section>
             <article className="bg-gray-100 section">
                 <div className="grid grid-cols-2 w-64 space-x-4 pl-4 pt-4">
                     <button onClick={createChHandler} className="justify-center border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row">
