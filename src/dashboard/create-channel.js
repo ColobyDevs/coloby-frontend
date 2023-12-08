@@ -9,8 +9,9 @@ const CreateChannel = ()=>{
 
 
     const [channelName, setChannelName] = useState('')
-
-    const {setCreateChModal, createChModal, token} = useContext(Context)
+    const {modal, auth} = useContext(Context)
+    const {setCreateChModal, createChModal} = modal
+    const{token} = auth
     const [toggle, setToggle] = useState(false)
     const channelType = toggle ? 'public' : 'private'
     const channelInfo = toggle ? 'Anyone in your workspace can view and join this channel' : 'Only those you allow can see and join this channel'

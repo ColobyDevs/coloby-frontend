@@ -8,11 +8,13 @@ import { Link } from 'react-router-dom'
 import Overview from './overview'
 import Requests from './requests'
 import Assigned from './assignedToMe'
-import Analysis from './analysis'
+import Analysis from './analysis/analysis'
 import './taskboard.css'
 function TaskBoard(){
 
-    const {state, dispatch} = useContext(Context);
+    const {taskboardReducer} = useContext(Context)
+    console.log(taskboardReducer);
+    const {state, dispatch} = taskboardReducer
   
 
     function taskBoardTabHandler(tab){
@@ -60,7 +62,7 @@ function TaskBoard(){
         <section className=''>
             <h1 className='px-4 mt-4  font-medium '>Task Board</h1>
             <article className='title-bg px-4 mt-2 w-full border'>
-            <nav className=' h-12  items-end pb-1 justify-between text-xs text-start flex flex-row w-1/2'>
+            <nav className=' h-12 z-30 relative items-end pb-1 justify-between text-xs text-start flex flex-row w-1/2'>
                 <Link title='Overview'  to='/taskboard/overview' className='' onClick={()=>taskBoardTabHandler('OVERVIEW')}>
                 <span className={`${state.overview.isActive ? 'active':'inactive'} font-medium transition-all delay-100 duration-100`}>Overview</span>
                 </Link>

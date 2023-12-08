@@ -5,8 +5,12 @@ import { toast } from 'sonner'
 
 export const useHttp=(httpBody, api, type)=>{
     const navigate = useNavigate()
-
-    const {login, setIsLoading, msgTrigger, setMsgTrigger, setCreateChModal} = useContext(Context)
+const {auth, modal, loader, chat} =  useContext(Context)
+const {login} = auth
+const { setErrMsg, setCreateChModal, setShowModal} = modal
+const {setMsgTrigger, msgTrigger} = chat
+const {setIsLoading} = loader
+    // const {login, setIsLoading, msgTrigger, setMsgTrigger, setCreateChModal, setErrMsg, setShowModal} = useContext(Context)
     const httpFunction = async(httpBody, api, type)=>{
         
         try{
@@ -17,7 +21,10 @@ export const useHttp=(httpBody, api, type)=>{
             const responseData = await response.json()
             const {access_token,  user_id} = responseData
             console.log(responseData);
-            if(type === 'login'){
+            if (!response.ok) {
+                console.log(Object.values(responseData)[0][0]);
+                throw new Error(Object.values(responseData)[0][0])
+            }else if(response.ok && type === 'login'){
                 login(access_token,  user_id);
             }else if(type === 'sendMessage'){
                setMsgTrigger(!msgTrigger)
@@ -28,14 +35,19 @@ export const useHttp=(httpBody, api, type)=>{
                 setCreateChModal(false)
                 toast.success('Room Succesfully Created!')
             }
-            if (!response.ok) {
-                throw new Error(responseData.message)
-            }
             setIsLoading(false)
-
+            
         }catch(err){
             setIsLoading(false)
-            console.log(err);
+            // const {credential_error} = err
+            // if (Object.keys(err) === credential_error){
+            //     setErrMsg(Object.keys(err)[0])
+            // }
+            setShowModal(true)
+     
+       
+            setErrMsg(err.message)
+            console.log(err.message);
         }
         
 
@@ -43,7 +55,7 @@ export const useHttp=(httpBody, api, type)=>{
 
     const httpHandler=(e)=>{
         e.preventDefault()
-        console.log(api, type);
+       
         httpFunction(httpBody, api, type)
     }
     return [httpHandler]
@@ -64,3 +76,4 @@ export const useHttp=(httpBody, api, type)=>{
 // "mayhor"
 
 // Mayhoral
+{credential_error: Array(1)}

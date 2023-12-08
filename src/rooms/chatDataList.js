@@ -7,7 +7,8 @@ import { Context } from '../context/context';
 
 export default function ChatDataList(){
 
-const {roomMsgs} = useContext(Context)
+const {chat} = useContext(Context)
+const {roomMsgs} =chat
 return(<>
 {roomMsgs.map((obj, i)=>{
   

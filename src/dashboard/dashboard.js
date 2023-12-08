@@ -14,8 +14,12 @@ import {HiMiniUser} from 'react-icons/hi2'
 
 const Dashboard = ()=>{
     const navigate = useNavigate();
-    const location = useLocation()
-    const {setCreateChModal,setIsLoading, setRoomMsgs, msgTrigger,  token} = useContext(Context)
+    
+    const {auth, modal} = useContext(Context)
+    const {setCreateChModal} = modal
+    const {token} = auth
+    // const {setCreateChModal,  token} = useContext(Context)
+
 
 
 useEffect(()=>{

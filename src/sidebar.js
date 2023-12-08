@@ -9,7 +9,11 @@ import { IoIosSettings, IoIosHelpCircle, IoIosLogOut, IoIosNotificationsOutline,
 
 
 const Sidebar = () => {
-    const {setCreateChModal, logout, userId, state, dispatch} = useContext(Context)
+    const {auth, taskboardReducer, modal} = useContext(Context)
+    // const {setCreateChModal, logout,  state, dispatch} = useContext(Context)
+    const {setCreateChModal } = modal
+    const {logout} = auth
+    const { dispatch } = taskboardReducer
     const createChHandler = ()=>{
         setCreateChModal(true)
     }
@@ -41,23 +45,24 @@ const Sidebar = () => {
             <section className={`flex flex-col space-y-5  h-64 justify-center w-full items-center mx-auto mt-4 `}>
                 <article className="flex flex-row w-1/2 mx-auto space-x-4 h-4 items-center">
                     <MdDashboard className="" />
-                    <Link to={`/dashboard/${userId}`}>
+                    <Link to={`/dashboard`}>
                     <h2>Dashboard</h2>
                     </Link>
                 </article>
 
                 <article className="flex flex-col space-y-5 w-1/2 mx-auto h-5/6">
                     <div className="flex flex-col row-span-1">
-                        <div className="flex flex-row space-x-4 items-center">
+                        <div className="flex flex-row space-x-4 items-center cursor-pointer" onClick={showHandler}>
                             <RiOrganizationChart />
-                            <Link to='channels'>
-                            <h2>Channels</h2>
-                            </Link>
-                            <RiArrowDownSLine className="ml-4 cursor-pointer" onClick={showHandler} />
+                           
+                            <h2>Rooms</h2>
+                            <RiArrowDownSLine className="ml-4 cursor-pointer"  />
                         </div>
                         <div className={`grid grid-rows-3  items-center ml-8 transition-all delay-400 ease-in-out ${show ? 'h-16' : 'h-0'}`}>
+                            <Link to='rooms'>
+                            <h1 className={`${show ? 'visible' : 'hidden'} text-xs`}>#coloby</h1>
+                            </Link>
                             <h1 className={`${show ? 'visible' : 'hidden'} text-xs`}>#newJam</h1>
-                            <h1 className={`${show ? 'visible' : 'hidden'} text-xs`}>#ncoloby</h1>
                             <h1 className={`${show ? 'visible' : 'hidden'} text-sm cursor-pointer`} onClick={createChHandler}>New channel +</h1>
                         </div>
                     </div>

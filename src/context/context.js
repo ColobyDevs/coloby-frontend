@@ -1,5 +1,5 @@
 import React, {createContext, useState, useCallback, useEffect, useReducer} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 export const Context = createContext()
@@ -15,9 +15,11 @@ const [roomMsgs, setRoomMsgs] = useState([])
 const [msgTrigger, setMsgTrigger ] = useState(false)
 const [showChatDate, setShowChatDate] = useState(false)
 const [chatDate, setChatDate] = useState('')
+const [errMsg, setErrMsg] = useState('')
+const [showModal, setShowModal] = useState(false)
 
 
-
+const location = useLocation()
 
 
 const navigate = useNavigate()
@@ -30,7 +32,7 @@ const login = useCallback((token, userId, tokenDuration)=>{
         const tokenExpirationTime = tokenDuration || new Date().getTime() + (604800000)
         setTokenExpDate(tokenExpirationTime)
         localStorage.setItem('userData', JSON.stringify({accessToken: token,  tokenExpDate: tokenExpirationTime, userId}))
-        return navigate(`/dashboard/${userId}`)
+        return navigate(`/dashboard`)
 
 })
 
@@ -69,9 +71,9 @@ useEffect(()=>{
 
 
   const getMsgs = async (first)=>{
-
+     
             setIsLoading(true)
-            console.log(token);
+            // console.log(JSON.parse(localStorage.getItem('userData')).accessToken);
         
     
                 try{
@@ -83,7 +85,7 @@ useEffect(()=>{
                         }
                     })
                     const responseData = await response.json()
-                    console.log(responseData);
+                 
             if(responseData.detail === 'Given token not valid for any token type'){
                 throw new Error(responseData.message)
             }
@@ -99,9 +101,11 @@ useEffect(()=>{
         } 
     
     }
+ 
     useEffect(()=>{
-        console.log(1);
-                getMsgs()
+        if(location.pathname === '/dashboard'){
+            getMsgs()
+        }
     }, [ msgTrigger])
 
 
@@ -150,29 +154,46 @@ const coloby = 'coloby'
 
     return(
         <Context.Provider value={{
-                coloby,
-                createChModal,
-                setCreateChModal,
-                username,
-                setUsername,
-                token,
-                setToken,
-                userId,
-                login,
-                logout,
+            
+            auth:{
+            token,
+            setToken,
+            setUsername,
+            userId,
+            login,
+            logout,
+            username
+        },
+         modal:{
+            createChModal,
+            setCreateChModal,
+            showModal,
+            setShowModal,
+                errMsg,
+                setErrMsg,
+        },
+        chat:{
+            roomMsgs,
+            setRoomMsgs,
+            msgTrigger,
+            setMsgTrigger,
+            showChatDate,
+            setShowChatDate,
+            chatDate,
+            setChatDate,
+        },
+        taskboardReducer: {
+            state,
+            dispatch,
+        },
+        loader:{
                 isLoading,
                 setIsLoading,
-                roomMsgs,
-                setRoomMsgs,
-                msgTrigger,
-                setMsgTrigger,
-                showChatDate,
-                setShowChatDate,
-                chatDate,
-                setChatDate,
-                state,
-                dispatch
-
+        }
+               
+                
+              
+              
         }}>
             {props.children}
         </Context.Provider>

@@ -14,9 +14,13 @@ import ChatPreload from "./chatPreLoad";
 
 const Chat = ()=>{
     const [dateShow, setDateShow] = useState(false)
-    const {token, msgTrigger, isLoading, setRoomMsgs, setIsLoading, roomMsgs} = useContext(Context)
+    const {auth, chat, loader} = useContext(Context)
+    const {token} = auth
+    const {isLoading} = loader
+    const {roomMsgs} =  chat
+    // const {token,  isLoading, roomMsgs} = useContext(Context)
     const location = useLocation()
-    let socket;
+    console.log(isLoading);
     
     const reducer = (state, action)=>{
         if(action.type === 'firstP'){
@@ -73,7 +77,7 @@ const [httpHandler] = useHttp(httpBody, api, 'sendMessage')
 
 
 useEffect(()=>{
-    if(location.pathname === '/channels' && roomMsgs !== []){
+    if(location.pathname === '/rooms' && roomMsgs !== []){
         const carr = document.querySelector('.section-chat');
         console.log(carr);
         carr.scrollTop += carr.scrollHeight;
