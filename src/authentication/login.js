@@ -45,7 +45,7 @@ const [httpHandler] = useHttp(httpBody, api, 'login')
 
 return (
     <React.Fragment>
-      <div className="my-auto absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 grid-rows-3 space-y-3">
+      <div className="my-auto absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 grid-rows-3 space-y-3">
             <h3 className="text-blue-500 font-medium text-center">Login</h3>
     <form className="bg-gray-100 w-96 mx-auto h-56 grid grid-flow-row py-3 text-xs"  onSubmit={httpHandler}>
     <Input type='email' id='email' name='Email' validator = {[VALIDATOR_EMAIL()]} onInput={inputHandler} errMsg = 'Invalid Email'/>

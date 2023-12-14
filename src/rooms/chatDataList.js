@@ -11,7 +11,7 @@ const {chat} = useContext(Context)
 const {roomMsgs} =chat
 return(<>
 {roomMsgs.map((obj, i)=>{
-  
+  console.log(obj);
   let msgTime = ''
   if(obj.created_at){
     const date = new Date(obj.created_at);
@@ -59,7 +59,7 @@ roomMsgs[i].date = currentFormatDate
 }
 
   
-   return <ChatDataItem type ={obj.type} time= {msgTime} date = {roomMsgs[i].date}  sender = {obj.user} key={obj.created_at} message= {obj.message} />
+   return <ChatDataItem time= {msgTime} date = {roomMsgs[i].date}  sender = {obj.user} key={obj.created_at} message= {obj.message} />
 })}
 
 </>)

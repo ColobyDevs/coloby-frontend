@@ -6,6 +6,7 @@ export const Context = createContext()
 
 const ContextProvider = (props)=>{
 const [createChModal, setCreateChModal] = useState(false)
+const [createTbModal, setCreateTbModal] = useState(false)
 const [username, setUsername] = useState('')
 const [token, setToken] = useState(null)
 const [userId, setUserId] = useState('')
@@ -19,10 +20,9 @@ const [errMsg, setErrMsg] = useState('')
 const [showModal, setShowModal] = useState(false)
 
 
-const location = useLocation()
-
 
 const navigate = useNavigate()
+
 
 const login = useCallback((token, userId, tokenDuration)=>{
         setToken(token)
@@ -70,44 +70,7 @@ useEffect(()=>{
 
 
 
-  const getMsgs = async (first)=>{
-     
-            setIsLoading(true)
-            // console.log(JSON.parse(localStorage.getItem('userData')).accessToken);
-        
-    
-                try{
-                    const response = await fetch(`https://coloby.onrender.com/api/v1/chat/get/colobytest_mhz0/`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('userData')).accessToken
-                        }
-                    })
-                    const responseData = await response.json()
-                 
-            if(responseData.detail === 'Given token not valid for any token type'){
-                throw new Error(responseData.message)
-            }
-              setRoomMsgs(responseData.messages)
-            // dispatch({type: 'clear'})
-            setIsLoading(false)
-            if(!response.ok){
-                throw new Error(responseData.message)
-            }
-        }catch(err){
-            setIsLoading(false)
-            console.log(err)
-        } 
-    
-    }
  
-    useEffect(()=>{
-        if(location.pathname === '/dashboard'){
-            getMsgs()
-        }
-    }, [ msgTrigger])
-
 
 
     // taskboard subsection navigation
@@ -145,12 +108,9 @@ useEffect(()=>{
 
     const [state, dispatch] = useReducer(reducerFunc, initialState)
 
+    const taskboardReducerDispatch = dispatch
+
    
-
-
-
-
-const coloby = 'coloby'
 
     return(
         <Context.Provider value={{
@@ -164,14 +124,18 @@ const coloby = 'coloby'
             logout,
             username
         },
+
          modal:{
             createChModal,
             setCreateChModal,
             showModal,
             setShowModal,
-                errMsg,
-                setErrMsg,
+            errMsg,
+            setErrMsg,
+            createTbModal,
+            setCreateTbModal
         },
+
         chat:{
             roomMsgs,
             setRoomMsgs,
@@ -182,17 +146,17 @@ const coloby = 'coloby'
             chatDate,
             setChatDate,
         },
+
         taskboardReducer: {
             state,
-            dispatch,
+            taskboardReducerDispatch,
         },
+
         loader:{
-                isLoading,
-                setIsLoading,
+            isLoading,
+            setIsLoading,
         }
-               
-                
-              
+            
               
         }}>
             {props.children}

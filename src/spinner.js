@@ -6,9 +6,9 @@ import { Context } from "./context/context";
 export default function Spinner(){
     const {loader} = useContext(Context)
     const {isLoading} = loader
-    console.log(isLoading);
+   
   if(isLoading){
 
-      return (<div className=" backdrop fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center  z-40 "><CgSpinner className="animate-spin text-7xl"/></div>)
+      return (<div className=" backdrop fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center text-blue-300  z-50 "><CgSpinner className="animate-spin text-7xl"/></div>)
     }
 }

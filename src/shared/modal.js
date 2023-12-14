@@ -12,7 +12,7 @@ export default function Modal(){
     }
     if(showModal){
 
-        return (<section className="backdrop  fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-40">
+        return (<section className="backdrop  fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center z-50">
             <div className="h-56 w-64 shadow-lg rounded-md border-red-500 border-2 bg-white grid grid-flow-row justify-center items-center ">
                 <MdErrorOutline className="text-red-500 mx-auto text-3xl "/>
                 <p className="px-2 text-center text-sm font-medium">{errMsg}</p>
