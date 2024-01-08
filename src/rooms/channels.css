@@ -1,0 +1,14 @@
+.colour{
+    background-color: #052CFD;
+  }
+
+.text{
+  color: #052CFD;
+}
+
+.chat-con::-webkit-scrollbar{
+  display: none;
+}
+.chat-message-box, .chat-type-box{
+  background-color: #7E7B7B;
+}
