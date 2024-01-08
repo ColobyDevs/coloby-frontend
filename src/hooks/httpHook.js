@@ -10,7 +10,7 @@ const {login} = auth
 const { setErrMsg, setCreateChModal, setShowModal} = modal
 const {setMsgTrigger, msgTrigger} = chat
 const {setIsLoading} = loader
-    // const {login, setIsLoading, msgTrigger, setMsgTrigger, setCreateChModal, setErrMsg, setShowModal} = useContext(Context)
+  
     const httpFunction = async(httpBody, api, type)=>{
         
         try{
@@ -39,10 +39,6 @@ const {setIsLoading} = loader
             
         }catch(err){
             setIsLoading(false)
-            // const {credential_error} = err
-            // if (Object.keys(err) === credential_error){
-            //     setErrMsg(Object.keys(err)[0])
-            // }
             setShowModal(true)
      
        

@@ -11,7 +11,7 @@ const {chat} = useContext(Context)
 const {roomMsgs} =chat
 return(<>
 {roomMsgs.map((obj, i)=>{
-  console.log(obj);
+ 
   let msgTime = ''
   if(obj.created_at){
     const date = new Date(obj.created_at);

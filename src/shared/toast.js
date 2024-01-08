@@ -1,5 +1,5 @@
 import React from 'react';
-import { Toaster, toast } from 'sonner';
+import { Toaster } from 'sonner';
 
 // ...
 

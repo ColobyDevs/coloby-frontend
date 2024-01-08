@@ -1,5 +1,5 @@
 import React, {createContext, useState, useCallback, useEffect, useReducer} from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export const Context = createContext()
@@ -18,6 +18,7 @@ const [showChatDate, setShowChatDate] = useState(false)
 const [chatDate, setChatDate] = useState('')
 const [errMsg, setErrMsg] = useState('')
 const [showModal, setShowModal] = useState(false)
+const [showActionModal, setShowActionModal] = useState(false)
 
 
 
@@ -41,13 +42,14 @@ const login = useCallback((token, userId, tokenDuration)=>{
 const logout = useCallback(()=>{
     setToken(null)
     setTokenExpDate(null)
+    setShowActionModal(false)
     localStorage.removeItem('userData')
     return navigate('/login')
 })
 
 // persist login after refresh
 useEffect(()=>{
-    console.log('test');
+    
     const storedData = JSON.parse(localStorage.getItem('userData'))
     if(storedData && storedData.accessToken  && storedData.userId && storedData.tokenExpDate > new Date().getTime()){
        
@@ -133,7 +135,9 @@ useEffect(()=>{
             errMsg,
             setErrMsg,
             createTbModal,
-            setCreateTbModal
+            setCreateTbModal,
+            showActionModal,
+            setShowActionModal
         },
 
         chat:{

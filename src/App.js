@@ -9,13 +9,12 @@ import Dashboard from './dashboard/dashboard';
 import Channels from './rooms/channels';
 import Sidebar from './sidebar';
 import Chat from './rooms/chats';
-// import TaskBoard from './taskboard/taskboard';
 import Profile from './profile/profile';
-import Spinner from './spinner';
-import Modal from './shared/modal';
+import Spinner from './shared/spinner';
+import NotifModal from './shared/notifModal';
 import Toast from './shared/toast';
 import TaskBoard from './taskboard/taskboard';
-import Overview from './taskboard/overview';
+import ActionModal from './shared/actionModal';
 
 
 function App() {
@@ -25,7 +24,8 @@ function App() {
   return (
     <>
     {token && <Sidebar/>}
-    <Modal/>
+    <ActionModal/>
+    <NotifModal/>
     <Spinner/>
     <Toast/>
       <Routes>
@@ -37,6 +37,7 @@ function App() {
     <Route path='/signup' element={<Signup/>}/>
     <Route path='/taskboard/:section' element = {<TaskBoard/>}/>
     <Route path='/' element = { <LandingPage/>}/>
+
 
       </Routes>
   

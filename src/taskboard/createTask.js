@@ -5,8 +5,8 @@ import "./createTask.css";
 import { useHttp } from "../hooks/httpHook";
 
 export default function CreateTask() {
-    const {modal, chat} = useContext(Context)
-    const {userId, token} = chat
+    const {modal, auth} = useContext(Context)
+    const {userId, token} = auth
     const {createTbModal, setCreateTbModal} = modal
     const handleTaskboardModal = ()=>{
         setCreateTbModal(false)
@@ -33,17 +33,32 @@ const httpBody = {
     Authorization: 'Bearer ' + token
     }
 }
-console.log(token);
+
+
+
 const api = `https://coloby.onrender.com/api/v1/room/{colobytest_mhz0}/tasks/`
 
     const [httpHandler] = useHttp(httpBody, api, 'creatTask')
-
     const handleChange = (e)=>{
-       
         setForm((prev)=>{
-          return { ...prev,
-            [e.target.name]: e.target.value
-        }
+        
+          if(e.target.name === 'startDate' || e.target.name === 'due_date'){
+              const date = new Date(e.target.value)
+              const year = date.getFullYear()
+              const month = date.getMonth()
+              const day = date.getDate()
+              const dateObject = new Date(year, month, day).toISOString()
+              const finalDate = dateObject
+              console.log(finalDate);
+              return { ...prev,
+              [e.target.name]: finalDate
+          }
+          }else{
+            return { ...prev,
+              [e.target.name]: e.target.value
+          }
+          }
+          
         })
     }
 
@@ -66,7 +81,7 @@ const api = `https://coloby.onrender.com/api/v1/room/{colobytest_mhz0}/tasks/`
                     Title <span className="text-red-600">*</span>
                   </label>
                   <input
-                    className=" px-2 h-8 rounded-sm border"
+                    className=" px-2 h-8 rounded-sm border focus:outline-none"
                     name='title'
                     placeholder="Title"
                     type="text"

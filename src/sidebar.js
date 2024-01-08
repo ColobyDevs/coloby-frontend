@@ -1,5 +1,6 @@
-import React, { useState, useContext, useReducer } from "react";
+import React, { useState, useContext, useReducer, useEffect } from "react";
 import { Context } from "./context/context";
+import { useLocation } from "react-router-dom";
 import ColobyLogo from "./assets/ColobyLogo.png";
 import { Link } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
@@ -19,12 +20,13 @@ import "./sidebar.css";
 
 const Sidebar = () => {
   const { auth, taskboardReducer, modal } = useContext(Context);
-  const { setCreateChModal } = modal;
+  const { setCreateChModal, showActionModal, setShowActionModal } = modal;
   const { logout } = auth;
   const { taskboardReducerDispatch } = taskboardReducer;
   const createChHandler = () => {
     setCreateChModal(true);
   };
+  const location = useLocation()
 
   const [show, setShow] = useState(false);
 
@@ -135,14 +137,34 @@ const Sidebar = () => {
     }
   };
 
+  useEffect(()=>{
+    if(location.pathname === '/dashboard'){
+        return dispatch({type: 'DASHBOARD_TAB'})
+    }else if(location.pathname === '/rooms'){
+         return dispatch({type: 'ROOMS_TAB'})
+    }else if(location.pathname === '/notifications'){
+        return dispatch({type: 'NOTIFICATIONS_TAB'})
+    }else if(location.pathname.includes('/taskboard')){
+        return dispatch({type: 'TASKBOARD_TAB'})
+    }else if(location.pathname=== '/messages'){
+        return dispatch({type: 'MESSAGE_TAB'})
+    }else if(location.pathname=== '/settings'){
+        return dispatch({type: 'SETTINGS_TAB'})
+    }else if(location.pathname=== '/help'){
+        return dispatch({type: 'HELP_TAB'})
+    }
+    }, [location.pathname])
   const [state, dispatch] = useReducer(reducerFunc, initialState);
 
   const handleTabChange = (type) => {
     dispatch({ type });
   };
 
-  console.log(state.roomsIsActive);
+  const handleModal = ()=>{
+    setShowActionModal(true)
+  }
 
+    
   return (
     <>
       <main className="fixed h-screen hidden space-y-10 py-4 lg:flex lg:flex-col border w-72 border-l">
@@ -155,7 +177,7 @@ const Sidebar = () => {
         </div>
 
         <section
-          className={`flex flex-col space-y-5  h-64 justify-center w-full items-center mx-auto mt-4 `}
+          className={`flex flex-col space-y-5  h-full carousel justify-center w-full items-center mx-auto mt-4 overflow-x-hidden overflow-scroll scroll-smooth`}
         >
           <article
             className={`  ${
@@ -274,7 +296,7 @@ const Sidebar = () => {
             <div className="flex flex-col w-full align-center text-center space-y-2">
               <div
                 className="flex flex-row items-center space-x-4 cursor-pointer"
-                onClick={logout}
+                onClick={handleModal}
               >
                 <IoIosLogOut className="" />
                 <h2>Logout</h2>

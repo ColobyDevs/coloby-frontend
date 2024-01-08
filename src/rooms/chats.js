@@ -14,7 +14,6 @@ import { AiTwotoneCamera, AiOutlineSend } from "react-icons/ai";
 import avatar from "../img/avatar.jpg";
 import { useHttp } from "../hooks/httpHook";
 import { PiSpinnerGapBold } from "react-icons/pi";
-import ChatPreload from "./chatPreLoad";
 // import io from 'socket.io-client'
 
 const Chat = () => {
@@ -23,17 +22,17 @@ const Chat = () => {
   const { token } = auth;
   const { isLoading, setIsLoading } = loader;
   const { roomMsgs, setRoomMsgs, msgTrigger } = chat;
-  // const {token,  isLoading, roomMsgs} = useContext(Context)
+
   const location = useLocation();
-  console.log(isLoading);
 
   const reducer = (state, action) => {
+  
     if (action.type === "firstP") {
       return { ...state, value: action.value, type: action.type };
     } else if (action.type === "secondP") {
       return { ...state, value: action.value, type: action.type };
     } else if (action.type === "clear") {
-      return initialState;
+      return {...state, value: ''};
     }
   };
 
@@ -92,7 +91,7 @@ const Chat = () => {
         throw new Error(responseData.message);
       }
       setRoomMsgs(responseData.messages);
-      // dispatch({type: 'clear'})
+      dispatch({type: 'clear'})
       setIsLoading(false);
       if (!response.ok) {
         throw new Error(responseData.message);
@@ -112,7 +111,6 @@ const Chat = () => {
   useEffect(() => {
     if (location.pathname === "/rooms" && roomMsgs !== []) {
       const carr = document.querySelector(".section-chat");
-      console.log(carr);
       carr.scrollTop += carr.scrollHeight;
     }
   }, [state.value, isLoading]);

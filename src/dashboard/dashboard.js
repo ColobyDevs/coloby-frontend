@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { Context } from "../context/context";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { MdSearch, MdExplore } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import ChannelCards from "./channel-cards";
@@ -31,9 +31,7 @@ const Dashboard = () => {
   const { setIsLoading } = loader;
   const { setRoomMsgs, msgTrigger } = chat;
 
-  useEffect(() => {
-    console.log(1);
-  }, []);
+ 
 
   const [navState, setNavState] = useState(true);
 
@@ -226,7 +224,7 @@ const Dashboard = () => {
       </>
     );
   } else {
-    return navigate("/login");
+    return <Navigate to='/login'/>;
   }
 };
 

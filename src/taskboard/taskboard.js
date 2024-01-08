@@ -33,7 +33,7 @@ function TaskBoard() {
             <MdSearch className="text-lg border-r-0  h-full rounded-l-md" />
             <input
               placeholder={`Search...`}
-              className="px-2 h-full w-10/12  rounded-r-md focus:outline-none"
+              className="px-2 h-full w-10/12 rounded-r-md focus:outline-none"
             />
           </div>
 

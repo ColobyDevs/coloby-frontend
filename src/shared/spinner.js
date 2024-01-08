@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import { PiSpinnerGapBold } from "react-icons/pi";
 import { CgSpinner } from "react-icons/cg";
-import { Context } from "./context/context";
+import { Context } from "../context/context";
 
 export default function Spinner(){
     const {loader} = useContext(Context)
