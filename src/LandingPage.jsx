@@ -9,6 +9,7 @@ import Banner from "./components/banner/Banner";
 import Testimonials from "./components/testimonials/Testimonials";
 import Footer from "./components/footer/Footer";
 import Signup from "./components/signup/Signup";
+import Login from "./components/login/Login";
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
       <Banner />
       <Testimonials />
       <Footer />
-
+      <Login />
       <Routes>
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
