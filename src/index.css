@@ -13,3 +13,12 @@
 .carousel::-webkit-scrollbar{
   display: none;
 }
+.backdrop{
+  background: rgba(0, 0, 0, 0.5)
+}
+.primary-color-bg{
+  background-color: #052CFD;
+}
+.main-color-text{
+  color: #052CFD;
+}

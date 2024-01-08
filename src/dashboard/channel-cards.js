@@ -1,7 +1,6 @@
 import React from "react";
-import avatar from '../img/avatar.jpg'
 import mock from '../img/mock.png'
-import { MdSearch, MdExplore } from "react-icons/md";
+import { MdExplore } from "react-icons/md";
 
 const ChannelCards = (props)=>{
 return(

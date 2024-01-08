@@ -1,0 +1,13 @@
+.overall-pie-bg{
+    background-color: #4A5070;
+}
+.month-pie-bg{
+        background-color:  #253174;
+}
+.week-pie-bg{
+    background-color: #1A3F85;
+
+}
+.pie-date, .task-ctg{
+    font-size: x-small;
+}

@@ -1,0 +1,11 @@
+.close-btn:hover{
+    background-color: #052CFD;
+    color: white;
+}
+text{
+    color: #052CFD;
+}
+.backdrop{
+  background: rgba(0, 0, 0, 0.5)
+
+}

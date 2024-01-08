@@ -1,20 +1,15 @@
-import React, {useEffect, useState} from "react";
-import { useLocation } from "react-router-dom";
-
+import React from "react";
 import Input from "./input";
 import Button from "./formElements/button";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "./validators";
 import { useForm } from "./formHook";
 import { Link } from "react-router-dom";
 import { useHttp } from "../hooks/httpHook";
-import {CgSpinner} from 'react-icons/cg'
 import GoogleLoginAuth from "./googleLogin";
 
 
 const Login = ()=>{
-const [currLocation, setCurrLocation] = useState()
 
-  const location = useLocation()
 const [formState, inputHandler] = useForm( {
     email:{
       value: '',
@@ -50,8 +45,8 @@ const [httpHandler] = useHttp(httpBody, api, 'login')
 
 return (
     <React.Fragment>
-      <div className="my-auto absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 grid-rows-3 space-y-3">
-            <h3 className="text-blue-500 font-medium">Login</h3>
+      <div className="my-auto absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 grid-rows-3 space-y-3">
+            <h3 className="text-blue-500 font-medium text-center">Login</h3>
     <form className="bg-gray-100 w-96 mx-auto h-56 grid grid-flow-row py-3 text-xs"  onSubmit={httpHandler}>
     <Input type='email' id='email' name='Email' validator = {[VALIDATOR_EMAIL()]} onInput={inputHandler} errMsg = 'Invalid Email'/>
     <Input type='password' id='password' name = 'Password'  validator = {[VALIDATOR_MINLENGTH(8)]} onInput={inputHandler} errMsg = 'Invalid Password(should be at least 6 characters)'/>

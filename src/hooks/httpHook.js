@@ -1,32 +1,49 @@
-import React, {useContext} from 'react'
-import { useNavigate } from 'react-router-dom'
+import {useContext} from 'react'
 import { Context } from '../context/context'
-
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 export const useHttp=(httpBody, api, type)=>{
-    const {login, setRoomMsgs, msgTrigger, setMsgTrigger} = useContext(Context)
+    const navigate = useNavigate()
+const {auth, modal, loader, chat} =  useContext(Context)
+const {login} = auth
+const { setErrMsg, setCreateChModal, setShowModal} = modal
+const {setMsgTrigger, msgTrigger} = chat
+const {setIsLoading} = loader
+  
     const httpFunction = async(httpBody, api, type)=>{
         
         try{
+           type !== 'sendMessage' && setIsLoading(true)
           const response = await fetch(`${api}`,
                 httpBody
             )
             const responseData = await response.json()
             const {access_token,  user_id} = responseData
             console.log(responseData);
-            if(type === 'login'){
+            if (!response.ok) {
+                console.log(Object.values(responseData)[0][0]);
+                throw new Error(Object.values(responseData)[0][0])
+            }else if(response.ok && type === 'login'){
                 login(access_token,  user_id);
             }else if(type === 'sendMessage'){
-                console.log('ko');
                setMsgTrigger(!msgTrigger)
+            } else if(type === 'register'){
+                setIsLoading(false)
+                return navigate('/login')
+            } else if(type === 'createRoom'){
+                setCreateChModal(false)
+                toast.success('Room Succesfully Created!')
             }
-            if (!response.ok) {
-                throw new Error(responseData.message)
-            }
-
+            setIsLoading(false)
+            
         }catch(err){
-
-            console.log(err);
+            setIsLoading(false)
+            setShowModal(true)
+     
+       
+            setErrMsg(err.message)
+            console.log(err.message);
         }
         
 
@@ -34,7 +51,7 @@ export const useHttp=(httpBody, api, type)=>{
 
     const httpHandler=(e)=>{
         e.preventDefault()
-        console.log(api, type);
+       
         httpFunction(httpBody, api, type)
     }
     return [httpHandler]
@@ -55,3 +72,4 @@ export const useHttp=(httpBody, api, type)=>{
 // "mayhor"
 
 // Mayhoral
+{credential_error: Array(1)}

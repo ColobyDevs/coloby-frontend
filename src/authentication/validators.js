@@ -49,11 +49,7 @@ export const validate = (value, validators) => {
     }
     if(validator.type === VALIDATOR_TYPE_REQ_MAX){
       isValid = isValid && value.trim().length > 0 && value.trim().length <= validator.val;
-      if(value.trim().length > 0 === true){
-          errorType = 'Description cannot be more than 50 characters'
-      }else if( value.trim().length <= validator.val){
-        errorType = 'title cannot be empty'
-      }
+     
     }
   }
   return {isValid,errorType};
