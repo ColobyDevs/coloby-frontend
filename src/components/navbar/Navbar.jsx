@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import useMobileMenu from "../hooks/useMobileMenu"; // Import the hook
 import "./navbar.css";
 import "animate.css";
@@ -42,7 +44,7 @@ const Navbar = () => {
               <a href="#!">Testimonials</a>
             </li>
             <li>
-              <a href="#!">Login</a>
+              <Link to="/login">Login</Link>
             </li>
           </ul>
         </nav>

@@ -1,7 +1,7 @@
 import React from "react";
-
+import "./login.css";
 const Login = () => {
-  return <div>Login</div>;
+  return <div>New Login Page</div>;
 };
 
 export default Login;
