@@ -14,18 +14,18 @@ import Login from "./components/login/Login";
 const App = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar />
       <Design />
       <Services />
       <Works />
       <Banner />
       <Testimonials />
-      <Footer />
-      <Login />
-      <Routes>
+      <Footer /> */}
+      <Signup />
+      {/* <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 };
