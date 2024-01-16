@@ -38,6 +38,11 @@
 .service__box-icon {
   font-size: 2rem;
   color: var(--color-variant);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 .service__box h2 {
   color: var(--color-variant);

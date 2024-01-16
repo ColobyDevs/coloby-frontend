@@ -24,7 +24,6 @@ const Works = () => {
           <h3>How it all works</h3>
           <div className="works__container-content">
             <div>
-              {" "}
               <img src={WorkImage1} alt="" />
               <h4>Create</h4>
               <p>
@@ -33,7 +32,6 @@ const Works = () => {
               </p>
             </div>
             <div>
-              {" "}
               <img src={WorkImage2} alt="" />
               <h4>Innovate</h4>
               <p>
@@ -42,7 +40,6 @@ const Works = () => {
               </p>
             </div>
             <div>
-              {" "}
               <img src={WorkImage3} alt="" />
               <h4>Collaborate</h4>
               <p>
@@ -52,7 +49,7 @@ const Works = () => {
             </div>
             <div>
               <img src={WorkImage4} alt="" />
-              <h4>Clobby & Clobs</h4>{" "}
+              <h4>Clobby & Clobs</h4>
               <p>
                 Coloby ipsum dolor, sit amet consectetur adipisicing elit.
                 Quasi, in? Pariatur alias eos nostrum recusandae illo.

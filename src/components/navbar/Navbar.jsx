@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import useMobileMenu from "../hooks/useMobileMenu"; // Import the hook
+import useMobileMenu from "../hooks/useMobileMenu";
 import "./navbar.css";
 import "animate.css";
 
 const Navbar = () => {
-  // Call the useMobileMenu hook here
   useMobileMenu();
 
   return (
@@ -44,6 +43,7 @@ const Navbar = () => {
               <a href="#!">Testimonials</a>
             </li>
             <li>
+              {/* <a href="/">Login</a> */}
               <Link to="/login">Login</Link>
             </li>
           </ul>

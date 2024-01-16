@@ -1,5 +1,6 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+// import { Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
 import Design from "./components/design/Design";
@@ -10,22 +11,20 @@ import Testimonials from "./components/testimonials/Testimonials";
 import Footer from "./components/footer/Footer";
 import Signup from "./components/signup/Signup";
 import Login from "./components/login/Login";
+import Waitlist from "./components/waitlist/Waitlist";
 
 const App = () => {
   return (
     <>
-      {/* <Navbar />
+      <Navbar />
       <Design />
       <Services />
       <Works />
       <Banner />
       <Testimonials />
-      <Footer /> */}
-      <Login />
-      {/* <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes> */}
+      <Footer />
+      {/* <Waitlist /> */}
+      {/* <Login /> */}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import "./login.css";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -29,10 +29,14 @@ const Login = () => {
                     Sign in
                   </h2>
                   <p className="font-normal text-st_grey lg:text-[18px] hidden lg:block">
-                    Don't have an account?{" "}
-                    <a className="font-medium text-st_green" href="signup.html">
+                    Don't have an account?
+                    <Link
+                      className="font-medium text-st_green"
+                      to="/signup"
+                      target="_blank"
+                    >
                       Create now
-                    </a>
+                    </Link>
                   </p>
                 </div>
                 <div>
@@ -119,7 +123,7 @@ const Login = () => {
                   </div>
                   <div className="block lg:hidden mt-[35px] lg:mt-0">
                     <p className="font-normal text-st_grey text-[14px] lg:text-[18px] text-center">
-                      Don't have an account?{" "}
+                      Don't have an account?
                       <a className="font-medium text-st_green" href="/register">
                         Create now
                       </a>

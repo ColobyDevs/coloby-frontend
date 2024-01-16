@@ -22,19 +22,15 @@ const Design = () => {
           </h4>
           <div className="main__icon">
             <a href="">
-              {" "}
               <img src={FacebookIcon} alt="" />
             </a>
             <a href="">
-              {" "}
               <img src={GithubIcon} alt="" />
-            </a>{" "}
+            </a>
             <a href="">
-              {" "}
               <img src={GoogleIcon} alt="" />
             </a>
             <a href="">
-              {" "}
               <img src={MicrosoftIcon} alt="" />
             </a>
           </div>
