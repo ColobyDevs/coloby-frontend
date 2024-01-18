@@ -1,5 +1,6 @@
 body {
   height: 200vh;
+  background: red;
 }
 
 /* NAVBAR */
@@ -140,7 +141,7 @@ nav ul li ul li a {
   border-radius: 0.0625rem;
   height: 0.3125rem;
   width: 2.1875rem;
-  background: #000;
+  background: var(--color-variant);
   position: absolute;
   display: block;
   content: "";
@@ -164,4 +165,11 @@ nav ul li ul li a {
 }
 #nav-toggle.active span:after {
   transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 799px) {
+  .little__icon {
+    margin-top: 2px !important;
+    margin-left: 2px !important;
+  }
 }

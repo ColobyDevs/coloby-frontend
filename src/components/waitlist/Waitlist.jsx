@@ -29,8 +29,8 @@ const Waitlist = () => {
             <span className="mt-2 text-[#052CFD]">oloby</span>
           </div>
         </div>
-        <div className="waitlist_right-container">
-          <div className="waitlist_right-container-box">
+        <div className="waitlist_right-container ">
+          <div className="waitlist_right-container-box ">
             <a href="" className="flex text-[#052CFD]">
               Why Coloby
               <FaChevronDown className="mt-1.5 ml-0.5 text-[#052CFD]" />
@@ -101,7 +101,7 @@ const Waitlist = () => {
               </div>
             </div>
             <div>
-              <button className="w-[45%] py-3 bg-[#0B1F89] text-[#FAFBFF] text-xl mt-6">
+              <button className=" py-3 bg-[#0B1F89] text-[#FAFBFF] text-xl mt-6 flex mx-auto justify-center items-center min-w-[40%]">
                 Join Waitlist
               </button>
             </div>
