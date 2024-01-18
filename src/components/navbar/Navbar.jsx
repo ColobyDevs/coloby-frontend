@@ -16,8 +16,8 @@ const Navbar = () => {
       <div className="nav-container">
         <div className="brand">
           <a href="">
-            <div className="flex ">
-              <img src={Logo} alt="" className="bg-purple-500" />
+            <div className="flex">
+              <img src={Logo} alt="" className="mt-0" />
               <span className="mt-3">oloby</span>
             </div>
           </a>

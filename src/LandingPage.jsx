@@ -4,7 +4,6 @@ import React from "react";
 
 import Navbar from "./components/navbar/Navbar";
 import Design from "./components/design/Design";
-import Services from "./components/services/Services";
 import Works from "./components/works/Works";
 import Banner from "./components/banner/Banner";
 import Testimonials from "./components/testimonials/Testimonials";
