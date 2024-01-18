@@ -4,7 +4,7 @@ import DesignImage from "../../assets/designImage.png";
 const Design = () => {
   return (
     <>
-      <section className="flex gap-[3.5rem]  bg-gradient-to-b from-[#B6BEEAB2] to-[#D9D9D900] py-[9.375rem] px-[5.625rem]">
+      <section className="h-[fit-content] flex gap-[5rem]  bg-gradient-to-b from-[#B6BEEAB2] to-[#D9D9D900] pt-[9.375rem] px-[5.625rem] mb-[5rem]">
         <section>
           <h1 className="max-w-[28.125rem] text-[#030E46] text-[2.5rem] font-[37.5rem]">
             Build a team, manage task & Code

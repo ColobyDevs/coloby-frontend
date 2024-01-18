@@ -4,6 +4,7 @@ import React from "react";
 
 import Navbar from "./components/navbar/Navbar";
 import Design from "./components/design/Design";
+import Company from "./components/company/Company";
 import Works from "./components/works/Works";
 import Banner from "./components/banner/Banner";
 import Testimonials from "./components/testimonials/Testimonials";
@@ -17,7 +18,8 @@ const App = () => {
     <>
       <Navbar />
       <Design />
-      {/* <Services />
+      <Company />
+      {/*
       <Works />
       <Banner />
       <Testimonials />
