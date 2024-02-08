@@ -19,6 +19,7 @@ const App = () => {
       <Navbar />
       <Design />
       <Company />
+
       {/*
       <Works />
       <Banner />
