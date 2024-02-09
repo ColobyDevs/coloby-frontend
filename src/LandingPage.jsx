@@ -12,6 +12,7 @@ import Footer from "./components/footer/Footer";
 import Signup from "./components/signup/Signup";
 import Login from "./components/login/Login";
 import Waitlist from "./components/waitlist/Waitlist";
+import Integration from "./components/integration/Integration";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <Navbar />
       <Design />
       <Company />
+      <Integration />
 
       {/*
       <Works />
