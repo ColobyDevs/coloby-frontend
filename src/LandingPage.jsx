@@ -14,6 +14,7 @@ import Login from "./components/login/Login";
 import Waitlist from "./components/waitlist/Waitlist";
 import Integration from "./components/integration/Integration";
 import Features from "./components/features/Features";
+import Why from "./components/why/Why";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
       <Company />
       <Integration />
       <Features />
+      <Why />
 
       {/*
       <Works />

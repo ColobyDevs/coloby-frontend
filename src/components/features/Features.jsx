@@ -8,7 +8,7 @@ import { HiArrowLongRight } from "react-icons/hi2";
 const Features = () => {
   return (
     <>
-      <section className="h-[100vh] mt-16">
+      <section className="mt-16 mb-10">
         <IoIosStar className="m-auto text-[2rem] text-[#0B1F89] rounded-full bg border-2 border-solid border-[#0B1F89] p-[2px] mb-6" />
         <h3 className="text-center text-[2.25rem] text-[#030E46] font-[700]">
           FEATURES
@@ -16,7 +16,7 @@ const Features = () => {
 
         {/* Features inside box */}
 
-        <section className="w-[85%] flex m-auto items-center justify-center flex-wrap h-[100vh]">
+        <section className="w-[85%] flex m-auto items-center justify-center flex-wrap">
           <div className="w-[300px] h-[250px] border-solid border-[1px] border-[#7E7B7B] flex flex-col justify-between">
             <TbBallFootball className="text-[#00000099] text-[4rem] mt-[10px] p-[15px]" />
             <div className="flex justify-between p-[15px] text-[#00000099] items-center">
