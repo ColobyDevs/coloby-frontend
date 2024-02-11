@@ -5,7 +5,7 @@ import { DiJira } from "react-icons/di";
 const Integration = () => {
   return (
     <>
-      <section className="mt-[50px] bg-[#283474] text-white">
+      <section className="mt-[50px] bg-[#283474] text-white pb-[100px]">
         <div className="flex-col justify-center items-center m-auto text-center ">
           <p>
             <IoIosCheckmarkCircleOutline className=" text-[60px] p-2 m-auto" />
@@ -23,7 +23,7 @@ const Integration = () => {
             <DiJira className="text-[60px] p-2 bg-[#283474] rounded-full" />
             <h3 className="mt-4 mb-6 text-[16px]">HR Management Team</h3>
             <p
-              className="text-[0.875rem] font-[500px]
+              className="text-[0.875rem] font-[500]
             "
             >
               Organizing your team is a critical component of an organization
@@ -39,7 +39,7 @@ const Integration = () => {
             <DiJira className="text-[60px] p-2 bg-[#283474] rounded-full" />
             <h3 className="mt-4 mb-6 text-[16px]">HR Management Team</h3>
             <p
-              className="text-[0.875rem] font-[500px]
+              className="text-[0.875rem] font-[500]
             "
             >
               Organizing your team is a critical component of an organization
@@ -55,7 +55,7 @@ const Integration = () => {
             <DiJira className="text-[60px] p-2 bg-[#283474] rounded-full" />
             <h3 className="mt-4 mb-6 text-[16px]">HR Management Team</h3>
             <p
-              className="text-[0.875rem] font-[500px]
+              className="text-[0.875rem] font-[500]
             "
             >
               Organizing your team is a critical component of an organization
@@ -71,7 +71,7 @@ const Integration = () => {
             <DiJira className="text-[60px] p-2 bg-[#283474] rounded-full" />
             <h3 className="mt-4 mb-6 text-[16px]">HR Management Team</h3>
             <p
-              className="text-[0.875rem] font-[500px]
+              className="text-[0.875rem] font-[500]
             "
             >
               Organizing your team is a critical component of an organization
@@ -87,7 +87,7 @@ const Integration = () => {
             <DiJira className="text-[60px] p-2 bg-[#283474] rounded-full" />
             <h3 className="mt-4 mb-6 text-[16px]">HR Management Team</h3>
             <p
-              className="text-[0.875rem] font-[500px]
+              className="text-[0.875rem] font-[500]
             "
             >
               Organizing your team is a critical component of an organization
@@ -103,7 +103,7 @@ const Integration = () => {
             <DiJira className="text-[60px] p-2 bg-[#283474] rounded-full" />
             <h3 className="mt-4 mb-6 text-[16px]">HR Management Team</h3>
             <p
-              className="text-[0.875rem] font-[500px]
+              className="text-[0.875rem] font-[500]
             "
             >
               Organizing your team is a critical component of an organization

@@ -13,6 +13,7 @@ import Signup from "./components/signup/Signup";
 import Login from "./components/login/Login";
 import Waitlist from "./components/waitlist/Waitlist";
 import Integration from "./components/integration/Integration";
+import Features from "./components/features/Features";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Design />
       <Company />
       <Integration />
+      <Features />
 
       {/*
       <Works />
