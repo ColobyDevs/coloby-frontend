@@ -16,7 +16,7 @@ const Why = () => {
         <section>
           <div className="flex gap-[74px] m-auto justify-center mt-[80px]">
             <img src={WhyUse} alt="why use Coloby image1" className="w-[40%]" />
-            <div className="max-w-[570px] max-h-[250px] bg-[#03030380] p-[10px] text-white rounded-[5px]">
+            <div className="max-w-[570px] bg-[#03030380] p-[10px] text-white rounded-[5px]">
               <h4 className="text-[2rem] text-center font-[600]">
                 Task Management
               </h4>
@@ -32,8 +32,7 @@ const Why = () => {
           </div>
 
           <div className="flex gap-[74px] m-auto justify-center mt-[80px]">
-            {" "}
-            <div className="max-w-[570px] max-h-[250px] bg-[#03030380] p-[10px] text-white rounded-[5px]">
+            <div className="max-w-[570px] bg-[#03030380] p-[10px] text-white rounded-[5px]">
               <h4 className="text-[2rem] text-center font-[600]">
                 Task Management
               </h4>
@@ -51,7 +50,7 @@ const Why = () => {
 
           <div className="flex gap-[74px] m-auto justify-center mt-[80px]">
             <img src={WhyUse} alt="why use Coloby image1" className="w-[40%]" />
-            <div className="max-w-[570px] max-h-[250px] bg-[#03030380] p-[10px] text-white rounded-[5px]">
+            <div className="max-w-[570px] bg-[#03030380] p-[10px] text-white rounded-[5px]">
               <h4 className="text-[2rem] text-center font-[600]">
                 Task Management
               </h4>
