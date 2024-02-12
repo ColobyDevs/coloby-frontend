@@ -111,13 +111,13 @@ const Footer = () => {
                   type="email"
                   placeholder="Email address"
                   required
-                  className="h-[60px] w-[256px] p-[10px]"
+                  className="h-[60px] w-[256px] p-[10px] text-[#888D91]"
                 />
                 <button className="h-[60px] w-[65px] bg-[#922E8D] text-center text-white flex items-center justify-center text-[2rem]">
                   <HiArrowLongRight />
                 </button>
               </div>
-              <p className="text-[0.75rem] mt-[20px] leading-[30px]">
+              <p className="text-[0.75rem] mt-[20px] leading-[30px] text-[#4D254BB2]">
                 Enter your email address to enable us keep you updated on our
                 latest courses and other neccessary information.
               </p>
