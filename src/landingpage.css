@@ -30,3 +30,26 @@ body {
   background: var(--color-bg);
   /* height: inherit; */
 }
+
+.footer__conatainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media screen and (max-width: 1100px) {
+  body {
+    /* background: red; */
+  }
+  .footer__conatainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  body {
+    /* background: red; */
+  }
+  .footer__conatainer {
+    grid-template-columns: 1fr;
+  }
+}
