@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "./input";
 import Button from "./formElements/button";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "./validators";
@@ -6,9 +6,14 @@ import { useForm } from "./formHook";
 import { Link } from "react-router-dom";
 import { useHttp } from "../hooks/httpHook";
 import GoogleLoginAuth from "./googleLogin";
-
+import { useNavigate, useLocation,  } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../context/context";
 
 const Login = ()=>{
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location?.from?.pathname || '/'
 
 const [formState, inputHandler] = useForm( {
     email:{
@@ -43,6 +48,9 @@ const [httpHandler] = useHttp(httpBody, api, 'login')
 
 
 
+
+
+
 return (
     <React.Fragment>
       <div className="my-auto absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 grid-rows-3 space-y-3">
@@ -59,13 +67,15 @@ return (
     
     <div className="flex flex-row text-sm space-x-2 mt-6 mx-auto justify-center">
             <h2 className="">Don't have an account?</h2>
-            <Link to='/signup'>
+            <Link to='/dashboard'>
             <span className="text-blue-400">Signup</span>
             </Link>
     </div>
       </div>
     </React.Fragment>
 )
+
 }
+
 
 export default Login

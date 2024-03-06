@@ -1,5 +1,5 @@
 import React, {createContext, useState, useCallback, useEffect, useReducer} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 export const Context = createContext()
@@ -8,7 +8,7 @@ const ContextProvider = (props)=>{
 const [createChModal, setCreateChModal] = useState(false)
 const [createTbModal, setCreateTbModal] = useState(false)
 const [username, setUsername] = useState('')
-const [token, setToken] = useState(null)
+const [token, setToken] = useState('')
 const [userId, setUserId] = useState('')
 const [tokenExpDate, setTokenExpDate] = useState('')
 const [isLoading, setIsLoading] = useState(false)
@@ -23,21 +23,25 @@ const [showActionModal, setShowActionModal] = useState(false)
 
 
 const navigate = useNavigate()
+const location = useLocation()
 
-
+const from = location?.from?.pathname || '/login'
 const login = useCallback((token, userId, tokenDuration)=>{
-        setToken(token)
+    
+        setToken(()=>{
+            console.log('pop');
+            return token
+        })
         setUsername(username)
         setUserId(userId)
         
         const tokenExpirationTime = tokenDuration || new Date().getTime() + (604800000)
         setTokenExpDate(tokenExpirationTime)
         localStorage.setItem('userData', JSON.stringify({accessToken: token,  tokenExpDate: tokenExpirationTime, userId}))
-        return navigate(`/dashboard`)
-
-})
-
-
+        return navigate(from, {replace: true})
+        
+    })
+  
 
 const logout = useCallback(()=>{
     setToken(null)
@@ -49,10 +53,8 @@ const logout = useCallback(()=>{
 
 // persist login after refresh
 useEffect(()=>{
-    
     const storedData = JSON.parse(localStorage.getItem('userData'))
     if(storedData && storedData.accessToken  && storedData.userId && storedData.tokenExpDate > new Date().getTime()){
-       
         login(storedData.accessToken, storedData.userId, tokenExpDate)
     }
 }, [token])

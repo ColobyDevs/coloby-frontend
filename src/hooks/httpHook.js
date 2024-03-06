@@ -7,8 +7,8 @@ export const useHttp=(httpBody, api, type)=>{
     const navigate = useNavigate()
 const {auth, modal, loader, chat} =  useContext(Context)
 const {login} = auth
-const { setErrMsg, setCreateChModal, setShowModal} = modal
-const {setMsgTrigger, msgTrigger} = chat
+         const { setErrMsg, setCreateChModal, setShowModal, setCreateTbModal} = modal
+        const {setMsgTrigger, msgTrigger} = chat
 const {setIsLoading} = loader
   
     const httpFunction = async(httpBody, api, type)=>{
@@ -34,6 +34,10 @@ const {setIsLoading} = loader
             } else if(type === 'createRoom'){
                 setCreateChModal(false)
                 toast.success('Room Succesfully Created!')
+            }else if(type === 'createTask'){
+                setCreateTbModal(false)
+                toast.success('Task Succesfully Created!')
+                
             }
             setIsLoading(false)
             
@@ -57,19 +61,3 @@ const {setIsLoading} = loader
     return [httpHandler]
 }
 
-
-// email
-// : 
-// "mayowaayeni008@gmail.com"
-// first_name
-// : 
-// "Mayowa"
-// last_name
-// : 
-// "Ayeni"
-// username
-// : 
-// "mayhor"
-
-// Mayhoral
-{credential_error: Array(1)}

@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { Context } from "../context/context";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { MdSearch, MdExplore } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import ChannelCards from "./channel-cards";
 import CreateChannel from "./create-channel";
+import RequireAuth from "../authentication/RequireAuth";
 import "./dashboard.css";
 import avatar from "../img/avatar.jpg";
 import mock from "../img/mock.png";
@@ -22,17 +23,12 @@ import {
 import { HiMiniUser } from "react-icons/hi2";
 
 const Dashboard = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
 
-  const { auth, modal, loader, chat } = useContext(Context);
+  const { auth, modal} = useContext(Context);
   const { setCreateChModal } = modal;
   const { token } = auth;
-  const { setIsLoading } = loader;
-  const { setRoomMsgs, msgTrigger } = chat;
 
- 
-
+  
   const [navState, setNavState] = useState(true);
 
   const [carousel, setCarousel] = useState();
@@ -72,7 +68,7 @@ const Dashboard = () => {
     });
   }, [leftValue]);
 
-  if (token) {
+  
     return (
       <>
         <CreateChannel />
@@ -223,9 +219,7 @@ const Dashboard = () => {
         </section>
       </>
     );
-  } else {
-    return <Navigate to='/login'/>;
-  }
-};
+  } 
+
 
 export default Dashboard;

@@ -7,20 +7,20 @@ import { RiAddLine } from "react-icons/ri";
 import "./overview.css";
 
 export default function Overview() {
-  const drag = (e) => {
-    e.preventDefault();
-    e.dataTransfer.setData("text", e.target.id);
-  };
+  // const drag = (e) => {
+  //   e.preventDefault();
+  //   e.dataTransfer.setData("text", e.target.id);
+  // };
 
-  const allowDrop = (e) => {
-    e.preventDefault();
-  };
+  // const allowDrop = (e) => {
+  //   e.preventDefault();
+  // };
 
-  const drop = (e) => {
-    e.preventDefault();
-    const data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-  };
+  // const drop = (e) => {
+  //   e.preventDefault();
+  //   const data = e.dataTransfer.getData("text");
+  //   e.target.appendChild(document.getElementById(data));
+  // };
 
   return (
     <section className="px-4 grid grid-cols-4  mt-4 gap-x-4 ">

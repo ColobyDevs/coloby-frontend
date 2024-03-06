@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-container{
+/* .main-container{
   display: flex;
   flex-direction: column;
-  }
+  } */
 
   .carousel{
     scrollbar-width: none;

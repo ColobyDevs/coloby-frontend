@@ -1,23 +1,41 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+// import { Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-const LandingPage =()=> {
+import Navbar from "./components/navbar/Navbar";
+import Design from "./components/design/Design";
+import Company from "./components/company/Company";
+import Works from "./components/works/Works";
+import Banner from "./components/banner/Banner";
+import Testimonials from "./components/testimonials/Testimonials";
+import Footer from "./components/footer/Footer";
+import Signup from "./components/signup/Signup";
+import Login from "./components/login/Login";
+import Waitlist from "./components/waitlist/Waitlist";
+import Integration from "./components/integration/Integration";
+import Features from "./components/features/Features";
+import Why from "./components/why/Why";
+
+const LandingPage = () => {
   return (
-    <div className=' absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 space-x-10 w-64 ml-10 mt-5  m grid grid-cols-2'>
-      <button className='border text-blue-500 rounded-md'>
+    <>
+      <Navbar />
+      <Design />
+      <Company />
+      <Integration />
+      <Features />
+      <Why />
+      <Banner />
+      <Footer />
 
-      <Link to='/signup'>
-        <span >Signup</span>
-      </Link>
-      </button>
+      {/*
+      <Works />
+      <Testimonials />
+    
+      {/* <Waitlist /> */}
+      {/* <Login /> */}
+    </>
+  );
+};
 
-      <button className='border text-white rounded-md bg-blue-500'>
-      <Link to='/login'>
-        <span >Login</span>
-      </Link>
-      </button>
-    </div>
-
-  )
-}
-export default LandingPage
+export default LandingPage;

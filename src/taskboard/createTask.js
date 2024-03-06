@@ -13,16 +13,16 @@ export default function CreateTask() {
     }
     const [form, setForm] = useState({
         title: '',
-        assigned_to: userId,
-        priority: '',
+        assigned_to: 'Mayhoral',
+        // priority: '',
         description: '',
-        taskStatus: '',
-        hifi: '',
-        lofi: '',
-        startDate: '',
+        // taskStatus: '',
+        // hifi: '',
+        // lofi: '',
+        // startDate: '',
         due_date: '',
-        completed: true,
-        room: 'colobytest_mhz0'
+        // completed: true,
+        // room: 'test-room_srpg'
     })
 // const httpBody = JSON.stringify(form)
 const httpBody = {
@@ -36,28 +36,17 @@ const httpBody = {
 
 
 
-const api = `https://coloby.onrender.com/api/v1/room/{colobytest_mhz0}/tasks/`
+const api = `https://coloby.onrender.com/api/v1/room/test-room_srpg/tasks/`
 
-    const [httpHandler] = useHttp(httpBody, api, 'creatTask')
+    const [httpHandler] = useHttp(httpBody, api, 'createTask')
     const handleChange = (e)=>{
         setForm((prev)=>{
         
-          if(e.target.name === 'startDate' || e.target.name === 'due_date'){
-              const date = new Date(e.target.value)
-              const year = date.getFullYear()
-              const month = date.getMonth()
-              const day = date.getDate()
-              const dateObject = new Date(year, month, day).toISOString()
-              const finalDate = dateObject
-              console.log(finalDate);
-              return { ...prev,
-              [e.target.name]: finalDate
-          }
-          }else{
+         
             return { ...prev,
               [e.target.name]: e.target.value
           }
-          }
+          
           
         })
     }

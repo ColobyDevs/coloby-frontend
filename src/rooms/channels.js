@@ -9,7 +9,8 @@ import mock from '../img/mock.png'
 import './channels.css';
 import Chat from "./chats";
 import ChatTimeline from "./chat-timeline";
-
+import NoCodeChannel from "./channelsNoCode";
+import ChannelsCode from "./channelsCode";
 
 const Channels = ()=>{
 
@@ -49,9 +50,9 @@ const Channels = ()=>{
             </div>
                 <button className="colour h-8 w-36 text-xs rounded-md text-white flex flex-row justify-center items-center gap-x-2"><RiBallPenLine/>Manage Members</button>
         </div>
-        <section className="flex flex-row w-full space-x-8">
+        {/* <section className="flex flex-row w-full space-x-8 bg-red-500">
 
-        <section className="w-4/5">
+        <section className="w-4/5 ">
         <article className="ml-4 mt-4 border-2 rounded-md h-64 w-full flex flex-col">
         <div className="h-8 px-2 border-b w-full flex flex-row items-center">
             <h1 className="text-sm">Focus Board</h1>
@@ -113,7 +114,8 @@ const Channels = ()=>{
             <Chat/>
             <ChatTimeline/>
         </div>
-        </section>
+        </section> */}
+        <ChannelsCode/>
         </article>
 
         </main>

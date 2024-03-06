@@ -41,12 +41,16 @@ const Input = (props)=>{
  const colorChange = ()=>{
     setFocusColor(true)
  }
+
+ const label = props.name.replace(props.name[0], props.name[0].toUpperCase()) 
     return(
-        <div className="grid grid-rows-3 py-1 px-4">
-            <label htmlFor={props.name} className={`text-start ${errorState ? 'text-red-500': 'text-gray-900'} font-bold`}>{props.name}</label>
-            <input  type={props.type} validation={props.validation} value={state.value} onChange={changeHandler} onBlur={touchHander} onFocus={colorChange} className={`${errorState ? 'border-red-500': 'border-gray-300'}  focus:outline-none border rounded-md px-1`} />
-         <p className="text-red-500 text-start">{errorState && props.errMsg}</p>
-        </div>
+        <section className="lg:flex lg:flex-col lg:space-y-4  ">
+            <div className="lg:flex lg:flex-col space-y-0">
+            <label htmlFor={props.name} className={`text-start ${errorState ? 'text-red-500': 'text-gray-900'} font-bold mb-[12px] text-st_grey`}>{label}</label>
+            <input placeholder={props.placeholder}  type={props.type} validation={props.validation} value={state.value} onChange={changeHandler} onBlur={touchHander} onFocus={colorChange} className={`${errorState ? 'border-red-500': 'border-gray-300'}  focus:outline-none px-1 w-full bg-transparent border border-solid border-[#CBD5E0] rounded-[12px] p-[12px]`} />
+            <p className={`${errorState? 'block': 'hidden'} text-red-500 font-light text-sm`}>{errorState && props.errMsg}</p>
+            </div>
+        </section>
     )
 
 }

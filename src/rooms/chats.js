@@ -53,7 +53,7 @@ const Chat = () => {
   const chatBox = useRef();
 
   const btnIsValid = state.value !== "";
-  const api = "https://coloby.onrender.com/api/v1/chat/send/colobytest_mhz0/";
+  const api = "https://coloby.onrender.com/api/v1/chat/send/test-room_srpg/";
 
   const message = {
     message: state.value,
@@ -74,7 +74,7 @@ const Chat = () => {
 
     try {
       const response = await fetch(
-        `https://coloby.onrender.com/api/v1/chat/get/colobytest_mhz0/`,
+        `https://coloby.onrender.com/api/v1/chat/get/test-room_srpg/`,
         {
           method: "GET",
           headers: {
@@ -104,7 +104,7 @@ const Chat = () => {
 
   useEffect(() => {
     if (location.pathname === "/rooms") {
-      getMsgs();
+      // getMsgs();
     }
   }, [msgTrigger]);
 

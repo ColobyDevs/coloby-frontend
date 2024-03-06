@@ -1,4 +1,5 @@
 import React, { useState, useContext, useReducer, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import { Context } from "./context/context";
 import { useLocation } from "react-router-dom";
 import ColobyLogo from "./assets/ColobyLogo.png";
@@ -305,6 +306,7 @@ const Sidebar = () => {
           </article>
         </section>
       </main>
+      <Outlet/>
     </>
   );
 };
