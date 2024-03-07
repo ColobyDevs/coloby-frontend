@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Input from "../../authentication/input";
-import { useForm } from "../../authentication/formHook";
+import Input from "../input";
+import { useForm } from "../formHook";
 import { useHttp } from "../../hooks/httpHook";
-import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "../../authentication/validators";
+import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "../validators";
 const Login = () => {
 
   const [formState, inputHandler] = useForm( {
