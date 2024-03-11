@@ -3,40 +3,59 @@ import { Link } from "react-router-dom";
 import Input from "../input";
 import { useForm } from "../formHook";
 import { useHttp } from "../../hooks/httpHook";
-import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH, VALIDATOR_EMAIL } from "../validators";
+import {
+  VALIDATOR_REQUIRE,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_EMAIL,
+} from "../validators";
 
 const Signup = () => {
-  const [formState, inputHandler] = useForm( {
-    email:{
-      value: '',
-      isValid: false
+  const [formState, inputHandler] = useForm(
+    {
+      email: {
+        value: "",
+        isValid: false,
+      },
+      firstName: {
+        value: "",
+        isValid: false,
+      },
+      lastName: {
+        value: "",
+        isValid: false,
+      },
+      userName: {
+        value: "",
+        isValid: false,
+      },
+      password: {
+        value: "",
+        isValid: false,
+      },
     },
-    password:{
-      value: '',
-      isValid: false
-    }
-}
-, false);
+    false
+  );
 
-const signUpData = {
-  email: formState.inputs.email.value,
-  first_name: formState.inputs.firstName.value,
-  last_name: formState.inputs.lastName.value,
-  password: formState.inputs.password.value,
-  username: formState.inputs.userName.value
-}
+  const signUpData = {
+    email: formState.inputs.email.value,
+    first_name: formState.inputs.firstName.value,
+    last_name: formState.inputs.lastName.value,
+    password: formState.inputs.password.value,
+    username: formState.inputs.userName.value,
+  };
+  console.log(formState);
 
-const header = {
-'Content-Type': 'application/json'
-}
-const api = 'https://coloby.onrender.com/api/v1/accounts/register/'
-const httpBody = {
-  method: 'POST',
-  headers: header,
-  body: JSON.stringify(signUpData)
-}
+  const header = {
+    "Content-Type": "application/json",
+  };
+  const api = "https://coloby.onrender.com/api/v1/accounts/register/";
+  const httpBody = {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify(signUpData),
+  };
 
-const [httpHandler] = useHttp(httpBody, api, 'register');
+  const [httpHandler] = useHttp(httpBody, api, "register");
 
   return (
     <>
@@ -66,50 +85,76 @@ const [httpHandler] = useHttp(httpBody, api, 'register');
                   </h2>
                   <p className="font-normal text-st_grey lg:text-[18px] hidden lg:block">
                     Have an account?
-                    <Link to='/login'>
-                      Login
-                    </Link>
-                    
+                    <Link to="/login">Login</Link>
                   </p>
                 </div>
                 <div>
                   <div className="mb-[30px] w-full flex flex-col lg:flex-row lg:gap-[20px]">
                     <div className="flex-1 mb-[30px] lg:mb-0">
-                  
-                      <Input name='first Name'type='text' id='first Name' placeholder="Moyinoluwa" validator = {[VALIDATOR_REQUIRE()]} onInput={inputHandler} errMsg = 'Field is required'/>
-
+                      <Input
+                        name="first Name"
+                        type="text"
+                        id="firstName"
+                        placeholder="Moyinoluwa"
+                        validator={[VALIDATOR_REQUIRE()]}
+                        onInput={inputHandler}
+                        errMsg="Field is required"
+                      />
                     </div>
                     <div className="flex-1">
-                    
-                      <Input name='last Name' type='text' id='last Name' placeholder="Afolabi" validator = {[VALIDATOR_REQUIRE()]} onInput={inputHandler} errMsg = 'Field is required'/>
-
+                      <Input
+                        name="last Name"
+                        type="text"
+                        id="lastName"
+                        placeholder="Afolabi"
+                        validator={[VALIDATOR_REQUIRE()]}
+                        onInput={inputHandler}
+                        errMsg="Field is required"
+                      />
                     </div>
                   </div>
                   <div className="mb-[30px]">
-                   
-                    <Input type='email' name='email' id='email' placeholder='example@gmail.com' validator = {[VALIDATOR_EMAIL()]} onInput={inputHandler} errMsg = 'Invalid Email'/>
-
+                    <Input
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="example@gmail.com"
+                      validator={[VALIDATOR_EMAIL()]}
+                      onInput={inputHandler}
+                      errMsg="Invalid Email"
+                    />
                   </div>
                   <div className="mb-[30px]">
-                   
-                      <Input name='username'type='text' id='username' placeholder="Moyin123" validator = {[VALIDATOR_REQUIRE()]} onInput={inputHandler} errMsg = 'Field is required'/>
-
+                    <Input
+                      name="username"
+                      type="text"
+                      id="userName"
+                      placeholder="Moyin123"
+                      validator={[VALIDATOR_REQUIRE()]}
+                      onInput={inputHandler}
+                      errMsg="Field is required"
+                    />
                   </div>
                   <div className="mb-[45px]">
-                    
-                    <Input type='password' id='password' name='password' placeholder='password' validator = {[VALIDATOR_MINLENGTH(8)]} onInput={inputHandler} errMsg = 'Invalid Password(should be at least 8 characters)'/>
-
+                    <Input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="password"
+                      validator={[VALIDATOR_MINLENGTH(8)]}
+                      onInput={inputHandler}
+                      errMsg="Invalid Password(should be at least 8 characters)"
+                    />
                   </div>
                   <div>
                     <button
                       type="submit"
                       className="w-full flex justify-center items-center py-3 bg-[#2a2affe6] text-white rounded-[30px] lg:rounded-[20px] text-white100 text-[20px] leading-[28px] font-semibold"
-                      disabled={!formState.isValid} 
+                      disabled={!formState.isValid}
                       onClick={httpHandler}
                     >
                       Sign up
                     </button>
-
                   </div>
                   <div className="my-[40px] flex items-center w-full gap-4">
                     <div className="bg-st_slate h-[1px] w-full flex-1"></div>

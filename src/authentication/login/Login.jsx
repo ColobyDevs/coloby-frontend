@@ -5,37 +5,36 @@ import { useForm } from "../formHook";
 import { useHttp } from "../../hooks/httpHook";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "../validators";
 const Login = () => {
-
-  const [formState, inputHandler] = useForm( {
-    email:{
-      value: '',
-      isValid: false
+  const [formState, inputHandler] = useForm(
+    {
+      email: {
+        value: "",
+        isValid: false,
+      },
+      password: {
+        value: "",
+        isValid: false,
+      },
     },
-    password:{
-      value: '',
-      isValid: false
-    }
-}
-, false);
+    false
+  );
 
-const loginData = {
-  email: formState.inputs.email.value,
-  password: formState.inputs.password.value
-}
+  const loginData = {
+    email: formState.inputs.email.value,
+    password: formState.inputs.password.value,
+  };
 
-const header = {
-  'Content-Type': 'application/json'
-}
-const api = 'https://coloby.onrender.com/api/v1/accounts/log-in/'
-const httpBody = {
-      method: 'POST',
-      headers: header,
-      body: JSON.stringify(loginData)
-}
+  const header = {
+    "Content-Type": "application/json",
+  };
+  const api = "https://coloby.onrender.com/api/v1/accounts/log-in/";
+  const httpBody = {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify(loginData),
+  };
 
-
-const [httpHandler] = useHttp(httpBody, api, 'login')
-
+  const [httpHandler] = useHttp(httpBody, api, "login");
 
   return (
     <>
@@ -76,9 +75,24 @@ const [httpHandler] = useHttp(httpBody, api, 'login')
                 </div>
                 <div>
                   <div className="lg:flex lg:flex-col lg:space-y-4 border">
-                   
-                    <Input type='email' id='email'  name='email' placeholder='example@gmail.com' validator = {[VALIDATOR_EMAIL()]} onInput={inputHandler} errMsg = 'Invalid Email'/>
-                    <Input type='password' id='password' name='password' placeholder='password' validator = {[VALIDATOR_MINLENGTH(8)]} onInput={inputHandler} errMsg = 'Invalid Password(should be at least 8 characters)'/>
+                    <Input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="example@gmail.com"
+                      validator={[VALIDATOR_EMAIL()]}
+                      onInput={inputHandler}
+                      errMsg="Invalid Email"
+                    />
+                    <Input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="password"
+                      validator={[VALIDATOR_MINLENGTH(8)]}
+                      onInput={inputHandler}
+                      errMsg="Invalid Password(should be at least 8 characters)"
+                    />
                   </div>
                   <div className="flex items-center justify-between mb-[45px]">
                     <div className="text-st_grey flex items-center gap-3">
@@ -93,7 +107,7 @@ const [httpHandler] = useHttp(httpBody, api, 'login')
                     <button
                       type="submit"
                       className="w-full flex justify-center rounded-[30px] items-center py-3 bg-[#2a2affe6] lg:rounded-[20px] text-white text-[20px] leading-[28px] font-semibold"
-                      disabled={!formState.isValid} 
+                      disabled={!formState.isValid}
                       onClick={httpHandler}
                     >
                       Sign in

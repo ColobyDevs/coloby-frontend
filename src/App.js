@@ -15,12 +15,10 @@ import NotifModal from './shared/notifModal';
 import Toast from './shared/toast';
 import TaskBoard from './taskboard/taskboard';
 import ActionModal from './shared/actionModal';
-import RequireAuth from './authentication/RequireAuth';
-import PersistLogin from './authentication/PersistLogin';
 import Layout from './Layout';
-import Login from './components/login/Login';
-import Signup from './components/signup/Signup';
-import LandingPage from './LandingPage';
+import Login from './authentication/login/Login';
+import Signup from './authentication/signup/Signup';
+import LandingPage from './landingPage';
 import './landingpage.css'
 function App() {
   const {auth} = useContext(Context)
@@ -44,9 +42,6 @@ function App() {
     <Route path='/chat' element = {<Chat/>}/>
     <Route path='/taskboard/:section' element = {<TaskBoard/>}/>
     </Route>
-
-    
-    {/* <Route element={<RequireUnAuth/>}> */}
     <Route path='/' element = { <LandingPage/>}/>
     <Route path='/login' element = { <Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
