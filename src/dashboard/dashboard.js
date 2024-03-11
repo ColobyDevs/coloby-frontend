@@ -5,7 +5,7 @@ import { MdSearch, MdExplore } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import ChannelCards from "./channel-cards";
 import CreateChannel from "./create-channel";
-import RequireAuth from "../authentication/RequireAuth";
+// import RequireAuth from "../authentication/RequireAuth";
 import "./dashboard.css";
 import avatar from "../img/avatar.jpg";
 import mock from "../img/mock.png";
