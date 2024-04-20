@@ -70,7 +70,7 @@ const api = `https://coloby.onrender.com/api/v1/room/test-room_srpg/tasks/`
                     Title <span className="text-red-600">*</span>
                   </label>
                   <input
-                    className=" px-2 h-8 rounded-sm border focus:outline-none"
+                    className=" px-2 h-8 rounded-sm border- border-solid focus:outline-none"
                     name='title'
                     placeholder="Title"
                     type="text"

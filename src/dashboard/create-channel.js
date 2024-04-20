@@ -57,8 +57,7 @@ const CreateChannel = () => {
             <div className="">
               <h1 className="font-medium">Create a Channel</h1>
               <p className="text-xs">
-                Channels are where your members communicate, sharing thoughts
-                and files together
+                Channels are where you share thoughts or files with your members.
               </p>
             </div>
             <HiMiniXMark
@@ -88,7 +87,7 @@ const CreateChannel = () => {
               <label className="label text-xs">Name</label>
               <div className="flex flex-col">
                 <input
-                  className="input text-xs"
+                  className="input text-xs border border-solid"
                   placeholder="# e.g Leads"
                   value={channelName}
                   onChange={channelNameHandler}
@@ -104,7 +103,7 @@ const CreateChannel = () => {
             <div className="flex flex-col">
               <label className="label text-xs">Purpose (optional)</label>
               <div className="flex flex-col">
-                <input className="input text-xs" placeholder="# e.g Leads" />
+                <input className="input text-xs border-solid" placeholder="# e.g Leads" />
                 <span className="field-text text-gray-400">
                   What's this channel about?
                 </span>
@@ -117,7 +116,7 @@ const CreateChannel = () => {
                 Send invites to : (optional)
               </label>
               <div className="flex flex-col">
-                <input className="input text-xs" placeholder="# e.g Leads" />
+                <input className="input text-xs border-solid" placeholder="# e.g Leads" />
                 <span className="field-text text-gray-400">
                   Select up to 1000 people to add to this channel
                 </span>
@@ -125,11 +124,11 @@ const CreateChannel = () => {
             </div>
           </article>
           <article className="flex flex-row justify-end px-10 space-x-3 items-center">
-            <div className="text-xs text-gray-300  w-24 h-8 grid justify-center rounded-md border">
-              <button onClick={createChHandler}>Cancel</button>
+            <div className="text-xs text-gray-300  w-24 h-8 grid justify-center  border">
+              <button className="border border-solid w-28 rounded-md" onClick={createChHandler}>Cancel</button>
             </div>
-            <div className="colour text-xs text-white  w-24 h-8 grid justify-center rounded-md">
-              <button type="submit">Create channel</button>
+            <div className="colour text-xs text-white  h-8 grid justify-center rounded-md">
+              <button className="w-28" type="submit ">Create channel</button>
             </div>
           </article>
 

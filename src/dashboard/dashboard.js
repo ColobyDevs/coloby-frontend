@@ -1,11 +1,10 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { Context } from "../context/context";
-import { Navigate } from "react-router-dom";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { MdSearch, MdExplore } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import ChannelCards from "./channel-cards";
 import CreateChannel from "./create-channel";
-// import RequireAuth from "../authentication/RequireAuth";
 import "./dashboard.css";
 import avatar from "../img/avatar.jpg";
 import mock from "../img/mock.png";
@@ -23,12 +22,18 @@ import {
 import { HiMiniUser } from "react-icons/hi2";
 
 const Dashboard = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const { auth, modal} = useContext(Context);
+ 
+  const { auth, modal, loader, chat } = useContext(Context);
   const { setCreateChModal } = modal;
   const { token } = auth;
+  const { setIsLoading } = loader;
+  const { setRoomMsgs, msgTrigger } = chat;
 
-  
+ 
+
   const [navState, setNavState] = useState(true);
 
   const [carousel, setCarousel] = useState();
@@ -60,20 +65,22 @@ const Dashboard = () => {
     setCreateChModal(true);
   };
 
-  useEffect(() => {
+  useEffect(() => {   
+      localStorage.setItem("lastVisitedPage", window.location.pathname); 
+      console.log(window.location.pathname);  
     setNavState(() => {
       if (leftValue === 0) {
         return true;
       }
     });
-  }, [leftValue]);
+  }, []);
 
-  
+  if (token) {
     return (
       <>
         <CreateChannel />
-        <section className="h-screen ml-72">
-          <section className="flex flex-row items-center justify-between  h-16 border w-full px-4">
+        <section className="h-screen ml-72 w-full">
+          <section className="bg-gray-100  flex flex-row items-center justify-between  h-16 border w-full px-4">
             <div className="w-1/2 flex flex-row h-1/2 items-center border px-2 rounded-md">
               <MdSearch className="text-lg border-r-0  h-full rounded-l-md" />
               <input
@@ -96,11 +103,11 @@ const Dashboard = () => {
             <div className="grid grid-cols-2 w-64 space-x-4 pl-4 pt-4">
               <button
                 onClick={createChHandler}
-                className="justify-center border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row"
+                className="justify-center border border-black border-solid space-x-2 rounded-md h-8 text-sm w-28 flex items-center flex-row"
               >
                 <RiAddLine className="" /> New Channel
               </button>
-              <button className="justify-center space-x-2 bg-blue-400 text-white border rounded-lg h-8 w-28 text-sm flex items-center flex-row">
+              <button className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-28 text-sm flex items-center flex-row">
                 <RiBallPenLine className="mr-1" /> Workspace
               </button>
             </div>
@@ -220,6 +227,6 @@ const Dashboard = () => {
       </>
     );
   } 
-
+};
 
 export default Dashboard;

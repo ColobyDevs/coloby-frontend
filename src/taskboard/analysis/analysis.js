@@ -1,10 +1,27 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
+import { Context } from "../../context/context";
 import PieCharts from "./piechart";
 import Barchart from "./barchart";
 import './analysis.css'
 import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis } from "victory";
 
+
 export default function Analysis(){
+  useEffect(()=>{
+    localStorage.setItem("lastVisitedPage", window.location.pathname);
+  }, [])
+  const { taskboardReducer } = useContext(Context);
+  const { state } = taskboardReducer;
+  const stateKeys = Object.keys(state)
+
+  Object.values(state).map((val, i)=>{
+       if(val.isActive == true){
+          console.log(stateKeys[i]);
+          localStorage.setItem('lastTaskState', JSON.stringify( stateKeys[i].toUpperCase()))
+       }
+  })
+
+
     return (<>
 
   <main className="flex flex-row gap-x-2">
@@ -173,5 +190,4 @@ export default function Analysis(){
   </article>
   </section>
     </>
-);
-}
+)};

@@ -168,7 +168,9 @@ const Sidebar = () => {
     
   return (
     <>
-      <main className="fixed h-screen hidden space-y-10 py-4 lg:flex lg:flex-col border w-72 border-l">
+    <section className="lg:flex lg:flex-column border h-72 top-0">
+      <main className="fixed h-screen  space-y-10 py-4 lg:flex lg:flex-col border w-72 ">
+
         <div className="ml-16">
           <img src={ColobyLogo} alt="coloby" className="w-20 h-10" />
         </div>
@@ -187,7 +189,7 @@ const Sidebar = () => {
           >
             <MdDashboard className="" />
             <Link
-              to={`/dashboard`}
+              to={`/app/dashboard`}
               onClick={() => handleTabChange("DASHBOARD_TAB")}
             >
               <h2>Dashboard</h2>
@@ -215,7 +217,7 @@ const Sidebar = () => {
                   show ? "h-16" : "h-0"
                 }`}
               >
-                <Link to="rooms">
+                <Link to="/app/rooms">
                   <h1 className={`${show ? "visible" : "hidden"} text-xs`}>
                     coloby
                   </h1>
@@ -262,7 +264,7 @@ const Sidebar = () => {
               onClick={() => handleTabChange("TASKBOARD_TAB")}
             >
               <IoIosStats />
-              <Link to="/taskboard/overview" onClick={taskBoardTabHandler}>
+              <Link to="/app/taskboard/overview" onClick={taskBoardTabHandler}>
                 <h2>Taskboard</h2>
               </Link>
             </div>
@@ -307,6 +309,7 @@ const Sidebar = () => {
         </section>
       </main>
       <Outlet/>
+    </section>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import DesignImage from "../../assets/designImage.png";
+import { Link } from "react-router-dom";
 
 const Design = () => {
   return (
@@ -16,7 +17,7 @@ const Design = () => {
           </p>
 
           <button className="mt-4 flex gap-[.625rem] bg-[#0B1F89] py-[.625rem] px-[2.625rem] text-[#FBFCFE] text-[1rem] rounded-sm">
-            Register
+            <Link to="/signup">Register</Link>
           </button>
         </section>
 

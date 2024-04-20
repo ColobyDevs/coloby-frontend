@@ -1,10 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useContext} from "react";
+import { Context } from "../../context/context";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import Input from "../input";
 import { useForm } from "../formHook";
 import { useHttp } from "../../hooks/httpHook";
 import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "../validators";
 const Login = () => {
+  const {location} = useLocation()
+  const {auth} = useContext(Context)
+  const {token} = auth
+ 
+
   const [formState, inputHandler] = useForm(
     {
       email: {
@@ -35,6 +41,8 @@ const Login = () => {
   };
 
   const [httpHandler] = useHttp(httpBody, api, "login");
+
+  if (!token){
 
   return (
     <>
@@ -169,6 +177,10 @@ const Login = () => {
       </section>
     </>
   );
+}else if(token ){
+  return <Navigate to='/dashboard'/>
+}
+
 };
 
 export default Login;

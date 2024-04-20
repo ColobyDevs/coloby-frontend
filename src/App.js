@@ -1,7 +1,11 @@
 import './App.css';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Context } from './context/context';
 import {Routes, Route} from 'react-router-dom'
+import Assigned from './taskboard/assignedToMe';
+import Overview from './taskboard/overview';
+import Analysis from './taskboard/analysis/analysis';
+import Requests from './taskboard/requests';
 // import LandingPage from './landingPage';
 // import Login from './authentication/login';
 // import Signup from './authentication/signup';
@@ -19,33 +23,42 @@ import Layout from './Layout';
 import Login from './authentication/login/Login';
 import Signup from './authentication/signup/Signup';
 import LandingPage from './landingPage';
+import authReqPages from './authReqPages';
 import './landingpage.css'
 function App() {
   const {auth} = useContext(Context)
   const {token} = auth
+ 
+
   
   return (
     <>
-    {/* {token && <Sidebar/>} */}
     <ActionModal/>
     <NotifModal/>
     <Spinner/>
     <Toast/>
-      <Routes>
+      <Routes>    
+        {/* <Route element={<Sidebar/>}/> */}
 
-  
-
-    <Route element={<Sidebar/>}>
-    <Route path='/dashboard' element = {<Dashboard/>}/>
-    <Route path='/profile' element = {<Profile/>}/>
-    <Route path='/rooms' element = {<Channels/>}/>
-    <Route path='/chat' element = {<Chat/>}/>
-    <Route path='/taskboard/:section' element = {<TaskBoard/>}/>
+    <Route path='/app' element = {<Sidebar/>}>
+       <Route index element={<Dashboard/>}/>
+    <Route path='/app/dashboard' element = {<Dashboard/>}/> 
+    <Route path='/app/profile' element = {<Profile/>}/>
+    <Route path='/app/profile' element = {<Profile/>}/>
+    <Route path='/app/rooms' element = {<Channels/>}/>
+    <Route path='/app/chat' element = {<Chat/>}/>
+    <Route path='/app/taskboard' element = {<TaskBoard/>}>
+      <Route index element={<Overview/>}/>
+    <Route path='/app/taskboard/overview' element = {<Overview/>}/>
+    <Route path='/app/taskboard/assigned_to_me' element = {<Assigned/>}/>
+    <Route path='/app/taskboard/requests' element = {<Requests/>}/>
+    <Route path='/app/taskboard/analysis' element = {<Analysis/>}/>
     </Route>
+    </Route> 
     <Route path='/' element = { <LandingPage/>}/>
     <Route path='/login' element = { <Login/>}/>
     <Route path='/signup' element={<Signup/>}/>
-    {/* </Route> */}
+    
   
       </Routes>
   

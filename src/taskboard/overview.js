@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
+import { Context } from "../context/context";
 import { GoDotFill } from "react-icons/go";
 import { BsThreeDotsVertical, BsEye } from "react-icons/bs";
 import { TfiComment } from "react-icons/tfi";
@@ -7,23 +8,22 @@ import { RiAddLine } from "react-icons/ri";
 import "./overview.css";
 
 export default function Overview() {
-  // const drag = (e) => {
-  //   e.preventDefault();
-  //   e.dataTransfer.setData("text", e.target.id);
-  // };
+  const { taskboardReducer } = useContext(Context);
+  const { state } = taskboardReducer;
+  const stateKeys = Object.keys(state)
 
-  // const allowDrop = (e) => {
-  //   e.preventDefault();
-  // };
+  Object.values(state).map((val, i)=>{
+       if(val.isActive == true){
+          console.log(stateKeys[i]);
+          localStorage.setItem('lastTaskState', JSON.stringify(stateKeys[i].toUpperCase()))
+       }
+  })
 
-  // const drop = (e) => {
-  //   e.preventDefault();
-  //   const data = e.dataTransfer.getData("text");
-  //   e.target.appendChild(document.getElementById(data));
-  // };
-
+  useEffect(()=>{
+    localStorage.setItem("lastVisitedPage", window.location.pathname);
+  }, [])
   return (
-    <section className="px-4 grid grid-cols-4  mt-4 gap-x-4 ">
+    <section className="px-4 grid grid-cols-4  mt-20 gap-x-4 ">
       <article className="title-bg rounded-md h-fit flex flex-col space-y-6 px-4 py-4">
         <div className="flex flex-row justify-between items-center">
           <div className="flex gap-x-2 flex-row items-center">

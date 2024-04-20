@@ -1,14 +1,10 @@
-import React, { useReducer, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Context } from "../context/context";
 import { MdSearch } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import avatar from "../img/avatar.jpg";
 import { RiAddLine, RiBallPenLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
-import Overview from "./overview";
-import Requests from "./requests";
-import Assigned from "./assignedToMe";
-import Analysis from "./analysis/analysis";
+import { Link, Outlet } from "react-router-dom";
 import "./taskboard.css";
 import CreateTask from "./createTask";
 function TaskBoard() {
@@ -19,15 +15,35 @@ function TaskBoard() {
   const handletTaskboardModal = () => {
     setCreateTbModal(true);
   };
-
   function taskBoardTabHandler(tab) {
     taskboardReducerDispatch({ type: tab });
   }
 
+  useEffect(() => {
+    console.log(state);
+    const lastTaskState = JSON.parse(localStorage.getItem("lastTaskState"));
+
+    taskBoardTabHandler(lastTaskState);
+
+    localStorage.setItem("lastVisitedPage", window.location.pathname);
+
+    const stateKeys = Object.keys(state);
+    Object.values(state).map((val, i) => {
+      if (val.isActive == true) {
+        console.log(stateKeys[i]);
+
+        localStorage.setItem(
+          "lastTaskState",
+          JSON.stringify(stateKeys[i].toUpperCase())
+        );
+      }
+    });
+  }, []);
+
   return (
     <React.Fragment>
       <CreateTask />
-      <main className="h-screen ml-72">
+      <main className="h-screen ml-72 lg:my-4">
         <section className="flex flex-row items-center justify-between  h-16 border w-full px-4">
           <div className="w-1/2 flex flex-row h-1/2 items-center border px-2 rounded-md">
             <MdSearch className="text-lg border-r-0  h-full rounded-l-md" />
@@ -55,12 +71,12 @@ function TaskBoard() {
             >
               <RiBallPenLine className="mr-1" /> Create Task
             </button>
-            <button className="justify-center border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row">
+            <button className="justify-center  border-black border-solid  focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row">
               <RiAddLine className="" /> View Task
             </button>
           </div>
           <div className="pt-4 ">
-            <button className="justify-center border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row">
+            <button className="justify-center border-solid border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row">
               <RiAddLine className="" /> Invite
             </button>
           </div>
@@ -69,10 +85,10 @@ function TaskBoard() {
         <section className="">
           <h1 className="px-4 mt-4  font-medium ">Task Board</h1>
           <article className="title-bg px-4 mt-2 w-full border">
-            <nav className=" h-12 z-30 relative items-end pb-1 justify-between text-xs text-start flex flex-row w-1/2">
+            <nav className=" h-12 z-30 relative items-end pb-1 justify-between text-xs text-start flex flex-row w-full">
               <Link
                 title="Overview"
-                to="/taskboard/overview"
+                to="/app/taskboard/overview"
                 className=""
                 onClick={() => taskBoardTabHandler("OVERVIEW")}
               >
@@ -85,7 +101,7 @@ function TaskBoard() {
                 </span>
               </Link>
               <Link
-                to="/taskboard/assigned_to_me"
+                to="/app/taskboard/assigned_to_me"
                 onClick={() => taskBoardTabHandler("ASSIGNED")}
               >
                 <span
@@ -97,7 +113,7 @@ function TaskBoard() {
                 </span>
               </Link>
               <Link
-                to="/taskboard/requests"
+                to="/app/taskboard/requests"
                 onClick={() => taskBoardTabHandler("REQUESTS")}
               >
                 <span
@@ -109,7 +125,7 @@ function TaskBoard() {
                 </span>
               </Link>
               <Link
-                to="/taskboard/analysis"
+                to="/app/taskboard/analysis"
                 onClick={() => taskBoardTabHandler("ANALYSIS")}
               >
                 <span
@@ -123,10 +139,8 @@ function TaskBoard() {
             </nav>
           </article>
         </section>
-        {state.overview.isActive && <Overview />}
-        {state.assigned.isActive && <Assigned />}
-        {state.requests.isActive && <Requests />}
-        {state.analysis.isActive && <Analysis />}
+
+        <Outlet />
       </main>
     </React.Fragment>
   );
