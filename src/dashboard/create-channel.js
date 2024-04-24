@@ -1,10 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../context/context";
 import { HiMiniXMark } from "react-icons/hi2";
 import "./create-channel.css";
 import { useHttp } from "../hooks/httpHook";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const CreateChannel = () => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+
   const [channelName, setChannelName] = useState("");
   const { modal, auth } = useContext(Context);
   const { setCreateChModal, createChModal } = modal;
@@ -52,12 +58,19 @@ const CreateChannel = () => {
         onSubmit={httpHandler}
         className="fixed top-0 bottom-0 right-0 left-0 flex z-20 items-center justify-center modal"
       >
-        <section className="bg-white w-1/2 h-5/6 rounded-md grid grid-rows-6 ">
+        <section
+          data-aos="fade-down"
+          data-aos-easing="ease-out"
+          data-aos-duration="600"
+          data-aos-once="true"
+          className="bg-white w-1/2 h-5/6 rounded-md grid grid-rows-6 "
+        >
           <article className="flex flex-row justify-between px-10 grow border border-b items-center">
             <div className="">
               <h1 className="font-medium">Create a Channel</h1>
               <p className="text-xs">
-                Channels are where you share thoughts or files with your members.
+                Channels are where you share thoughts or files with your
+                members.
               </p>
             </div>
             <HiMiniXMark
@@ -103,7 +116,10 @@ const CreateChannel = () => {
             <div className="flex flex-col">
               <label className="label text-xs">Purpose (optional)</label>
               <div className="flex flex-col">
-                <input className="input text-xs border-solid" placeholder="# e.g Leads" />
+                <input
+                  className="input text-xs border-solid"
+                  placeholder="# e.g Leads"
+                />
                 <span className="field-text text-gray-400">
                   What's this channel about?
                 </span>
@@ -116,7 +132,10 @@ const CreateChannel = () => {
                 Send invites to : (optional)
               </label>
               <div className="flex flex-col">
-                <input className="input text-xs border-solid" placeholder="# e.g Leads" />
+                <input
+                  className="input text-xs border-solid"
+                  placeholder="# e.g Leads"
+                />
                 <span className="field-text text-gray-400">
                   Select up to 1000 people to add to this channel
                 </span>
@@ -125,10 +144,17 @@ const CreateChannel = () => {
           </article>
           <article className="flex flex-row justify-end px-10 space-x-3 items-center">
             <div className="text-xs text-gray-300  w-24 h-8 grid justify-center  border">
-              <button className="border border-solid w-28 rounded-md" onClick={createChHandler}>Cancel</button>
+              <button
+                className="border border-solid w-28 rounded-md"
+                onClick={createChHandler}
+              >
+                Cancel
+              </button>
             </div>
             <div className="colour text-xs text-white  h-8 grid justify-center rounded-md">
-              <button className="w-28" type="submit ">Create channel</button>
+              <button className="w-28" type="submit ">
+                Create channel
+              </button>
             </div>
           </article>
 

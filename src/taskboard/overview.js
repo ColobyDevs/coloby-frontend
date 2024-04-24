@@ -23,7 +23,7 @@ export default function Overview() {
     localStorage.setItem("lastVisitedPage", window.location.pathname);
   }, [])
   return (
-    <section className="px-4 grid grid-cols-4  mt-20 gap-x-4 ">
+    <section className="px-4 grid grid-cols-4  mt-20 gap-x-4 lg:pb-4">
       <article className="title-bg rounded-md h-fit flex flex-col space-y-6 px-4 py-4">
         <div className="flex flex-row justify-between items-center">
           <div className="flex gap-x-2 flex-row items-center">

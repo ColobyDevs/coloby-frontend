@@ -1,9 +1,11 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { Context } from "../../context/context";
 import { Link, Navigate } from "react-router-dom";
 import Input from "../input";
 import { useForm } from "../formHook";
 import { useHttp } from "../../hooks/httpHook";
+import { IoIosArrowBack } from "react-icons/io";
+
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH,
@@ -11,7 +13,11 @@ import {
 } from "../validators";
 
 const Signup = () => {
+  const [authSocial, setAuthSocial] = useState(true)
 
+  const socialAuth = ()=>{
+    setAuthSocial(!authSocial)
+  }
   const {auth} = useContext(Context)
   const {token} = auth
  
@@ -67,87 +73,153 @@ const Signup = () => {
 
   return (
     <>
-      <section className="w-full h-screen">
-        <div className="w-full h-full flex flex-col lg:flex-row ">
-        <div className="w-full lg:w-1/2 bg-[#2a2affe6]"></div>
-          <div className="w-full lg:w-1/2 bg-white100 px-[25px] lg:py-auto  lg:px-[42px] font-outfit">
-            <div className="lg:px-[50px]">
-              <form>
-                <div className="lg:mb-10">
-                  <h2 className="font-bold text-st_black text-[36px] lg:py-4 lg:text-[42px] lg:leading-[48px] mb-[40px] lg:mb-[34px]">
-                    Sign up
-                  </h2>
-                  <p className="font-normal text-st_grey lg:text-[18px] hidden lg:block">
-                    Have an account?
-                    <Link to="/login">Login</Link>
-                  </p>
-                </div>
-                <div className=" lg:flex-col  lg:grid lg:grid-rows-3 lg:gap-y-4  ">
-                  <div className="mb-[30px] lg:mb-0 w-full flex flex-col lg:flex-row lg:gap-[10px]">
-                    <div className="flex-1 mb-[30px] lg:mb-0">
-                      <Input
-                        name="first Name"
-                        type="text"
-                        id="firstName"
-                        placeholder="Moyinoluwa"
-                        validator={[VALIDATOR_REQUIRE()]}
-                        onInput={inputHandler}
-                        errMsg="Field is required"
-                      />
-                    </div>
-                    <div className="mb-[30px]">
-                    <Input
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="example@gmail.com"
-                      validator={[VALIDATOR_EMAIL()]}
-                      onInput={inputHandler}
-                      errMsg="Invalid Email"
-                    />
-                  </div>
-                  </div>
-                  <div className="mb-[30px] lg:mb-0 w-full flex flex-col lg:flex-row lg:gap-[10px]">
-                  <div className="mb-[30px]">
-                    <Input
-                      name="username"
-                      type="text"
-                      id="userName"
-                      placeholder="Moyin123"
-                      validator={[VALIDATOR_REQUIRE()]}
-                      onInput={inputHandler}
-                      errMsg="Field is required"
-                    />
-                  </div>
-                  <div className="mb-[45px] lg:mb-0">
-                    <Input
-                      type="password"
-                      id="password"
-                      name="password"
-                      placeholder="password"
-                      validator={[VALIDATOR_MINLENGTH(8)]}
-                      onInput={inputHandler}
-                      errMsg="Must at least 8 characters"
-                    />
-                  </div>
-                  </div>           
-                  <div className="lg:mb-0 lg:mt-2">
-                    <button
-                      type="submit"
-                      className="w-full flex justify-center items-center py-3 bg-[#2a2affe6] text-white rounded-[30px] lg:rounded-[20px] text-white100 text-[20px] leading-[28px] font-semibold"
-                      disabled={!formState.isValid}
-                      onClick={httpHandler}
-                    >
-                      Sign up
-                    </button>
-                  </div>
-                 
-                </div>
-              </form>
-            </div>
+      <section className=" h-full overflow-hidden lg:min-h-screen lg:items-center lg:px-10 flex flex-col lg:grid lg:grid-cols-2 bg-gradient-to-b from-[#B6BEEAB2] to-[#D9D9D900]">
+          <div className="w-full hidden lg:block">
+            <h2 className="text-[#030E46] lg:text-3xl font-bold">
+              The fastest and easiest way <br /> to build your dream team,{" "}
+              <br />
+              manage task and so many <br /> others
+            </h2>
+            <span className="lg:mt-6">
+              Sign Up for free, no credit card required!
+            </span>
           </div>
-        </div>
-      </section>
+          <section className="flex">
+
+        { authSocial ? <article className="lg:bg-white flex flex-col  justify-evenly h-screen w-full   lg:shadow-lg lg:w-full lg:h-[500px]">
+            <div className="text-center ">
+              <h1 className="text-2xl">Create an account.</h1>
+              <p className="font-thin">
+                Enhance your skills and future-proof your career
+              </p>
+            </div>
+            <section className=" flex flex-col lg:space-y-2 items-center justify-center">
+              <article className=" md:flex-col space-y-4  items-center justify-center lg:space-y-2">
+                <button className="relative  w-full  flex bg-transparent justify-center items-center border border-solid  border-[#CBD5E0] rounded-md p-3  text-[#67728A] lg:text-sm font-medium ">
+                  <div className="icon">
+                    <img
+                      alt=""
+                      loading="lazy"
+                      width="25"
+                      height="25"
+                      decoding="async"
+                      data-nimg="1"
+                      style={{ color: "transparent" }}
+                      src="google.svg"
+                    />
+                  </div>
+                  Continue with Google
+                </button>
+                <button className="relative  w-full flex bg-transparent justify-center items-center border border-solid border-[#CBD5E0] rounded-md p-3  text-[#67728A]  lg:text-sm font-medium ">
+                  <div className="icon ">
+                    <img
+                      alt=""
+                      loading="lazy"
+                      width="25"
+                      height="25"
+                      decoding="async"
+                      data-nimg="1"
+                      style={{ color: "transparent" }}
+                      src="facebook.svg"
+                    />
+                  </div>
+                  Continue with Facebook
+                </button>
+                <button onClick={socialAuth} className="relative  w-full flex bg-transparent justify-center items-center border border-solid border-[#CBD5E0] rounded-md p-3  text-[#67728A]  lg:text-sm font-medium ">
+                  <div className="icon ">
+                    <img
+                      alt=""
+                      loading="lazy"
+                      width="25"
+                      height="25"
+                      decoding="async"
+                      data-nimg="1"
+                      style={{ color: "transparent" }}
+                      src="facebook.svg"
+                    />
+                  </div>
+                  Continue with Email
+                </button>
+              </article>
+
+            </section>
+
+        
+            <div className="">
+              <p className="text-center px-4 lg:px-0">
+                Already have an account ? Click here to{" "}
+                <span className="text-blue-700 underline">
+                <Link to='/auth/login'>Log In!</Link>
+                </span>
+              </p>
+            </div>
+          </article> :  
+            <article   
+             className="lg:w-full lg:bg-white ">
+            <div className=" text-[#0B1F89]  w-fit pl-2 mt-4 flex flex-row items-center cursor-pointer">
+                
+                 <IoIosArrowBack /> <span onClick={socialAuth} className=" text-start ">Back</span>
+                 </div>
+              <article className="lg:bg-white flex flex-col h-screen justify-evenly lg:shadow-lg lg:w-full lg:h-[500px]">
+            <div className="text-center ">
+                
+              <h1 className="text-2xl">Create an account.</h1>
+              <p className="font-thin">
+                Enhance your skills and future-proof your career
+              </p>
+            </div>
+        
+            <form className="lg:flex lg:flex-col space-y-4 mx-auto w-[90%] lg:w-4/5 lg:space-y-6 ">
+              <Input
+                className="lg:px-4 border border-[#CBD5E0] border-solid lg:w-full h-10 rounded-md"
+                name="email"
+                type="email"
+                id = "email"
+                placeholder="Enter Email Address"
+                validator={[VALIDATOR_EMAIL()]}
+                onInput={inputHandler}
+                errMsg="Invalid Email"
+              />
+                <Input
+                className="lg:px-4 border border-[#CBD5E0] border-solid lg:w-full h-10 rounded-md"
+                name="username"
+                type="text"
+                id = "username"
+                placeholder="Enter a username"
+                validator={[VALIDATOR_REQUIRE()]}
+                onInput={inputHandler}
+                errMsg="Field cannot be empty"
+              />
+              <Input
+                className="lg:px-4 border border-[#CBD5E0] border-solid lg:w-full h-10 rounded-md"
+                name="passsword"
+                type="passsword"
+                id = "password"
+                placeholder="Enter Password"
+                validator={[VALIDATOR_MINLENGTH(8)]}
+                onInput={inputHandler}
+                errMsg="Invalid Password(should be at least 8 characters)"
+              />
+              <button disabled={!formState.isValid} onClick={!formState.isValid && httpHandler} className="h-10 bg-[#0B1F89] w-full text-white rounded-md">
+                Sign Up
+              </button>
+            </form>
+            <div className="">
+              <p className="text-center px-4 lg:px-0">
+                Already have an account? Click here to{" "}
+                <span className="text-blue-700 underline">
+                <Link to='/auth/login'>Log In!</Link>
+                </span>
+              </p>
+            </div>
+            </article>
+
+          </article>
+  }
+         
+          </section>
+
+        </section>
     </>
   )
 }if(token){

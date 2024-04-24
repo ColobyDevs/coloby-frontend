@@ -19,6 +19,7 @@ const [chatDate, setChatDate] = useState('')
 const [errMsg, setErrMsg] = useState('')
 const [showModal, setShowModal] = useState(false)
 const [showActionModal, setShowActionModal] = useState(false)
+const [rooms, setRooms] = useState([])
 
 
 
@@ -30,7 +31,8 @@ const login = useCallback((token, userId, tokenDuration)=>{
     setToken(token)
     setUsername(username)
     setUserId(userId)
-    
+    getUserData()
+    console.log('p');
     const tokenExpirationTime = tokenDuration || new Date().getTime() + (604800000)
     setTokenExpDate(tokenExpirationTime)
     localStorage.setItem('userData', JSON.stringify({accessToken: token,  tokenExpDate: tokenExpirationTime, userId}))
@@ -46,9 +48,25 @@ const login = useCallback((token, userId, tokenDuration)=>{
         }else{
             return navigate('/app/dashboard')
         }
-
-})
-
+        
+    })
+    const getUserData = async ()=>{
+        if(token){
+        setIsLoading(true)
+        const response = await fetch('https://coloby.onrender.com/api/v1/userdata', {
+            headers:{
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            }
+        })
+        const responseData = await response.json()
+         setRooms(responseData.created_rooms)
+         setIsLoading(false)
+        }
+    }
+    console.log(rooms);
+    
+    // getUserData()
 const logout = useCallback(()=>{
     setToken(null)
     setTokenExpDate(null)
@@ -64,6 +82,8 @@ useEffect(()=>{
     if(storedData && storedData.accessToken  && storedData.userId && storedData.tokenExpDate > new Date().getTime()){
        
         login(storedData.accessToken, storedData.userId, tokenExpDate)
+    }else{
+        //to be implemented, user must sign in again
     }
 }, [token])
 
@@ -174,7 +194,9 @@ useEffect(()=>{
         loader:{
             isLoading,
             setIsLoading,
-        }
+        },
+        rooms,
+        setRooms
             
               
         }}>

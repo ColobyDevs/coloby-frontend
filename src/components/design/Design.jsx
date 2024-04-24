@@ -17,7 +17,7 @@ const Design = () => {
           </p>
 
           <button className="mt-4 flex gap-[.625rem] bg-[#0B1F89] py-[.625rem] px-[2.625rem] text-[#FBFCFE] text-[1rem] rounded-sm">
-            <Link to="/signup">Register</Link>
+            <Link to="/auth/signup">Register</Link>
           </button>
         </section>
 

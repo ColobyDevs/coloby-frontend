@@ -5,5 +5,7 @@ export default function Requests(){
     useEffect(()=>{
         localStorage.setItem("lastVisitedPage", window.location.pathname);
       }, [])
-    return<>Requests</>
+    return<>
+    <section className="w-full">
+      </section></>
 }

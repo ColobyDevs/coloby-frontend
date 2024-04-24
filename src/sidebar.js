@@ -168,7 +168,7 @@ const Sidebar = () => {
     
   return (
     <>
-    <section className="lg:flex lg:flex-column border h-72 top-0">
+
       <main className="fixed h-screen  space-y-10 py-4 lg:flex lg:flex-col border w-72 ">
 
         <div className="ml-16">
@@ -309,7 +309,7 @@ const Sidebar = () => {
         </section>
       </main>
       <Outlet/>
-    </section>
+
     </>
   );
 };
