@@ -35,7 +35,7 @@ const Dashboard = () => {
   const { setRoomMsgs, msgTrigger } = chat;
 
  
-
+console.log(rooms);
   const [navState, setNavState] = useState(true);
 
   const [carousel, setCarousel] = useState();
@@ -102,7 +102,7 @@ const Dashboard = () => {
             </div>
 
             <div className="grid grid-cols-2 space-x-2">
-              <div className="h-10 w-10 grid items-center justify-center border rounded-md">
+              <div className="h-10 w-10 grid items-center justify-center border rounded-md ">
                 <IoIosNotificationsOutline className="text-3xl" />
               </div>
 
@@ -139,9 +139,9 @@ const Dashboard = () => {
             </div>
             <article
               ref={carouselRef}
-              className="mt-2  carousel px-4 h-48 w-scre  grid grid-flow-col overflow-auto space-x-6 scroll-ml-6 scroll-smooth"
+              className="mt-2  carousel px-4 h-48  flex flex-row overflow-auto space-x-6 scroll-ml-6 scroll-smooth"
             >
-              {rooms.length < 1 ? rooms.map((room, id)=>{ return <ChannelCards key={id} description={room.description} name={room.name} />}) : <div className=" flex lg:flex-col lg:space-y-2 text-center justify-center items-center"><p>You are not in any room yet</p><button onClick={createChHandler} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-36 text-sm flex items-center flex-row">
+              {rooms.length >= 1 ? rooms.map((room, id)=>{ return <ChannelCards key={id} description={room.description} name={room.name} />}) : <div className=" flex lg:flex-col lg:space-y-2 text-center justify-center items-center"><p>You are not in any room yet</p><button onClick={createChHandler} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-36 text-sm flex items-center flex-row">
                 <RiAddLine className="mr-1" /> Create a room
               </button></div>}
             </article>
