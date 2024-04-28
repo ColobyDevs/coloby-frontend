@@ -43,7 +43,7 @@ const getUserData = async(token)=>{
                setMsgTrigger(!msgTrigger)
             } else if(type === 'register'){
                 setIsLoading(false)
-                return navigate('/login')
+                return navigate('/auth/login')
             } else if(type === 'createRoom'){
                 setCreateChModal(false)
                 getUserData(token)
