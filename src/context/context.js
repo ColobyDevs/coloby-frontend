@@ -48,7 +48,8 @@ const login = useCallback((token, userId, tokenDuration)=>{
         }else{
             return navigate('/app/dashboard')
         }
-        
+    getUserData()
+    
     })
     const getUserData = async ()=>{
         if(token){
@@ -66,13 +67,21 @@ const login = useCallback((token, userId, tokenDuration)=>{
     }
     console.log(rooms);
     
-    // getUserData()
-const logout = useCallback(()=>{
+const logout = useCallback(async ()=>{
+    // const response = await fetch('https://coloby.onrender.com/api/v1/accounts/log-out/', {
+    //     method: 'POST',
+    //     headers:{
+    //         "Content-Type": "application/json",
+    //         Authorization: "Bearer " + token,
+    //     }
+    // })
+    // const responseData = await response.json()
+    // console.log(responseData);
     setToken(null)
     setTokenExpDate(null)
     setShowActionModal(false)
     localStorage.removeItem('userData')
-    return navigate('/login')
+    return navigate('/auth/login')
 })
 
 // persist login after refresh

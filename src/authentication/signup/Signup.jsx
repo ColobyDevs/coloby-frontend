@@ -32,10 +32,6 @@ const Signup = () => {
         value: "",
         isValid: false,
       },
-      lastName: {
-        value: "",
-        isValid: false,
-      },
       userName: {
         value: "",
         isValid: false,
@@ -51,7 +47,6 @@ const Signup = () => {
   const signUpData = {
     email: formState.inputs.email.value,
     first_name: formState.inputs.firstName.value,
-    last_name: formState.inputs.lastName.value,
     password: formState.inputs.password.value,
     username: formState.inputs.userName.value,
   };
@@ -170,6 +165,16 @@ const Signup = () => {
             </div>
         
             <form className="lg:flex lg:flex-col space-y-4 mx-auto w-[90%] lg:w-4/5 lg:space-y-6 ">
+            <Input
+                className="lg:px-4 border border-[#CBD5E0] border-solid lg:w-full h-10 rounded-md"
+                name="firstname"
+                type="text"
+                id = "firstName"
+                placeholder="Enter Firstname"
+                validator={[VALIDATOR_REQUIRE()]}
+                onInput={inputHandler}
+                errMsg="Field cannot be empty"
+              />
               <Input
                 className="lg:px-4 border border-[#CBD5E0] border-solid lg:w-full h-10 rounded-md"
                 name="email"
@@ -184,7 +189,7 @@ const Signup = () => {
                 className="lg:px-4 border border-[#CBD5E0] border-solid lg:w-full h-10 rounded-md"
                 name="username"
                 type="text"
-                id = "username"
+                id = "userName"
                 placeholder="Enter a username"
                 validator={[VALIDATOR_REQUIRE()]}
                 onInput={inputHandler}
@@ -192,15 +197,15 @@ const Signup = () => {
               />
               <Input
                 className="lg:px-4 border border-[#CBD5E0] border-solid lg:w-full h-10 rounded-md"
-                name="passsword"
-                type="passsword"
+                name="password"
+                type="password"
                 id = "password"
                 placeholder="Enter Password"
                 validator={[VALIDATOR_MINLENGTH(8)]}
                 onInput={inputHandler}
                 errMsg="Invalid Password(should be at least 8 characters)"
               />
-              <button disabled={!formState.isValid} onClick={!formState.isValid && httpHandler} className="h-10 bg-[#0B1F89] w-full text-white rounded-md">
+              <button disabled={!formState.isValid} onClick={httpHandler} className="h-10 bg-[#0B1F89] w-full text-white rounded-md">
                 Sign Up
               </button>
             </form>

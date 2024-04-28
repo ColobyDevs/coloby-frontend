@@ -28,18 +28,6 @@ const Signup = () => {
         value: "",
         isValid: false,
       },
-      firstName: {
-        value: "",
-        isValid: false,
-      },
-      lastName: {
-        value: "",
-        isValid: false,
-      },
-      userName: {
-        value: "",
-        isValid: false,
-      },
       password: {
         value: "",
         isValid: false,
@@ -50,24 +38,21 @@ const Signup = () => {
 
   const signUpData = {
     email: formState.inputs.email.value,
-    first_name: formState.inputs.firstName.value,
-    last_name: formState.inputs.lastName.value,
     password: formState.inputs.password.value,
-    username: formState.inputs.userName.value,
   };
-  console.log(formState);
+
 
   const header = {
     "Content-Type": "application/json",
   };
-  const api = "https://coloby.onrender.com/api/v1/accounts/register/";
+  const api = "https://coloby.onrender.com/api/v1/accounts/log-in/";
   const httpBody = {
     method: "POST",
     headers: header,
     body: JSON.stringify(signUpData),
   };
 
-  const [httpHandler] = useHttp(httpBody, api, "register");
+  const [httpHandler] = useHttp(httpBody, api, "login");
 
   if(!token){
 
@@ -191,15 +176,15 @@ const Signup = () => {
                 onInput={inputHandler}
                 errMsg="Invalid Password(should be at least 8 characters)"
               />
-              <button disabled={!formState.isValid} onClick={!formState.isValid && httpHandler} className="h-10 bg-[#0B1F89] w-full text-white rounded-md">
-                Sign Up
+              <button disabled={!formState.isValid} onClick={httpHandler} className="h-10 bg-[#0B1F89] w-full text-white rounded-md">
+                Log In
               </button>
             </form>
             <div className="">
               <p className="text-center px-4 lg:px-0">
                 Already have an account? Click here to{" "}
                 <span className="text-blue-700 underline">
-                <Link to='/auth/signup'>Log in!</Link>
+                <Link to='/auth/signup'>Sign up!</Link>
                 </span>
               </p>
             </div>
