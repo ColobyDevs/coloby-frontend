@@ -7,6 +7,7 @@ import Overview from "./taskboard/overview";
 import Analysis from "./taskboard/analysis/analysis";
 import Requests from "./taskboard/requests";
 import Dashboard from "./dashboard/dashboard";
+import Notifications from "./notifications/notifications";
 import Channels from "./rooms/channels";
 import Sidebar from "./sidebar";
 import Chat from "./rooms/chats";
@@ -40,9 +41,10 @@ function App() {
         <Route path="/app" element={<Sidebar />}>
           <Route index element={<Dashboard />} />
           <Route path="/app/dashboard" element={<Dashboard />} />
+          <Route path="/app/notifications" element={<Notifications />} />
           <Route path="/app/profile" element={<Profile />} />
           <Route path="/app/profile" element={<Profile />} />
-          <Route path="/app/rooms" element={<Channels />} />
+          <Route path="/app/rooms/:name" element={<Channels />} />
           <Route path="/app/chat" element={<Chat />} />
           <Route path="/app/taskboard" element={<TaskBoard />}>
             <Route index element={<Overview />} />
