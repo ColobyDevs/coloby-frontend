@@ -20,7 +20,7 @@ function TaskBoard() {
   }
 
   useEffect(() => {
-    console.log(state);
+   
     const lastTaskState = JSON.parse(localStorage.getItem("lastTaskState"));
 
     taskBoardTabHandler(lastTaskState);

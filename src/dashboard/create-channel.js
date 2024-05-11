@@ -23,7 +23,7 @@ const CreateChannel = () => {
 
   const channelNameHandler = (e) => {
     setChannelName(e.target.value);
-    console.log(channelName);
+  
   };
 
   const header = {

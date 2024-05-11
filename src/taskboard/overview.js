@@ -14,7 +14,7 @@ export default function Overview() {
 
   Object.values(state).map((val, i)=>{
        if(val.isActive == true){
-          console.log(stateKeys[i]);
+          
           localStorage.setItem('lastTaskState', JSON.stringify(stateKeys[i].toUpperCase()))
        }
   })

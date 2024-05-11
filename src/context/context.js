@@ -1,10 +1,11 @@
 import React, {createContext, useState, useCallback, useEffect, useReducer} from "react";
 import { useNavigate } from "react-router-dom";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export const Context = createContext()
 
 const ContextProvider = (props)=>{
+   
 const [createChModal, setCreateChModal] = useState(false)
 const [createTbModal, setCreateTbModal] = useState(false)
 const [username, setUsername] = useState('')
@@ -32,10 +33,10 @@ const login = useCallback((token, userId, tokenDuration)=>{
     setUsername(username)
     setUserId(userId)
     getUserData()
-    console.log('p');
+   
     const tokenExpirationTime = tokenDuration || new Date().getTime() + (604800000)
     setTokenExpDate(tokenExpirationTime)
-    localStorage.setItem('userData', JSON.stringify({accessToken: token,  tokenExpDate: tokenExpirationTime, userId}))
+    localStorage.setItem('userData', JSON.stringify({accessToken: token,  tokenExpDate: tokenExpirationTime}))
         const lastVisitedPage = localStorage.getItem("lastVisitedPage");
         if (lastVisitedPage) {
           localStorage.removeItem("lastVisitedPage"); // Remove the stored URL
@@ -61,6 +62,7 @@ const login = useCallback((token, userId, tokenDuration)=>{
             }
         })
         const responseData = await response.json()
+        console.log(responseData);
          setRooms(responseData.created_rooms)
          setIsLoading(false)
         }
@@ -68,19 +70,12 @@ const login = useCallback((token, userId, tokenDuration)=>{
     console.log(rooms);
     
 const logout = useCallback(async ()=>{
-    // const response = await fetch('https://coloby.onrender.com/api/v1/accounts/log-out/', {
-    //     method: 'POST',
-    //     headers:{
-    //         "Content-Type": "application/json",
-    //         Authorization: "Bearer " + token,
-    //     }
-    // })
-    // const responseData = await response.json()
-    // console.log(responseData);
+  
     setToken(null)
     setTokenExpDate(null)
     setShowActionModal(false)
     localStorage.removeItem('userData')
+    localStorage.removeItem("lastVisitedPage");
     return navigate('/auth/login')
 })
 
@@ -88,7 +83,7 @@ const logout = useCallback(async ()=>{
 useEffect(()=>{
     
     const storedData = JSON.parse(localStorage.getItem('userData'))
-    if(storedData && storedData.accessToken  && storedData.userId && storedData.tokenExpDate > new Date().getTime()){
+    if(storedData && storedData.accessToken  && storedData.tokenExpDate > new Date().getTime()){
        
         login(storedData.accessToken, storedData.userId, tokenExpDate)
     }else{
@@ -131,7 +126,7 @@ useEffect(()=>{
     }
 
     const reducerFunc = (state, action)=>{
-        console.log('called');
+       
             switch(action.type){
                 case 'OVERVIEW':{
                     return {...state, overview:{isActive:true }, assigned: {isActive: false}, requests: {isActive: false}, analysis: {isActive: false} }

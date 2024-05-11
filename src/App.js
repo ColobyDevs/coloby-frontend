@@ -19,8 +19,9 @@ import ActionModal from "./shared/actionModal";
 import Login from "./authentication/login/Login";
 import Signup from "./authentication/signup/Signup";
 import LandingPage from "./landingPage";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./landingpage.css";
+
 function App() {
   const { auth } = useContext(Context);
   const { token } = auth;
@@ -31,6 +32,7 @@ function App() {
       <NotifModal />
       <Spinner />
       <Toast />
+        <GoogleOAuthProvider clientId='668444211742-f4kiimq957krf5t62hmbkjgo56ejpo9k.apps.googleusercontent.com'>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth/login" element={<Login />} />
@@ -54,6 +56,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
+         </GoogleOAuthProvider>
     </>
   );
 }

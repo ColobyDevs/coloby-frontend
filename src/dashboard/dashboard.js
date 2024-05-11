@@ -35,7 +35,7 @@ const Dashboard = () => {
   const { setRoomMsgs, msgTrigger } = chat;
 
  
-console.log(rooms);
+
   const [navState, setNavState] = useState(true);
 
   const [carousel, setCarousel] = useState();
@@ -115,8 +115,9 @@ console.log(rooms);
             <div className="grid grid-cols-2 w-64 space-x-4 pl-4 pt-4">
               <button
                 onClick={createChHandler}
-                className="justify-center border border-black border-solid space-x-2 rounded-md h-8 text-sm w-28 flex items-center flex-row"
+                className="justify-center border border-black border-solid space-x-2 rounded-md h-8 text-sm w-28 flex items-center flex-row "
               >
+               
                 <RiAddLine className="" /> New Channel
               </button>
               <button onClick={checkUserData} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-28 text-sm flex items-center flex-row">
@@ -141,7 +142,7 @@ console.log(rooms);
               ref={carouselRef}
               className="mt-2  carousel px-4 h-48  flex flex-row overflow-auto space-x-6 scroll-ml-6 scroll-smooth"
             >
-              {rooms.length >= 1 ? rooms.map((room, id)=>{ return <ChannelCards key={id} description={room.description} name={room.name} />}) : <div className=" flex lg:flex-col lg:space-y-2 text-center justify-center items-center"><p>You are not in any room yet</p><button onClick={createChHandler} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-36 text-sm flex items-center flex-row">
+              {rooms.length >= 1 ? rooms.map((room, id)=>{ return <ChannelCards key={id} description={room.description} name={room.name} />}) : <div className=" flex lg:flex-col lg:space-y-2 mx-auto text-center justify-center items-center"><p>You are not in any room yet</p><button onClick={createChHandler} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-36 text-sm flex items-center flex-row">
                 <RiAddLine className="mr-1" /> Create a room
               </button></div>}
             </article>
