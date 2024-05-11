@@ -8,9 +8,11 @@ import { Link, Outlet } from "react-router-dom";
 import "./taskboard.css";
 import CreateTask from "./createTask";
 function TaskBoard() {
-  const { taskboardReducer, modal } = useContext(Context);
-  const { state, taskboardReducerDispatch } = taskboardReducer;
+  const { taskBoard, modal, rooms, setActiveRoomId } = useContext(Context);
+  const {roomsList} = rooms
+  const { state, taskboardReducerDispatch } = taskBoard;
   const { setCreateTbModal } = modal;
+  
 
   const handletTaskboardModal = () => {
     setCreateTbModal(true);
@@ -20,32 +22,21 @@ function TaskBoard() {
   }
 
   useEffect(() => {
-   
-    const lastTaskState = JSON.parse(localStorage.getItem("lastTaskState"));
-
-    taskBoardTabHandler(lastTaskState);
-
     localStorage.setItem("lastVisitedPage", window.location.pathname);
-
-    const stateKeys = Object.keys(state);
-    Object.values(state).map((val, i) => {
-      if (val.isActive == true) {
-        console.log(stateKeys[i]);
-
-        localStorage.setItem(
-          "lastTaskState",
-          JSON.stringify(stateKeys[i].toUpperCase())
-        );
-      }
-    });
   }, []);
+  
+ 
+
+const getSelectRm = async(e)=>{
+  setActiveRoomId(Number(e.target.value))
+  }
 
   return (
     <React.Fragment>
       <CreateTask />
-      <main className="h-screen ml-72 lg:my-4">
-        <section className="flex flex-row items-center justify-between  h-16 border w-full px-4">
-          <div className="w-1/2 flex flex-row h-1/2 items-center border px-2 rounded-md">
+      <main className="h-screen ml-72 lg:py-4">
+        <section className="flex flex-row items-center justify-between  h-16 border  w-full px-4">
+          <div className="w-1/2 flex flex-row h-1/2 items-center border border-solid px-2 rounded-md">
             <MdSearch className="text-lg border-r-0  h-full rounded-l-md" />
             <input
               placeholder={`Search...`}
@@ -75,7 +66,13 @@ function TaskBoard() {
               <RiAddLine className="" /> View Task
             </button>
           </div>
-          <div className="pt-4 ">
+          <div className="pt-4 grid grid-cols-2 space-x-4">
+          <select onChange={getSelectRm} className="justify-center border-solid border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row">
+
+            {roomsList.map((room, i)=>{
+             return <option value={i}>{room.name}</option>
+            })}
+            </select>
             <button className="justify-center border-solid border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row">
               <RiAddLine className="" /> Invite
             </button>
