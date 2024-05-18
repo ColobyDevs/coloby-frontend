@@ -18,10 +18,11 @@ import { PiSpinnerGapBold } from "react-icons/pi";
 
 const Chat = () => {
   const [dateShow, setDateShow] = useState(false);
-  const { auth, chat, loader } = useContext(Context);
+  const { auth, chat, loader, user } = useContext(Context);
   const { token } = auth;
   const { isLoading, setIsLoading } = loader;
   const { roomMsgs, setRoomMsgs, msgTrigger } = chat;
+  const {currUser} = user
 
   const location = useLocation();
 
@@ -53,7 +54,7 @@ const Chat = () => {
   const chatBox = useRef();
 
   const btnIsValid = state.value !== "";
-  const api = "https://coloby.onrender.com/api/v1/chat/send/colobytest_mhz0/";
+  const api = "https://coloby.onrender.com/api/v1/chat/send/test-room_srpg/";
 
   const message = {
     message: state.value,
@@ -74,7 +75,7 @@ const Chat = () => {
 
     try {
       const response = await fetch(
-        `https://coloby.onrender.com/api/v1/chat/get/colobytest_mhz0/`,
+        `https://coloby.onrender.com/api/v1/chat/get/test-room_srpg/`,
         {
           method: "GET",
           headers: {
@@ -104,12 +105,12 @@ const Chat = () => {
 
   useEffect(() => {
     if (location.pathname === "/rooms") {
-      getMsgs();
+      // getMsgs();
     }
   }, [msgTrigger]);
 
   useEffect(() => {
-    if (location.pathname === "/rooms" && roomMsgs !== []) {
+    if (location.pathname === "/rooms" && roomMsgs.length >= 1) {
       const carr = document.querySelector(".section-chat");
       carr.scrollTop += carr.scrollHeight;
     }
@@ -124,7 +125,7 @@ const Chat = () => {
         <article className="flex h-10 items-center px-2 flex-row border-b sticky top-0 w-full bg-gray-900 text-white">
           <img className="w-8 h-8 rounded-full" src={avatar} />
           <div className="ml-4  flex flex-col">
-            <h2 className="text-xs ">Mayhoral</h2>
+            <h2 className="text-xs ">{currUser.username} (you)</h2>
             <span className="field-text">Online</span>
           </div>
           {dateShow && <p className="absolute mt-12 ml-20 text-sm">Date</p>}

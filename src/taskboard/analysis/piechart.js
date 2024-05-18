@@ -5,7 +5,7 @@ import { GoDotFill } from "react-icons/go";
 export default function PieCharts() {
   return (
     <>
-      <section className="ml-4 mt-4 flex flex-row gap-x-4 z-20">
+      <section className="ml-4 mt-20 flex flex-row gap-x-4 z-20">
         <article className="overall-pie-bg h-40 rounded-md w-56 border flex flex-row items-center">
           <section className="flex flex-col">
             <div className="mt-12 text-white px-2 flex flex-col justify-start">
