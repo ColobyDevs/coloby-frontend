@@ -5,6 +5,8 @@ import { MdSearch } from 'react-icons/md'
 import avatar from '../img/avatar.jpg'
 import { GoDotFill } from "react-icons/go";
 import NotifCard from './notif-card'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const Notifications = () => {
     const {notifications} = useContext(Context)
@@ -53,10 +55,15 @@ const Notifications = () => {
         </div>
     </article>
     <section className='flex flex-col mt-2 space-y-1'>
-        {notifs.map((notif, id)=>{
-
-          return  <NotifCard key={notif.id} notif={notif}/>
-        })}
+       {
+        notifs.length >= 1 ?
+         notifs.map((notif, id)=>{
+           
+           return  <NotifCard key={notif.id} notif={notif}/>
+          })
+           :
+          <Skeleton count={8}  height={'2.5rem'}/>
+        }
         
     </section>  
   </main>
