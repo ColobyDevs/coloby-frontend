@@ -5,12 +5,15 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import avatar from "../img/avatar.jpg";
 import { RiAddLine, RiBallPenLine } from "react-icons/ri";
 import { Link, Outlet } from "react-router-dom";
+import TaskView from "./taskView";
 import "./taskboard.css";
 import CreateTask from "./createTask";
+import RoomSelect from "./roomSelect";
 function TaskBoard() {
-  const { taskBoard, modal, rooms, setActiveRoomId } = useContext(Context);
-  const {roomsList} = rooms
-  const { state, taskboardReducerDispatch } = taskBoard;
+  const { taskBoard, modal, rooms } = useContext(Context);
+  const { roomsList } = rooms;
+  const { state, taskboardReducerDispatch, setActiveRoomId, activeRoomId } =
+    taskBoard;
   const { setCreateTbModal } = modal;
   
 
@@ -24,15 +27,14 @@ function TaskBoard() {
   useEffect(() => {
     localStorage.setItem("lastVisitedPage", window.location.pathname);
   }, []);
-  
- 
 
-const getSelectRm = async(e)=>{
-  setActiveRoomId(Number(e.target.value))
-  }
+  const getSelectRm = async (e) => {
+    setActiveRoomId(Number(e.target.value));
+  };
 
   return (
     <React.Fragment>
+      <TaskView />
       <CreateTask />
       <main className="h-screen ml-72 lg:py-4">
         <section className="flex flex-row items-center justify-between  h-16 border  w-full px-4">
@@ -67,11 +69,14 @@ const getSelectRm = async(e)=>{
             </button>
           </div>
           <div className="pt-4 grid grid-cols-2 space-x-4">
-          <select onChange={getSelectRm} className="justify-center border-solid border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row">
-
-            {roomsList.map((room, i)=>{
-             return <option value={i}>{room.name}</option>
-            })}
+            <select
+              onChange={getSelectRm}
+              className="justify-center border-solid border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row"
+            >
+              {roomsList.map((room, i) => {
+                
+                return <RoomSelect id={i} room={room} key ={room.id}/>
+              })}
             </select>
             <button className="justify-center border-solid border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row">
               <RiAddLine className="" /> Invite
@@ -85,7 +90,7 @@ const getSelectRm = async(e)=>{
             <nav className=" h-12 z-30 relative items-end pb-1 justify-between text-xs text-start flex flex-row w-full">
               <Link
                 title="Overview"
-                to="/app/taskboard/overview"
+                to={`/app/taskboard/overview`}
                 className=""
                 onClick={() => taskBoardTabHandler("OVERVIEW")}
               >
@@ -98,7 +103,7 @@ const getSelectRm = async(e)=>{
                 </span>
               </Link>
               <Link
-                to="/app/taskboard/assigned_to_me"
+                to={`/app/taskboard/assigned_to_me`}
                 onClick={() => taskBoardTabHandler("ASSIGNED")}
               >
                 <span
@@ -110,7 +115,7 @@ const getSelectRm = async(e)=>{
                 </span>
               </Link>
               <Link
-                to="/app/taskboard/requests"
+                to={`/app/taskboard/request`}
                 onClick={() => taskBoardTabHandler("REQUESTS")}
               >
                 <span
@@ -122,7 +127,7 @@ const getSelectRm = async(e)=>{
                 </span>
               </Link>
               <Link
-                to="/app/taskboard/analysis"
+                to={`/app/taskboard/analysis`}
                 onClick={() => taskBoardTabHandler("ANALYSIS")}
               >
                 <span
