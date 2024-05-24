@@ -5,6 +5,9 @@ import { useLocation } from "react-router-dom";
 import ColobyLogo from "./assets/ColobyLogo.png";
 import { Link } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
+import { GoDotFill } from "react-icons/go";
+
+
 import {
   RiDiscussLine,
   RiArrowDownSLine,
@@ -18,7 +21,7 @@ import {
   IoIosStats,
 } from "react-icons/io";
 import "./sidebar.css";
-import { RoomsSidebar } from "./rooms/rooms-card";
+import {  RoomsSidebar } from "./rooms/rooms-card";
 
 const Sidebar = () => {
   const { auth, taskBoard, modal, rooms } = useContext(Context);
@@ -221,8 +224,8 @@ const Sidebar = () => {
               >
                  {roomsList.map((room)=>{
                    return(
-                      <Link to={`/app/rooms/${room.name}`} className={`${show ? "visible" : "hidden"} text-sm`}>
-                   <RoomsSidebar room={room} id={room.id}/>
+                      <Link key={room.id} to={`/app/rooms/${room.name}`} className={`${show ? "visible" : "hidden"} text-sm`}>
+                   <RoomsSidebar key={room.id} room={room} id={room.id}/>
                 </Link>
                     )
                  })}
@@ -237,10 +240,16 @@ const Sidebar = () => {
                 New channel +
               </span> */}
             </div>
-            <div className={`${state.notificationIsActive && 'active_tab'} flex flex-row  items-center space-x-3`} onClick={() => handleTabChange("NOTIFICATIONS_TAB")}>
+            <div className={`${state.notificationIsActive && 'active_tab'}   flex flex-row  items-center justify-between`} onClick={() => handleTabChange("NOTIFICATIONS_TAB")}>
+             <div>
+
               <IoIosNotificationsOutline />
+              </div>
               <Link to="/app/notifications">
+                <div className="flex flex-row ml-4 items-center">
               <h2>Notifications</h2>
+              <GoDotFill className="ml-2 mt-[-3px] animate-pulse font-xs text-red-400"/>
+                </div>
               </Link>
             </div>
             <div
