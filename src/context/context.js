@@ -26,15 +26,22 @@ const ContextProvider = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [showActionModal, setShowActionModal] = useState(false);
   const [roomsList, setRoomsList] = useState([]);
+  const [numberOfRooms, setNumberOfRooms] = useState(0)
   const [activeRoomId, setActiveRoomId] = useState(0);
   const [activeTasks, setActiveTasks] = useState([]);
   const [notifs, setNotifs] = useState([])
   const [activeRoom, setActiveRoom] = useState("");
   const [currUser, setCurrUser] = useState(null)
+  const [viewTaskModal, setViewTaskModal] = useState(false)
+  const [taskInView, setTaskInView] = useState({})
+  const [taskOptionsView, setTaskOptionsView] = useState(false)
+  const [taskUpdate, setTaskUpdate] = useState({})
+  const [editorText, setEditorText] = useState(taskInView?.description)
 
 
   const navigate = useNavigate();
 
+ 
   const login = useCallback((token, userId, tokenDuration) => {
     setToken(token);
     setUsername(username);
@@ -67,7 +74,7 @@ const ContextProvider = (props) => {
   });
   const getUserData = async () => {
     if (token) {
-      setIsLoading(true);
+   
       const response = await fetch(
         "https://coloby.onrender.com/api/v1/userdata",
         {
@@ -78,10 +85,20 @@ const ContextProvider = (props) => {
         }
       );
       const responseData = await response.json();
-      console.log(responseData);
       setCurrUser(responseData.user)
-      setRoomsList(responseData.created_rooms);
-      setIsLoading(false);
+
+      const storedRoomsNumber = localStorage.getItem("numberOfRooms");
+      if(!storedRoomsNumber || responseData.created_rooms.length !== Number(storedRoomsNumber)){
+        localStorage.setItem("numberOfRooms", responseData.created_rooms.length);
+      }
+      localStorage.setItem(
+        "roomSlugs",
+        JSON.stringify(responseData.created_rooms.map((room)=>{
+          return room.slug
+        }) )
+      );
+      
+       setRoomsList(responseData.created_rooms);
     }
   };
 
@@ -92,6 +109,7 @@ const ContextProvider = (props) => {
     setRoomsList([])
     localStorage.removeItem("userData");
     localStorage.removeItem("lastVisitedPage");
+    localStorage.removeItem("roomSlugs");
     return navigate("/auth/login");
   });
 
@@ -129,10 +147,15 @@ const ContextProvider = (props) => {
   }, [activeRoomId, roomsList])
 
    
-
+const updateX=()=>{
+  const storedData = JSON.parse(localStorage.getItem("userData"));
+  console.log(storedData.accessToken)
+  console.log(roomsList);
+}
 const getRoomTasks = async()=>{
-  setIsLoading(true)
-  const response = await fetch(`https://coloby.onrender.com/api/v1/room/${roomsList[activeRoomId]?.slug}/tasks/`, {
+  const roomSlugs = JSON.parse(localStorage.getItem("roomSlugs"));
+  console.log(roomSlugs, activeRoomId);
+  const response = await fetch(`https://coloby.onrender.com/api/v1/room/${roomSlugs[activeRoomId]}/tasks/`, {
   headers: {
     'Content-Type': 'application/json',
     Authorization: 'Bearer ' + token
@@ -140,9 +163,9 @@ const getRoomTasks = async()=>{
   })
   const responseData = await response.json()
   setActiveTasks(responseData)
-  setIsLoading(false)
- 
 }
+
+
 
 const getNotif = async()=>{
 try{
@@ -248,6 +271,8 @@ try{
           setCreateTbModal,
           showActionModal,
           setShowActionModal,
+          viewTaskModal,
+          setViewTaskModal
         },
 
         chat: {
@@ -268,6 +293,12 @@ try{
           setActiveRoomId,
           activeTasks,
           setActiveTasks,
+          taskInView,
+          setTaskInView,
+          taskOptionsView, 
+          setTaskOptionsView,
+          taskUpdate,
+          setTaskUpdate
         },
 
         loader: {
@@ -287,7 +318,12 @@ try{
         },
         user:{
           currUser
-        }
+        },
+        textEditorContent:{
+          editorText,
+          setEditorText
+        },
+        updateX
       }}
     >
       {props.children}
