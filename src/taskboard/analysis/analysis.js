@@ -10,16 +10,9 @@ export default function Analysis(){
   useEffect(()=>{
     localStorage.setItem("lastVisitedPage", window.location.pathname);
   }, [])
-  const { taskboardReducer } = useContext(Context);
-  const { state } = taskboardReducer;
-  const stateKeys = Object.keys(state)
-
-  Object.values(state).map((val, i)=>{
-       if(val.isActive == true){
-          console.log(stateKeys[i]);
-          localStorage.setItem('lastTaskState', JSON.stringify( stateKeys[i].toUpperCase()))
-       }
-  })
+  
+  
+ 
 
 
     return (<>
