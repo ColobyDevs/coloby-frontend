@@ -2,12 +2,15 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import { Context } from "../context/context";
 import { MdSearch, MdExplore } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import ChannelCards from "./channel-cards";
 import CreateChannel from "./create-channel";
 import "./dashboard.css";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import avatar from "../img/avatar.jpg";
 import mock from "../img/mock.png";
+import Loader from "./loader";
 import {
   RiAddLine,
   RiBallPenLine,
@@ -91,6 +94,7 @@ const Dashboard = () => {
   const handleRoomView = (room)=>{
       setActiveRoom(room)
   }
+  const numberOfRooms = localStorage.getItem("numberOfRooms");
 
   if (token) {
     return (
@@ -147,10 +151,20 @@ const Dashboard = () => {
               ref={carouselRef}
               className="mt-2  carousel px-4 h-48  flex flex-row overflow-auto space-x-6 scroll-ml-6 scroll-smooth"
             >
-              {roomsList.length >= 1 ? roomsList.map((room, id)=>{ return  <Link onClick={(room)=> handleRoomView(room)} to={`/app/rooms/${room.name}`}>
-                <ChannelCards key={id} description={room.description} name={room.name} /> </Link>}) : <div className=" flex lg:flex-col lg:space-y-2 mx-auto text-center justify-center items-center"><p>You are not in any room yet</p><button onClick={createChHandler} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-36 text-sm flex items-center flex-row">
-                <RiAddLine className="mr-1" /> Create a room
-              </button></div>}
+              {
+            numberOfRooms &&  Number(numberOfRooms) >= 1 ?
+              roomsList.length >= 1 ? roomsList.map((room, id)=>{ return  <Link onClick={(room)=> handleRoomView(room)} to={`/app/rooms/${room.name}`}>
+                <ChannelCards key={id} description={room.description} name={room.name} /> </Link>}) :  <Loader/>
+           
+               : <div className=" flex lg:flex-col lg:space-y-2 mx-auto text-center justify-center items-center"><p>You are not in any room yet</p><button onClick={createChHandler} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-36 text-sm flex items-center flex-row">
+              <RiAddLine className="mr-1" /> Create a room
+            </button></div>
+            }
+            
+
+      
+
+            
             </article>
 
             <article className="px-4 flex flex-row justify-between mt-4">
@@ -222,7 +236,9 @@ const Dashboard = () => {
         </section>
       </>
     );
-  } 
+  } else{
+    return <Navigate to ={'/app/dashboard'}/>
+  }
 };
 
 export default Dashboard;

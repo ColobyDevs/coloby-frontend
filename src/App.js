@@ -21,6 +21,7 @@ import Login from "./authentication/login/Login";
 import Signup from "./authentication/signup/Signup";
 import LandingPage from "./landingPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import TextEditor from "./shared/textEditor";
 import "./landingpage.css";
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/editor" element={<TextEditor />} />
+
         <Route path="/app" element={<Sidebar />}>
           <Route index element={<Dashboard />} />
           <Route path="/app/dashboard" element={<Dashboard />} />
@@ -47,13 +50,14 @@ function App() {
           <Route path="/app/rooms/:name" element={<Channels />} />
           <Route path="/app/chat" element={<Chat />} />
           <Route path="/app/taskboard" element={<TaskBoard />}>
+            
             <Route index element={<Overview />} />
             <Route path="/app/taskboard/overview" element={<Overview />} />
             <Route
               path="/app/taskboard/assigned_to_me"
               element={<Assigned />}
             />
-            <Route path="/app/taskboard/requests" element={<Requests />} />
+            <Route path="/app/taskboard/request" element={<Requests />} />
             <Route path="/app/taskboard/analysis" element={<Analysis />} />
           </Route>
         </Route>

@@ -12,6 +12,7 @@ import ChatTimeline from "./chat-timeline";
 import NoCodeChannel from "./channelsNoCode";
 import ChannelsCode from "./channelsCode";
 import { Context } from "../context/context";
+import TextEditor from "../shared/textEditor";
 
 const Channels = () => {
   const { rooms } = useContext(Context);
@@ -87,7 +88,7 @@ const Channels = () => {
               </div>
             </article>
             <div className="px-4 ">
-              <button className=" mt-4  h-8 w-28 text-xs rounded-md text-white flex flex-row  items-center gap-x-2  justify-center text border-2">
+              <button  className=" mt-4  h-8 w-28 text-xs rounded-md text-white flex flex-row  items-center gap-x-2  justify-center text border-2">
                 <HiMiniUser />
                 Add people
               </button>

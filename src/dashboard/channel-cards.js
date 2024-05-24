@@ -1,6 +1,8 @@
 import React, {useContext} from "react";
 import mock from '../img/mock.png'
 import { MdExplore } from "react-icons/md";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const ChannelCards = (props)=>{
 
