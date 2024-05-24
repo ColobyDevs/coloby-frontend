@@ -5,11 +5,12 @@ import { toast } from "sonner";
 
 export const useHttp = (httpBody, api, type) => {
   const navigate = useNavigate();
-  const { auth, modal, loader, chat, setRooms } = useContext(Context);
+  const { auth, modal, loader, chat, rooms } = useContext(Context);
   const { login, token } = auth;
   const { setErrMsg, setCreateChModal, setShowModal, setCreateTbModal } = modal;
   const { setMsgTrigger, msgTrigger } = chat;
   const { setIsLoading } = loader;
+  const {setRoomsList} = rooms
   const getUserData = async (token) => {
     setIsLoading(true);
     const response = await fetch(
@@ -22,7 +23,11 @@ export const useHttp = (httpBody, api, type) => {
       }
     );
     const responseData = await response.json();
-    setRooms(responseData.created_rooms);
+    setRoomsList(responseData.created_rooms);
+    localStorage.setItem(
+      "roomSlugs",
+      JSON.stringify(responseData.created_rooms.map((room)=>{return room.slug}) )
+    );
     setIsLoading(false);
   };
 
@@ -38,7 +43,6 @@ export const useHttp = (httpBody, api, type) => {
         console.log(Object.values(responseData)[0][0]);
         throw new Error(Object.values(responseData)[0][0]);
       } else if (response.ok && type === "login") {
-        console.log("p");
         login(access_token, user_id);
       } else if (type === "sendMessage") {
         setMsgTrigger(!msgTrigger);
@@ -48,6 +52,7 @@ export const useHttp = (httpBody, api, type) => {
       } else if (type === "createRoom") {
         setCreateChModal(false);
         getUserData(token);
+
         toast.success("Room Succesfully Created!");
       } else if (type === "createTask") {
         setCreateTbModal(false);
