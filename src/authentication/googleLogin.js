@@ -33,7 +33,7 @@ function GoogleLoginAuth({ type }) {
         }
         );
         const responseData = await response.json();
-        console.log(responseData);
+        
       if(response.ok){
         login(responseData.access_token)
       }
