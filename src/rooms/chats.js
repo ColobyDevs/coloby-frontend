@@ -125,7 +125,7 @@ const Chat = () => {
         <article className="flex h-10 items-center px-2 flex-row border-b sticky top-0 w-full bg-gray-900 text-white">
           <img className="w-8 h-8 rounded-full" src={avatar} />
           <div className="ml-4  flex flex-col">
-            <h2 className="text-xs ">{currUser.username} (you)</h2>
+            <h2 className="text-xs ">{currUser?.username} (you)</h2>
             <span className="field-text">Online</span>
           </div>
           {dateShow && <p className="absolute mt-12 ml-20 text-sm">Date</p>}
