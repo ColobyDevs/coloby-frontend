@@ -5,23 +5,21 @@ import Input from "../input";
 import { useForm } from "../formHook";
 import { useHttp } from "../../hooks/httpHook";
 import { IoIosArrowBack } from "react-icons/io";
+import { GoogleLogin, useGoogleLogin, googleLogout } from "@react-oauth/google";
+import GoogleLoginAuth from "../googleLogin";
 
 import {
-  VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH,
   VALIDATOR_EMAIL,
 } from "../validators";
 
-const Signup = () => {
-  const [authSocial, setAuthSocial] = useState(true)
 
-  const socialAuth = ()=>{
-    setAuthSocial(!authSocial)
-  }
-  const {auth} = useContext(Context)
-  const {token} = auth
+const logOut = () => {
+  googleLogout();
  
+};
 
+const Signup = () => {
   const [formState, inputHandler] = useForm(
     {
       email: {
@@ -36,24 +34,38 @@ const Signup = () => {
     false
   );
 
-  const signUpData = {
-    email: formState.inputs.email.value,
-    password: formState.inputs.password.value,
-  };
-
-
+  
   const header = {
     "Content-Type": "application/json",
   };
   const api = "https://coloby.onrender.com/api/v1/accounts/log-in/";
-  const httpBody = {
+  
+  const signInData = {
+    email: formState.inputs.email.value,
+    password: formState.inputs.password.value,
+  };
+   const httpBody = {
     method: "POST",
     headers: header,
-    body: JSON.stringify(signUpData),
+    body: JSON.stringify(signInData),
   };
+  
+
+ 
 
   const [httpHandler] = useHttp(httpBody, api, "login");
 
+  const [authSocial, setAuthSocial] = useState(true)
+
+  const socialAuth = ()=>{
+    setAuthSocial(!authSocial)
+  }
+  const {auth} = useContext(Context)
+  const {token} = auth
+ 
+
+  
+ 
   if(!token){
 
   return (
@@ -80,22 +92,8 @@ const Signup = () => {
             </div>
             <section className=" flex flex-col lg:space-y-2 items-center justify-center">
               <article className=" md:flex-col space-y-4  items-center justify-center lg:space-y-2">
-                <button className="relative  w-full  flex bg-transparent justify-center items-center border border-solid  border-[#CBD5E0] rounded-md p-3  text-[#67728A] lg:text-sm font-medium ">
-                  <div className="icon">
-                    <img
-                      alt=""
-                      loading="lazy"
-                      width="25"
-                      height="25"
-                      decoding="async"
-                      data-nimg="1"
-                      style={{ color: "transparent" }}
-                      src="google.svg"
-                    />
-                  </div>
-                  Continue with Google
-                </button>
-                <button className="relative  w-full flex bg-transparent justify-center items-center border border-solid border-[#CBD5E0] rounded-md p-3  text-[#67728A]  lg:text-sm font-medium ">
+               <GoogleLoginAuth/>
+                <button onClick={logOut} className="relative  w-full flex bg-transparent justify-center items-center border border-solid border-[#CBD5E0] rounded-md p-3  text-[#67728A]  lg:text-sm font-medium ">
                   <div className="icon ">
                     <img
                       alt=""

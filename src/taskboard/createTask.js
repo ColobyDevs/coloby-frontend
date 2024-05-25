@@ -5,7 +5,7 @@ import "./createTask.css";
 import { useHttp } from "../hooks/httpHook";
 
 export default function CreateTask() {
-    const {modal, auth} = useContext(Context)
+    const {modal, auth, rooms, activeRoomId} = useContext(Context)
     const {userId, token} = auth
     const {createTbModal, setCreateTbModal} = modal
     const handleTaskboardModal = ()=>{
@@ -13,14 +13,14 @@ export default function CreateTask() {
     }
     const [form, setForm] = useState({
         title: '',
-        assigned_to: 'Mayhoral',
+        assigned_to: '',
         // priority: '',
         description: '',
         // taskStatus: '',
         // hifi: '',
         // lofi: '',
-        // startDate: '',
-        due_date: '',
+        startDate: '',
+        due_date: '' 
         // completed: true,
         // room: 'test-room_srpg'
     })
@@ -36,7 +36,7 @@ const httpBody = {
 
 
 
-const api = `https://coloby.onrender.com/api/v1/room/test-room_srpg/tasks/`
+const api = `https://coloby.onrender.com/api/v1/room/${rooms[activeRoomId]?.slug}/tasks/`
 
     const [httpHandler] = useHttp(httpBody, api, 'createTask')
     const handleChange = (e)=>{
@@ -84,11 +84,14 @@ const api = `https://coloby.onrender.com/api/v1/room/test-room_srpg/tasks/`
                   <label className="label">
                     Assign To <span className="text-red-600">*</span>
                   </label>
-                  <select onChange={handleChange} name="assigned_to" className="px-2 w-full rounded-sm border h-8">
-                    <option>In Progress</option>
-                    <option>Completed</option>
-                    <option></option>
-                  </select>
+                  <input
+                    className=" px-2 h-8 rounded-sm border- border-solid focus:outline-none"
+                    name='assigned_to'
+                    placeholder="assigned to"
+                    type="text"
+                    value= {form.assigned_to}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className=" flex flex-col space-y-1">
                   <label className="label">
@@ -106,7 +109,7 @@ const api = `https://coloby.onrender.com/api/v1/room/test-room_srpg/tasks/`
                 <label className="text-xs">
                   Description <span className="text-red-600">*</span>
                 </label>
-                <textarea value={form.description}  onChange={handleChange} name="description" className="w-full h-3/4 border" />
+                <textarea value={form.description}  onChange={handleChange} name="description" className="w-full text-xs px-2 h-3/4 border" />
               </article>
             </section>
 
@@ -189,10 +192,10 @@ const api = `https://coloby.onrender.com/api/v1/room/test-room_srpg/tasks/`
           </main>
 
           <article className="text-xs flex flex-row gap-x-4 h-5 w-1/4">
-            <button type='submit' className="border w-1/2 rounded-md primary-bg-color text-white">
+            <button type='submit' className="border w-1/2 rounded-md border-solid primary-bg-color main-color-text">
               Save
             </button>
-            <button  onClick={handleTaskboardModal} className="border w-1/2 rounded-md main-color-text">
+            <button  onClick={handleTaskboardModal} className="border border-solid w-1/2 rounded-md text-black ">
               Cancel
             </button>
           </article>

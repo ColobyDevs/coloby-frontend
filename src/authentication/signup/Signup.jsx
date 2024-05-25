@@ -5,7 +5,7 @@ import Input from "../input";
 import { useForm } from "../formHook";
 import { useHttp } from "../../hooks/httpHook";
 import { IoIosArrowBack } from "react-icons/io";
-
+import GoogleLoginAuth from "../googleLogin";
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH,
@@ -50,7 +50,7 @@ const Signup = () => {
     password: formState.inputs.password.value,
     username: formState.inputs.userName.value,
   };
-  console.log(formState);
+  
 
   const header = {
     "Content-Type": "application/json",
@@ -90,21 +90,7 @@ const Signup = () => {
             </div>
             <section className=" flex flex-col lg:space-y-2 items-center justify-center">
               <article className=" md:flex-col space-y-4  items-center justify-center lg:space-y-2">
-                <button className="relative  w-full  flex bg-transparent justify-center items-center border border-solid  border-[#CBD5E0] rounded-md p-3  text-[#67728A] lg:text-sm font-medium ">
-                  <div className="icon">
-                    <img
-                      alt=""
-                      loading="lazy"
-                      width="25"
-                      height="25"
-                      decoding="async"
-                      data-nimg="1"
-                      style={{ color: "transparent" }}
-                      src="google.svg"
-                    />
-                  </div>
-                  Continue with Google
-                </button>
+                <GoogleLoginAuth/>
                 <button className="relative  w-full flex bg-transparent justify-center items-center border border-solid border-[#CBD5E0] rounded-md p-3  text-[#67728A]  lg:text-sm font-medium ">
                   <div className="icon ">
                     <img

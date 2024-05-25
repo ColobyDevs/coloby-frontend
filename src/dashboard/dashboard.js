@@ -1,13 +1,16 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { Context } from "../context/context";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { MdSearch, MdExplore } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { Link, Navigate } from "react-router-dom";
 import ChannelCards from "./channel-cards";
 import CreateChannel from "./create-channel";
 import "./dashboard.css";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import avatar from "../img/avatar.jpg";
 import mock from "../img/mock.png";
+import Loader from "./loader";
 import {
   RiAddLine,
   RiBallPenLine,
@@ -29,13 +32,14 @@ const Dashboard = () => {
   }, []);
  
   const { auth, modal, loader, chat, rooms } = useContext(Context);
+  const {roomsList, setActiveRoom} = rooms
   const { setCreateChModal } = modal;
   const { token } = auth;
   const { setIsLoading } = loader;
   const { setRoomMsgs, msgTrigger } = chat;
 
  
-console.log(rooms);
+
   const [navState, setNavState] = useState(true);
 
   const [carousel, setCarousel] = useState();
@@ -87,13 +91,18 @@ console.log(rooms);
     });
   }, []);
 
+  const handleRoomView = (room)=>{
+      setActiveRoom(room)
+  }
+  const numberOfRooms = localStorage.getItem("numberOfRooms");
+
   if (token) {
     return (
       <>
         <CreateChannel />
-        <section className="h-screen ml-72">
-          <section className="bg-gray-100  flex flex-row items-center justify-between  h-16 border w-full px-4">
-            <div className="w-1/2 flex flex-row h-1/2 items-center border px-2 rounded-md">
+        <section className="h-screen ml-72 bg-gray-100 ">
+          <section className=" bg-white flex flex-row items-center justify-between  h-16 border w-full px-4">
+            <div className="w-1/2 flex flex-row h-1/2 items-center border border-solid px-2 rounded-md">
               <MdSearch className="text-lg border-r-0  h-full rounded-l-md" />
               <input
                 placeholder={`Search...`}
@@ -115,8 +124,9 @@ console.log(rooms);
             <div className="grid grid-cols-2 w-64 space-x-4 pl-4 pt-4">
               <button
                 onClick={createChHandler}
-                className="justify-center border border-black border-solid space-x-2 rounded-md h-8 text-sm w-28 flex items-center flex-row"
+                className="justify-center border border-black border-solid space-x-2 rounded-md h-8 text-sm w-28 flex items-center flex-row "
               >
+               
                 <RiAddLine className="" /> New Channel
               </button>
               <button onClick={checkUserData} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-28 text-sm flex items-center flex-row">
@@ -124,7 +134,7 @@ console.log(rooms);
               </button>
             </div>
             <div className="flex flex-row items-center">
-              <h2 className="mt-2 px-4 text-xl font-semibold">Your Channels</h2>
+              <h2 className="mt-2 px-4 text-lg font-semibold">Your Channels</h2>
               <div className="ml-auto grid grid-cols-2 mt-2 text-4xl px-2 cursor-pointer">
                 <button disabled={navState}>
                   <RiArrowLeftSLine
@@ -141,9 +151,20 @@ console.log(rooms);
               ref={carouselRef}
               className="mt-2  carousel px-4 h-48  flex flex-row overflow-auto space-x-6 scroll-ml-6 scroll-smooth"
             >
-              {rooms.length >= 1 ? rooms.map((room, id)=>{ return <ChannelCards key={id} description={room.description} name={room.name} />}) : <div className=" flex lg:flex-col lg:space-y-2 text-center justify-center items-center"><p>You are not in any room yet</p><button onClick={createChHandler} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-36 text-sm flex items-center flex-row">
-                <RiAddLine className="mr-1" /> Create a room
-              </button></div>}
+              {
+            numberOfRooms &&  Number(numberOfRooms) >= 1 ?
+              roomsList.length >= 1 ? roomsList.map((room, id)=>{ return  <Link onClick={(room)=> handleRoomView(room)} to={`/app/rooms/${room.name}`}>
+                <ChannelCards key={id} description={room.description} name={room.name} /> </Link>}) :  <Loader/>
+           
+               : <div className=" flex lg:flex-col lg:space-y-2 mx-auto text-center justify-center items-center"><p>You are not in any room yet</p><button onClick={createChHandler} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-36 text-sm flex items-center flex-row">
+              <RiAddLine className="mr-1" /> Create a room
+            </button></div>
+            }
+            
+
+      
+
+            
             </article>
 
             <article className="px-4 flex flex-row justify-between mt-4">
@@ -215,7 +236,9 @@ console.log(rooms);
         </section>
       </>
     );
-  } 
+  } else{
+    return <Navigate to ={'/app/dashboard'}/>
+  }
 };
 
 export default Dashboard;
