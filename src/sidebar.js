@@ -1,9 +1,13 @@
 import React, { useState, useContext, useReducer, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import { Context } from "./context/context";
 import { useLocation } from "react-router-dom";
 import ColobyLogo from "./assets/ColobyLogo.png";
 import { Link } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
+import { GoDotFill } from "react-icons/go";
+
+
 import {
   RiDiscussLine,
   RiArrowDownSLine,
@@ -17,12 +21,14 @@ import {
   IoIosStats,
 } from "react-icons/io";
 import "./sidebar.css";
+import {  RoomsSidebar } from "./rooms/rooms-card";
 
 const Sidebar = () => {
-  const { auth, taskboardReducer, modal } = useContext(Context);
+  const { auth, taskBoard, modal, rooms } = useContext(Context);
+  const {roomsList} = rooms
   const { setCreateChModal, showActionModal, setShowActionModal } = modal;
   const { logout } = auth;
-  const { taskboardReducerDispatch } = taskboardReducer;
+  const { taskboardReducerDispatch } = taskBoard;
   const createChHandler = () => {
     setCreateChModal(true);
   };
@@ -138,11 +144,11 @@ const Sidebar = () => {
   };
 
   useEffect(()=>{
-    if(location.pathname === '/dashboard'){
+    if(location.pathname === '/app/dashboard'){
         return dispatch({type: 'DASHBOARD_TAB'})
-    }else if(location.pathname === '/rooms'){
+    }else if(location.pathname.includes('/app/rooms')){
          return dispatch({type: 'ROOMS_TAB'})
-    }else if(location.pathname === '/notifications'){
+    }else if(location.pathname === '/app/notifications'){
         return dispatch({type: 'NOTIFICATIONS_TAB'})
     }else if(location.pathname.includes('/taskboard')){
         return dispatch({type: 'TASKBOARD_TAB'})
@@ -167,7 +173,9 @@ const Sidebar = () => {
     
   return (
     <>
-      <main className="fixed h-screen hidden space-y-10 py-4 lg:flex lg:flex-col border w-72 border-l">
+
+      <main className="fixed h-screen  space-y-10 py-4 lg:flex lg:flex-col border w-72 ">
+
         <div className="ml-16">
           <img src={ColobyLogo} alt="coloby" className="w-20 h-10" />
         </div>
@@ -186,7 +194,7 @@ const Sidebar = () => {
           >
             <MdDashboard className="" />
             <Link
-              to={`/dashboard`}
+              to={`/app/dashboard`}
               onClick={() => handleTabChange("DASHBOARD_TAB")}
             >
               <h2>Dashboard</h2>
@@ -214,45 +222,35 @@ const Sidebar = () => {
                   show ? "h-16" : "h-0"
                 }`}
               >
-                <Link to="rooms">
-                  <h1 className={`${show ? "visible" : "hidden"} text-xs`}>
-                    coloby
-                  </h1>
+                 {roomsList.map((room)=>{
+                   return(
+                      <Link key={room.id} to={`/app/rooms/${room.name}`} className={`${show ? "visible" : "hidden"} text-sm`}>
+                   <RoomsSidebar key={room.id} room={room} id={room.id}/>
                 </Link>
-                <h1 className={`${show ? "visible" : "hidden"} text-xs`}>
-                  newJam
-                </h1>
-                <h1 className={`${show ? "visible" : "hidden"} text-xs`}>
-                  newJam
-                </h1>
-                <h1 className={`${show ? "visible" : "hidden"} text-xs`}>
-                  newJam
-                </h1>
-                <h1 className={`${show ? "visible" : "hidden"} text-xs`}>
-                  newJam
-                </h1>
-                <h1 className={`${show ? "visible" : "hidden"} text-xs`}>
-                  newJam
-                </h1>
-                <h1 className={`${show ? "visible" : "hidden"} text-xs`}>
-                  newJam
-                </h1>
-                <h1 className={`${show ? "visible" : "hidden"} text-xs`}>
-                  newJam
-                </h1>
+                    )
+                 })}
+       
               </div>
-              <span
+              {/* <span
                 className={`${
                   show ? "visible" : "hidden"
                 } text-center  text-sm cursor-pointer`}
                 onClick={createChHandler}
               >
                 New channel +
-              </span>
+              </span> */}
             </div>
-            <div className={`flex flex-row  items-center space-x-3`}>
+            <div className={`${state.notificationIsActive && 'active_tab'}   flex flex-row  items-center justify-between`} onClick={() => handleTabChange("NOTIFICATIONS_TAB")}>
+             <div>
+
               <IoIosNotificationsOutline />
+              </div>
+              <Link to="/app/notifications">
+                <div className="flex flex-row ml-4 items-center">
               <h2>Notifications</h2>
+              <GoDotFill className="ml-2 mt-[-3px] animate-pulse font-xs text-red-400"/>
+                </div>
+              </Link>
             </div>
             <div
               className={` ${
@@ -261,7 +259,7 @@ const Sidebar = () => {
               onClick={() => handleTabChange("TASKBOARD_TAB")}
             >
               <IoIosStats />
-              <Link to="/taskboard/overview" onClick={taskBoardTabHandler}>
+              <Link to="/app/taskboard/overview" onClick={taskBoardTabHandler}>
                 <h2>Taskboard</h2>
               </Link>
             </div>
@@ -305,6 +303,8 @@ const Sidebar = () => {
           </article>
         </section>
       </main>
+      <Outlet/>
+
     </>
   );
 };

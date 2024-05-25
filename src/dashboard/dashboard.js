@@ -1,13 +1,16 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { Context } from "../context/context";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { MdSearch, MdExplore } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { Link, Navigate } from "react-router-dom";
 import ChannelCards from "./channel-cards";
 import CreateChannel from "./create-channel";
 import "./dashboard.css";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import avatar from "../img/avatar.jpg";
 import mock from "../img/mock.png";
+import Loader from "./loader";
 import {
   RiAddLine,
   RiBallPenLine,
@@ -20,12 +23,16 @@ import {
   RiFile2Line,
 } from "react-icons/ri";
 import { HiMiniUser } from "react-icons/hi2";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Dashboard = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const { auth, modal, loader, chat } = useContext(Context);
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+ 
+  const { auth, modal, loader, chat, rooms } = useContext(Context);
+  const {roomsList, setActiveRoom} = rooms
   const { setCreateChModal } = modal;
   const { token } = auth;
   const { setIsLoading } = loader;
@@ -63,22 +70,39 @@ const Dashboard = () => {
   const createChHandler = () => {
     setCreateChModal(true);
   };
+  const checkUserData = async ()=>{
+    const response = await fetch('https://coloby.onrender.com/api/v1/userdata', {
+      headers:{
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }
+    })
+    const responseData = await response.json()
+    console.log(responseData);
+  }
 
-  useEffect(() => {
+  useEffect(() => {   
+      localStorage.setItem("lastVisitedPage", window.location.pathname); 
+ 
     setNavState(() => {
       if (leftValue === 0) {
         return true;
       }
     });
-  }, [leftValue]);
+  }, []);
+
+  const handleRoomView = (room)=>{
+      setActiveRoom(room)
+  }
+  const numberOfRooms = localStorage.getItem("numberOfRooms");
 
   if (token) {
     return (
       <>
         <CreateChannel />
-        <section className="h-screen ml-72">
-          <section className="flex flex-row items-center justify-between  h-16 border w-full px-4">
-            <div className="w-1/2 flex flex-row h-1/2 items-center border px-2 rounded-md">
+        <section className="h-screen ml-72 bg-gray-100 ">
+          <section className=" bg-white flex flex-row items-center justify-between  h-16 border w-full px-4">
+            <div className="w-1/2 flex flex-row h-1/2 items-center border border-solid px-2 rounded-md">
               <MdSearch className="text-lg border-r-0  h-full rounded-l-md" />
               <input
                 placeholder={`Search...`}
@@ -87,7 +111,7 @@ const Dashboard = () => {
             </div>
 
             <div className="grid grid-cols-2 space-x-2">
-              <div className="h-10 w-10 grid items-center justify-center border rounded-md">
+              <div className="h-10 w-10 grid items-center justify-center border rounded-md ">
                 <IoIosNotificationsOutline className="text-3xl" />
               </div>
 
@@ -100,16 +124,17 @@ const Dashboard = () => {
             <div className="grid grid-cols-2 w-64 space-x-4 pl-4 pt-4">
               <button
                 onClick={createChHandler}
-                className="justify-center border-blue-400 focus:outline-none space-x-2 border rounded-lg h-8 text-sm w-28 flex items-center flex-row"
+                className="justify-center border border-black border-solid space-x-2 rounded-md h-8 text-sm w-28 flex items-center flex-row "
               >
+               
                 <RiAddLine className="" /> New Channel
               </button>
-              <button className="justify-center space-x-2 bg-blue-400 text-white border rounded-lg h-8 w-28 text-sm flex items-center flex-row">
+              <button onClick={checkUserData} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-28 text-sm flex items-center flex-row">
                 <RiBallPenLine className="mr-1" /> Workspace
               </button>
             </div>
             <div className="flex flex-row items-center">
-              <h2 className="mt-2 px-4 text-xl font-semibold">Your Channels</h2>
+              <h2 className="mt-2 px-4 text-lg font-semibold">Your Channels</h2>
               <div className="ml-auto grid grid-cols-2 mt-2 text-4xl px-2 cursor-pointer">
                 <button disabled={navState}>
                   <RiArrowLeftSLine
@@ -124,34 +149,22 @@ const Dashboard = () => {
             </div>
             <article
               ref={carouselRef}
-              className="mt-2 carousel px-4 h-48  w-full grid grid-flow-col overflow-auto space-x-6 scroll-ml-6 scroll-smooth"
+              className="mt-2  carousel px-4 h-48  flex flex-row overflow-auto space-x-6 scroll-ml-6 scroll-smooth"
             >
-              <ChannelCards class={cardRef} />
-              <div className="card">
-                <div className={` flex flex-row justify-center space-x-4 pt-2`}>
-                  <MdExplore />{" "}
-                  <p className="text-xs">Explore this channel story</p>
-                </div>
-                <div className="row-span-3 border-b mx-auto  w-full">
-                  <img
-                    src={mock}
-                    alt="channel"
-                    className="h-24 mx-auto border"
-                  />
-                </div>
-                <div className="border">
-                  <p className="text-xs px-4">
-                    Quick start- Getting around informa <br />
-                    ...
-                  </p>
-                </div>
-              </div>
-              <ChannelCards />
-              {/* <ChannelCards/>
-                <ChannelCards/>
-                <ChannelCards/>
-                <ChannelCards/>
-                <ChannelCards/> */}
+              {
+            numberOfRooms &&  Number(numberOfRooms) >= 1 ?
+              roomsList.length >= 1 ? roomsList.map((room, id)=>{ return  <Link onClick={(room)=> handleRoomView(room)} to={`/app/rooms/${room.name}`}>
+                <ChannelCards key={id} description={room.description} name={room.name} /> </Link>}) :  <Loader/>
+           
+               : <div className=" flex lg:flex-col lg:space-y-2 mx-auto text-center justify-center items-center"><p>You are not in any room yet</p><button onClick={createChHandler} className="justify-center space-x-2  primary-bg-color text-white border rounded-md h-8 w-36 text-sm flex items-center flex-row">
+              <RiAddLine className="mr-1" /> Create a room
+            </button></div>
+            }
+            
+
+      
+
+            
             </article>
 
             <article className="px-4 flex flex-row justify-between mt-4">
@@ -223,9 +236,46 @@ const Dashboard = () => {
         </section>
       </>
     );
-  } else {
-    return <Navigate to='/login'/>;
+  } else{
+    return <Navigate to ={'/app/dashboard'}/>
   }
 };
 
 export default Dashboard;
+
+// {
+//   "user": {
+//       "id": "c21e416b-b852-4141-9166-0041a586a024",
+//       "username": "Mayhoral",
+//       "email": "test@gmail.com",
+//       "rooms": [],
+//       "created_rooms": [
+//           {
+//               "id": 3,
+//               "users": [],
+//               "created_by": "Mayhoral",
+//               "total_users": 0,
+//               "name": "test1",
+//               "slug": "test1_bijc",
+//               "is_private": true,
+//               "description": null,
+//               "likes": []
+//           }
+//       ]
+//   },
+//   "joined_rooms": [],
+//   "created_rooms": [
+//       {
+//           "id": 3,
+//           "users": [],
+//           "created_by": "Mayhoral",
+//           "total_users": 0,
+//           "name": "test1",
+//           "slug": "test1_bijc",
+//           "is_private": true,
+//           "description": null,
+//           "likes": []
+//       }
+//   ],
+//   "assigned_tasks": []
+// }

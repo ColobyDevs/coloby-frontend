@@ -9,7 +9,9 @@
   }
 
   
-.section{
-  height: 498px;
-}
-
+  .section{
+    height: 498px;
+  }
+  .primary-bg-color{
+    background-color: #052CFD;
+  }

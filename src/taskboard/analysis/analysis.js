@@ -1,10 +1,20 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
+import { Context } from "../../context/context";
 import PieCharts from "./piechart";
 import Barchart from "./barchart";
 import './analysis.css'
 import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis } from "victory";
 
+
 export default function Analysis(){
+  useEffect(()=>{
+    localStorage.setItem("lastVisitedPage", window.location.pathname);
+  }, [])
+  
+  
+ 
+
+
     return (<>
 
   <main className="flex flex-row gap-x-2">
@@ -173,5 +183,4 @@ export default function Analysis(){
   </article>
   </section>
     </>
-);
-}
+)};
