@@ -9,7 +9,7 @@ import "froala-editor/js/plugins/paragraph_format.min.js";
 import "froala-editor/js/plugins/lists.min.js";
 import FroalaEditorComponent from "react-froala-wysiwyg";
 
-import "./textEditor.css";
+
 
 const TextEditor = () => {
   const { taskBoard, textEditorContent } = useContext(Context);
