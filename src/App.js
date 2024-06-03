@@ -21,7 +21,6 @@ import Login from "./authentication/login/Login";
 import Signup from "./authentication/signup/Signup";
 import LandingPage from "./landingPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import TextEditor from "./shared/textEditor";
 import CheckListBoard from "./shared/checkListBoard";
 import "./landingpage.css";
 
