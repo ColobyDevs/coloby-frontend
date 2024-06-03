@@ -19,7 +19,7 @@ const TaskView = () => {
     setTaskInView,
   } = taskBoard;
   const [editMode, setEditMode] = useState(false);
-  
+
   const [updateForm, setUpdateForm] = useState({
     title: "",
     due_date: "",
@@ -52,6 +52,7 @@ const TaskView = () => {
 
   const updateTask = () => {
     const updateFunc = async () => {
+      console.log('d');
       try {
         setIsLoading(true);
 
@@ -92,9 +93,12 @@ const TaskView = () => {
         console.log(err.message);
       }
     };
-    updateForm.description !== taskInView.description ||
-      updateForm.title !== taskInView.title ||
-      (updateForm.due_date !== taskInView.due_date && updateFunc());
+
+      if(updateForm.description !== taskInView.description ||
+        updateForm.title !== taskInView.title ||
+        updateForm.due_date !== taskInView.due_date){
+          return updateFunc()
+        }
   };
 
   const formatDate = (date) => {
@@ -197,7 +201,7 @@ const TaskView = () => {
                   <CheckListBoard />
                 </div>
                 <button
-                  onClick={() => updateTask}
+                  onClick={ updateTask}
                   disabled={
                     !(
                       updateForm.description !== taskInView.description ||
