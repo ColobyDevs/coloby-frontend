@@ -12,7 +12,7 @@ import ChatTimeline from "./chat-timeline";
 import NoCodeChannel from "./channelsNoCode";
 import ChannelsCode from "./channelsCode";
 import { Context } from "../context/context";
-import TextEditor from "../shared/textEditor";
+
 
 const Channels = () => {
   const { rooms } = useContext(Context);
