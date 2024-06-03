@@ -19,6 +19,7 @@ const Notifications = () => {
       }, []);
   
   
+     
       
   return (
     <main className='ml-72 h-screen bg-gray-100'>
@@ -59,10 +60,10 @@ const Notifications = () => {
         notifs.length >= 1 ?
          notifs.map((notif, id)=>{
            
-           return  <NotifCard key={notif.id} notif={notif}/>
+           return  <NotifCard key={notif.id} id={notif.id} notif={notif}/>
           })
            :
-          <Skeleton count={8}  height={'2.5rem'}/>
+          <Skeleton count={11}  height={'2.5rem'}/>
         }
         
     </section>  

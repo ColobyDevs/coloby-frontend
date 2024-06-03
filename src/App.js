@@ -22,47 +22,46 @@ import Signup from "./authentication/signup/Signup";
 import LandingPage from "./landingPage";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import TextEditor from "./shared/textEditor";
+import CheckListBoard from "./shared/checkListBoard";
 import "./landingpage.css";
 
 function App() {
   const { auth } = useContext(Context);
   const { token } = auth;
-
+  const googleclientId = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID
   return (
     <>
       <ActionModal />
       <NotifModal />
       <Spinner />
       <Toast />
-        <GoogleOAuthProvider clientId='668444211742-f4kiimq957krf5t62hmbkjgo56ejpo9k.apps.googleusercontent.com'>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/signup" element={<Signup />} />
-        <Route path="/editor" element={<TextEditor />} />
+      <GoogleOAuthProvider clientId={googleclientId}>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/signup" element={<Signup />} />
 
-        <Route path="/app" element={<Sidebar />}>
-          <Route index element={<Dashboard />} />
-          <Route path="/app/dashboard" element={<Dashboard />} />
-          <Route path="/app/notifications" element={<Notifications />} />
-          <Route path="/app/profile" element={<Profile />} />
-          <Route path="/app/profile" element={<Profile />} />
-          <Route path="/app/rooms/:name" element={<Channels />} />
-          <Route path="/app/chat" element={<Chat />} />
-          <Route path="/app/taskboard" element={<TaskBoard />}>
-            
-            <Route index element={<Overview />} />
-            <Route path="/app/taskboard/overview" element={<Overview />} />
-            <Route
-              path="/app/taskboard/assigned_to_me"
-              element={<Assigned />}
-            />
-            <Route path="/app/taskboard/request" element={<Requests />} />
-            <Route path="/app/taskboard/analysis" element={<Analysis />} />
+          <Route path="/app" element={<Sidebar />}>
+            <Route index element={<Dashboard />} />
+            <Route path="/app/dashboard" element={<Dashboard />} />
+            <Route path="/app/notifications" element={<Notifications />} />
+            <Route path="/app/profile" element={<Profile />} />
+            <Route path="/app/profile" element={<Profile />} />
+            <Route path="/app/rooms/:name" element={<Channels />} />
+            <Route path="/app/chat" element={<Chat />} />
+            <Route path="/app/taskboard" element={<TaskBoard />}>
+              <Route index element={<Overview />} />
+              <Route path="/app/taskboard/overview" element={<Overview />} />
+              <Route
+                path="/app/taskboard/assigned_to_me"
+                element={<Assigned />}
+              />
+              <Route path="/app/taskboard/request" element={<Requests />} />
+              <Route path="/app/taskboard/analysis" element={<Analysis />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
-         </GoogleOAuthProvider>
+        </Routes>
+      </GoogleOAuthProvider>
     </>
   );
 }

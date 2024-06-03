@@ -10,11 +10,13 @@ import "./taskboard.css";
 import CreateTask from "./createTask";
 import RoomSelect from "./roomSelect";
 function TaskBoard() {
-  const { taskBoard, modal, rooms } = useContext(Context);
+ 
+  const { taskBoard, modal, rooms,  auth } = useContext(Context);
   const { roomsList } = rooms;
-  const { state, taskboardReducerDispatch, setActiveRoomId, activeRoomId } =
+  const { state, taskboardReducerDispatch, setActiveRoomId, activeRoomId, setActiveTasks } =
     taskBoard;
   const { setCreateTbModal } = modal;
+  const {token} = auth
   
 
   const handletTaskboardModal = () => {
@@ -29,7 +31,22 @@ function TaskBoard() {
   }, []);
 
   const getSelectRm = async (e) => {
-    setActiveRoomId(Number(e.target.value));
+  setActiveRoomId(Number(e.target.value));
+    const response = await fetch(`https://coloby.onrender.com/api/v1/room/${roomsList[activeRoomId].slug}/tasks/`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    } 
+    })
+    const responseData = await response.json()
+    setActiveTasks((prevTasks) =>
+    prevTasks.map((task) =>
+      task.id === responseData.id
+        ? { ...task,  status: responseData.status }
+        : task
+    )
+  );
+
   };
 
   return (

@@ -6,6 +6,7 @@ import React, {
   useReducer,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import TaskboardCard from "../taskboard/taskboard-card";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export const Context = createContext();
@@ -37,6 +38,8 @@ const ContextProvider = (props) => {
   const [taskOptionsView, setTaskOptionsView] = useState(false)
   const [taskUpdate, setTaskUpdate] = useState({})
   const [editorText, setEditorText] = useState(taskInView?.description)
+  const [skeletalLoading, setSkeletalLoading] = useState(false)
+
 
 
   const navigate = useNavigate();
@@ -58,6 +61,7 @@ const ContextProvider = (props) => {
     );
     const lastVisitedPage = localStorage.getItem("lastVisitedPage");
     if (lastVisitedPage !== null) {
+      
       return navigate(lastVisitedPage);
     }else if (lastVisitedPage === null ){
      
@@ -91,12 +95,7 @@ const ContextProvider = (props) => {
       if(!storedRoomsNumber || responseData.created_rooms.length !== Number(storedRoomsNumber)){
         localStorage.setItem("numberOfRooms", responseData.created_rooms.length);
       }
-      localStorage.setItem(
-        "roomSlugs",
-        JSON.stringify(responseData.created_rooms.map((room)=>{
-          return room.slug
-        }) )
-      );
+     
       
        setRoomsList(responseData.created_rooms);
     }
@@ -147,23 +146,23 @@ const ContextProvider = (props) => {
   }, [activeRoomId, roomsList])
 
    
-const updateX=()=>{
-  const storedData = JSON.parse(localStorage.getItem("userData"));
-  console.log(storedData.accessToken)
-  console.log(roomsList);
-}
+
 const getRoomTasks = async()=>{
   const roomSlugs = JSON.parse(localStorage.getItem("roomSlugs"));
-  console.log(roomSlugs, activeRoomId);
-  const response = await fetch(`https://coloby.onrender.com/api/v1/room/${roomSlugs[activeRoomId]}/tasks/`, {
+  setSkeletalLoading(true)
+  const response = await fetch(`https://coloby.onrender.com/api/v1/room/${roomsList[activeRoomId].slug}/tasks/`, {
   headers: {
     'Content-Type': 'application/json',
     Authorization: 'Bearer ' + token
   } 
   })
   const responseData = await response.json()
-  setActiveTasks(responseData)
+
+    setActiveTasks(responseData)
+  
+  setSkeletalLoading(false)
 }
+
 
 
 
@@ -298,12 +297,14 @@ try{
           taskOptionsView, 
           setTaskOptionsView,
           taskUpdate,
-          setTaskUpdate
+          setTaskUpdate,
+         
         },
 
         loader: {
           isLoading,
           setIsLoading,
+          skeletalLoading, setSkeletalLoading
         },
 
         rooms:{
@@ -323,7 +324,10 @@ try{
           editorText,
           setEditorText
         },
-        updateX
+       
+        getRoomTasks,
+        getUserData
+        
       }}
     >
       {props.children}

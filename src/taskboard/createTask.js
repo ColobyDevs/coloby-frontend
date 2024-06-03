@@ -5,7 +5,9 @@ import "./createTask.css";
 import { useHttp } from "../hooks/httpHook";
 
 export default function CreateTask() {
-    const {modal, auth, rooms, activeRoomId} = useContext(Context)
+    const {modal, auth, rooms, taskBoard} = useContext(Context)
+    const {roomsList} = rooms
+    const {activeRoomId} = taskBoard
     const {userId, token} = auth
     const {createTbModal, setCreateTbModal} = modal
     const handleTaskboardModal = ()=>{
@@ -16,7 +18,7 @@ export default function CreateTask() {
         assigned_to: '',
         // priority: '',
         description: '',
-        // taskStatus: '',
+        status: '',
         // hifi: '',
         // lofi: '',
         startDate: '',
@@ -36,13 +38,11 @@ const httpBody = {
 
 
 
-const api = `https://coloby.onrender.com/api/v1/room/${rooms[activeRoomId]?.slug}/tasks/`
+const api = `https://coloby.onrender.com/api/v1/room/${roomsList[activeRoomId]?.slug}/tasks/`
 
     const [httpHandler] = useHttp(httpBody, api, 'createTask')
     const handleChange = (e)=>{
         setForm((prev)=>{
-        
-         
             return { ...prev,
               [e.target.name]: e.target.value
           }
@@ -95,11 +95,13 @@ const api = `https://coloby.onrender.com/api/v1/room/${rooms[activeRoomId]?.slug
                 </div>
                 <div className=" flex flex-col space-y-1">
                   <label className="label">
-                    Priority <span className="text-red-600">*</span>
+                    Task Status <span className="text-red-600">*</span>
                   </label>
-                  <select   onChange={handleChange} name="priority" className="px-2 w-full rounded-sm border h-8">
-                    <option>In Progress</option>
-                    <option>Completed</option>
+                  <select   onChange={handleChange} name="status" className="px-2 w-full rounded-sm border h-8">
+                  <option  disabled >Select Status</option>
+                    <option value='undone'>undone</option>
+                    <option value='pending'>pending</option>
+                    <option value='done'>done</option>
                     <option></option>
                   </select>
                 </div>
