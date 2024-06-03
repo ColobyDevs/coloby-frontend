@@ -259,7 +259,7 @@ const Sidebar = () => {
               onClick={() => handleTabChange("TASKBOARD_TAB")}
             >
               <IoIosStats />
-              <Link to="/app/taskboard/overview" onClick={taskBoardTabHandler}>
+              <Link to={`/app/taskboard/overview`} onClick={taskBoardTabHandler}>
                 <h2>Taskboard</h2>
               </Link>
             </div>
