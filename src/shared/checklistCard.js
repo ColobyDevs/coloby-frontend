@@ -1,7 +1,6 @@
 import { type } from '@testing-library/user-event/dist/type'
 import React, {useRef, useState, useEffect} from 'react'
 import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
-import './test.css'
 
 const CheckListCard = () => {
     const [label, setLabel] = useState('')
