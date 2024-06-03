@@ -11,3 +11,16 @@
     font-size: x-small;
     color: #747474;
 }
+
+.hoverDisplay{
+    display: visible;
+}
+
+.hide{
+    display: none;
+    visibility: hidden;
+}
+
+.visible{
+    display: flex;
+}
